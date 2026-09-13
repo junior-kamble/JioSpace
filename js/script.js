@@ -4,12 +4,37 @@ window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
 
-// Step 1: Moves from Riddle to the Music Question
+// Reusable function to go backwards smoothly
+function goBack(currentId, targetId) {
+    // If going back to phase 1, reset phase 2's inner buttons so she can play again
+    if (currentId === 'phase2') {
+        document.getElementById('ask-music').classList.remove('hidden');
+        document.getElementById('ask-language').classList.add('hidden');
+        document.getElementById('musicMsg').classList.add('hidden');
+    }
+    fadeTransition(currentId, targetId);
+}
+
+// Step 1: Moves from Riddle to the Split Layout
 function guessWho() {
     fadeTransition("phase1", "phase2");
 }
 
-// Step 2: Handles the Hindi/English clicks
+// Step 2: Hides the "Yes" button and reveals the Language buttons
+function likeMusicYes() {
+    const askMusic = document.getElementById("ask-music");
+    const askLanguage = document.getElementById("ask-language");
+    
+    // Quick fade trick for the inner elements
+    askMusic.style.opacity = '0';
+    setTimeout(() => {
+        askMusic.classList.add("hidden");
+        askLanguage.classList.remove("hidden");
+        askMusic.style.opacity = '1'; // reset for next time
+    }, 300);
+}
+
+// Step 3: Handles the Hindi/English clicks
 function clickHindi() {
     const msg = document.getElementById("musicMsg");
     msg.innerText = "You can't feel it... go for English! 😉";
@@ -20,13 +45,12 @@ function clickEnglish() {
     fadeTransition("phase2", "phase3");
 }
 
-// Step 3: Checks the final answer
+// Step 4: Checks the final answer
 function checkFinalAnswer() {
     const inputField = document.getElementById("answerInput");
     const errorMsg = document.getElementById("errorMessage");
     const answer = inputField.value.toLowerCase().trim();
     
-    // Accepts "me" or "you"
     if (answer === "me" || answer === "you") {
         fadeTransition("phase3", "phase4", true); 
     } else {
@@ -36,7 +60,7 @@ function checkFinalAnswer() {
     }
 }
 
-// Reusable animation function for smooth transitions
+// Reusable animation function for smooth transitions between cards
 function fadeTransition(hideId, showId, checkVaultTime = false) {
     const hideElement = document.getElementById(hideId);
     const showElement = document.getElementById(showId);
@@ -60,6 +84,6 @@ function checkTime() {
     if (currentHour >= unlockHour) {
         setTimeout(() => {
             fadeTransition("phase4", "phase5");
-        }, 3000); // Waits 3 seconds on the music page before jumping to the finale if it's past 5 PM
+        }, 3000); 
     }
 }
