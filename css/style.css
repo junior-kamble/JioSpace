@@ -1,0 +1,84 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    /* A sleek, dark modern gradient background */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container { max-width: 500px; width: 100%; text-align: center; }
+
+.main-title { font-size: 24px; margin-bottom: 30px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+/* Glassmorphism Card Effect */
+.card { 
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px; 
+    border-radius: 16px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    display: none;
+    transform: translateY(20px);
+}
+
+.card.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden { display: none !important; }
+
+/* Interactive Input & Button Elements */
+.question { font-size: 16px; margin-bottom: 20px; line-height: 1.5; }
+.question strong { font-size: 18px; color: #4facfe; }
+
+input { 
+    width: 100%; padding: 15px; margin: 10px 0 20px; 
+    border-radius: 8px; border: 2px solid transparent; 
+    background: rgba(255, 255, 255, 0.1); color: #fff; 
+    font-size: 16px; text-align: center; outline: none;
+    transition: 0.3s;
+}
+input::placeholder { color: rgba(255,255,255,0.5); }
+input:focus { border-color: #4facfe; background: rgba(255, 255, 255, 0.15); }
+
+button { 
+    background: linear-gradient(45deg, #4facfe, #00f2fe); 
+    color: #111; border: none; padding: 15px 30px; 
+    border-radius: 8px; cursor: pointer; font-size: 16px; 
+    font-weight: 600; width: 100%; transition: 0.3s; 
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79, 172, 254, 0.6); }
+
+/* Custom Error Shake Animation */
+.error { color: #ff4b4b; font-size: 14px; margin-top: -10px; margin-bottom: 15px; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+.shake { animation: shake 0.4s ease-in-out; border-color: #ff4b4b !important; }
+
+/* Media & Finale Styling */
+.success-title { color: #00f2fe; font-size: 22px; margin-bottom: 10px; }
+.video-container { 
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
+    border-radius: 12px; margin: 20px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.countdown-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 14px; color: #ccc; }
+.finale-title { color: #f9d423; font-size: 24px; margin-bottom: 15px; }
+.finale-text { font-size: 18px; line-height: 1.6; }
