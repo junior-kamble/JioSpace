@@ -1,12 +1,20 @@
 const unlockHour = 17; // 5:00 PM
 
+// This dictionary controls the Title and Background Theme for each phase!
+const phaseConfig = {
+    "phase1": { title: "A Little Something For You ✨", theme: "theme-phase1" },
+    "phase2": { title: "i dont have doubt", theme: "theme-phase2" },
+    "phase3": { title: "Almost There...", theme: "theme-phase3" },
+    "phase4": { title: "For Your Playlist 🎵", theme: "theme-phase4" },
+    "phase5": { title: "See You Soon... ☕", theme: "theme-phase5" }
+};
+
 window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
 
 // Reusable function to go backwards smoothly
 function goBack(currentId, targetId) {
-    // If going back to phase 1, reset phase 2's inner buttons so she can play again
     if (currentId === 'phase2') {
         document.getElementById('ask-music').classList.remove('hidden');
         document.getElementById('ask-language').classList.add('hidden');
@@ -25,12 +33,11 @@ function likeMusicYes() {
     const askMusic = document.getElementById("ask-music");
     const askLanguage = document.getElementById("ask-language");
     
-    // Quick fade trick for the inner elements
     askMusic.style.opacity = '0';
     setTimeout(() => {
         askMusic.classList.add("hidden");
         askLanguage.classList.remove("hidden");
-        askMusic.style.opacity = '1'; // reset for next time
+        askMusic.style.opacity = '1'; 
     }, 300);
 }
 
@@ -60,16 +67,29 @@ function checkFinalAnswer() {
     }
 }
 
-// Reusable animation function for smooth transitions between cards
+// Master Animation Function: Handles fading cards, changing titles, and updating backgrounds
 function fadeTransition(hideId, showId, checkVaultTime = false) {
     const hideElement = document.getElementById(hideId);
     const showElement = document.getElementById(showId);
+    const mainTitleElement = document.getElementById("mainTitle");
     
+    // Smoothly fade out old text
+    mainTitleElement.style.opacity = '0';
     hideElement.classList.remove("active");
+    
     setTimeout(() => {
+        // Change the text and background theme automatically based on the dictionary above!
+        mainTitleElement.innerText = phaseConfig[showId].title;
+        document.body.className = phaseConfig[showId].theme;
+        
         hideElement.classList.add("hidden");
         showElement.classList.remove("hidden");
-        setTimeout(() => showElement.classList.add("active"), 50);
+        
+        // Fade in new text and new card
+        setTimeout(() => {
+            mainTitleElement.style.opacity = '1';
+            showElement.classList.add("active");
+        }, 50);
         
         if (checkVaultTime) {
             checkTime();

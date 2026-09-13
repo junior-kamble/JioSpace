@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise for Georgette</title>
+    <title>Welcome to Jio World</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<!-- Added the starting theme class here -->
+<body class="theme-phase1">
     <div class="container">
-        <h1 class="main-title">A Little Something For You ✨</h1>
+        <!-- Main Title -->
+        <h1 id="mainTitle" class="main-title">A Little Something For You ✨</h1>
         
         <!-- Phase 1: The Riddle -->
         <div id="phase1" class="card">
@@ -37,26 +39,28 @@
                     <p>1. Do</p><p>2. you</p><p>3. know</p><p>4. Who</p><p>5. is</p><p>6. the</p><p>7. prettiest</p><p>8. girl</p><p>9. Today</p>
                 </div>
                 
-                <!-- Right Side: The Reveal & Questions -->
+                <!-- Right Side: The Reveal -->
                 <div class="split-right">
                     <h3 class="success-title">6 7 8 9 5 2</h3>
-                    <p class="decoded-text">(The prettiest girl Today is you)</p>
-                    
-                    <!-- Music Question 1 -->
-                    <div id="ask-music">
-                        <p class="question" style="margin-bottom: 15px;">Btw, do you like music?</p>
-                        <button onclick="likeMusicYes()">Yes 🎵</button>
-                    </div>
+                </div>
+            </div>
 
-                    <!-- Music Question 2 (Hidden until 'Yes' is clicked) -->
-                    <div id="ask-language" class="hidden">
-                        <p class="question" style="margin-bottom: 15px;">Which language?</p>
-                        <div class="button-group">
-                            <button onclick="clickHindi()" class="alt-button">Hindi</button>
-                            <button onclick="clickEnglish()">English</button>
-                        </div>
-                        <p id="musicMsg" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
+            <!-- Bottom Right Section (Music Question) -->
+            <div class="bottom-right-section">
+                <!-- Music Question 1 -->
+                <div id="ask-music">
+                    <p class="question">Btw, do you like music?</p>
+                    <button onclick="likeMusicYes()">Yes 🎵</button>
+                </div>
+
+                <!-- Music Question 2 -->
+                <div id="ask-language" class="hidden">
+                    <p class="question">Which language?</p>
+                    <div class="button-group">
+                        <button onclick="clickHindi()" class="alt-button">Hindi</button>
+                        <button onclick="clickEnglish()">English</button>
                     </div>
+                    <p id="musicMsg" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
                 </div>
             </div>
         </div>
@@ -88,6 +92,10 @@
         <!-- Phase 5: The Grand Finale -->
         <div id="phase5" class="card hidden">
             <h3 class="finale-title">The Final Vault is Open 🔓</h3>
+            
+            <!-- Beautiful Reveal Image -->
+            <img src="images/flower-shadow.png" alt="A beautiful surprise" class="finale-image">
+            
             <p class="finale-text">Meet me for coffee in Downtown Dubai right by the Burj Khalifa fountain view.</p>
         </div>
     </div>

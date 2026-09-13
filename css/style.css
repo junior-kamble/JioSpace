@@ -2,19 +2,27 @@
 
 body { 
     font-family: 'Poppins', sans-serif; 
-    background: #050505;
-    background-image: radial-gradient(circle at top right, #1a1a1a, #000 80%);
     color: #eaeaea; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     min-height: 100vh;
     padding: 20px;
+    /* Smoothly fades colors when the JS changes the theme */
+    transition: background 0.8s ease-in-out; 
 }
+
+/* === LUXURY DYNAMIC THEMES === */
+.theme-phase1 { background: #050505; background-image: radial-gradient(circle at top right, #1a1a1a, #000 80%); } /* Midnight Black */
+.theme-phase2 { background: #020617; background-image: radial-gradient(circle at top right, #0f172a, #020617 80%); } /* Deep Navy Glass */
+.theme-phase3 { background: #170312; background-image: radial-gradient(circle at top right, #2e0624, #170312 80%); } /* Dark Amethyst */
+.theme-phase4 { background: #1a1205; background-image: radial-gradient(circle at top right, #33230a, #1a1205 80%); } /* Warm Bronze/Gold */
+.theme-phase5 { background: #1a0508; background-image: radial-gradient(circle at top right, #330a10, #1a0508 80%); } /* Deep Rose (Matches Flowers) */
 
 .container { max-width: 500px; width: 100%; text-align: center; }
 
-.main-title { font-size: 24px; margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+/* The title also gets a smooth fade animation */
+.main-title { font-size: 24px; margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
 
 .card { 
     background: rgba(20, 20, 20, 0.6); 
@@ -46,34 +54,31 @@ body {
 .split-layout { display: flex; gap: 20px; text-align: left; align-items: center; clear: both; }
 .split-left { flex: 0.8; border-right: 1px solid rgba(255,255,255,0.2); padding-right: 15px; font-size: 14px; color: #aaa; line-height: 1.6; }
 .split-right { flex: 1.2; padding-left: 10px; text-align: center; }
-.decoded-text { color: #aaa; margin-bottom: 25px; font-style: italic; font-size: 14px; }
 
-/* Responsive adjustments for mobile screens */
+/* Bottom Right Section (Music Question) */
+.bottom-right-section { margin-top: 30px; padding-top: 25px; border-top: 1px dashed rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+.bottom-right-section .question { margin-bottom: 15px; }
+.bottom-right-section button { width: auto; padding: 10px 30px; } 
+.bottom-right-section .button-group { justify-content: flex-end; width: 100%; gap: 10px; }
+.bottom-right-section .button-group button { width: auto; min-width: 100px; padding: 10px 15px; }
+
 @media (max-width: 480px) {
     .split-layout { flex-direction: column; text-align: center; gap: 15px; }
     .split-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-right: 0; padding-bottom: 15px; width: 100%; text-align: center; }
     .split-right { padding-left: 0; width: 100%; }
+    .bottom-right-section { align-items: center; text-align: center; } 
+    .bottom-right-section .button-group { justify-content: center; }
 }
 
-/* Riddle Formatting */
+/* Form Inputs & Questions */
 .riddle-box { text-align: left; display: inline-block; margin: 15px 0 25px 0; font-size: 16px; line-height: 1.6; color: #bbb; }
 .question { font-size: 16px; margin-bottom: 20px; line-height: 1.5; color: #fff; clear: both; }
 
-input { 
-    width: 100%; padding: 15px; margin: 10px 0 20px; 
-    border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); 
-    background: rgba(0, 0, 0, 0.5); color: #fff; 
-    font-size: 16px; text-align: center; outline: none; transition: 0.3s;
-}
+input { width: 100%; padding: 15px; margin: 10px 0 20px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.5); color: #fff; font-size: 16px; text-align: center; outline: none; transition: 0.3s; }
 input::placeholder { color: rgba(255,255,255,0.3); }
 input:focus { border-color: #fff; background: rgba(20, 20, 20, 0.8); }
 
-button { 
-    background: linear-gradient(45deg, #222, #444); color: #fff; 
-    border: 1px solid rgba(255,255,255,0.2); padding: 15px 30px; 
-    border-radius: 8px; cursor: pointer; font-size: 16px; 
-    font-weight: 600; width: 100%; transition: 0.3s; letter-spacing: 1px;
-}
+button { background: linear-gradient(45deg, #222, #444); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; width: 100%; transition: 0.3s; letter-spacing: 1px; }
 button:hover { background: linear-gradient(45deg, #333, #555); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,255,255,0.1); }
 
 .button-group { display: flex; gap: 15px; justify-content: center; }
@@ -84,10 +89,12 @@ button:hover { background: linear-gradient(45deg, #333, #555); transform: transl
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
 .shake { animation: shake 0.4s ease-in-out; border-color: #ff4b4b !important; }
 
-.success-title { color: #fff; font-size: 26px; margin-bottom: 5px; letter-spacing: 3px; }
+.success-title { color: #fff; font-size: 32px; margin-bottom: 5px; letter-spacing: 3px; }
 .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.1); }
 .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 .countdown-box { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 14px; color: #888; border: 1px solid rgba(255,255,255,0.05); }
 .time-text { color: #ccc; margin-top: 5px; }
 .finale-title { color: #fff; font-size: 24px; margin-bottom: 15px; letter-spacing: 1px;}
 .finale-text { font-size: 18px; line-height: 1.6; color: #ddd; }
+
+.finale-image { width: 100%; max-width: 250px; border-radius: 12px; margin: 15px auto 25px auto; display: block; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
