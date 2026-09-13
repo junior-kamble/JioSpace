@@ -1,6 +1,5 @@
 const unlockHour = 17; // 5:00 PM
 
-// This forces the website to ALWAYS start at Phase 1 (the question)
 window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
@@ -10,8 +9,8 @@ function checkAnswer() {
     const errorMsg = document.getElementById("errorMessage");
     const answer = inputField.value.toLowerCase().trim();
     
-    if (answer === "youtube") {
-        // Memory feature removed! It just moves to Phase 2 for this session only.
+    // Accepts "you" or "me" as correct answers
+    if (answer === "you" || answer === "me") {
         showPhase2(true); 
     } else {
         inputField.classList.add("shake");
