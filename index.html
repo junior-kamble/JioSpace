@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise for Georgette</title>
+    <style>
+        body { font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 20px; background-color: #111; color: #fff; }
+        .hidden { display: none; }
+        .card { background: #222; padding: 30px; border-radius: 12px; margin: 20px auto; max-width: 400px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        input { padding: 12px; margin: 15px 0; border-radius: 6px; border: none; width: 80%; text-align: center; font-size: 16px; }
+        button { background-color: #e50914; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        button:hover { background-color: #f40612; }
+        .media-placeholder { background: #333; padding: 50px 20px; border-radius: 8px; margin-top: 15px; border: 1px dashed #555; }
+    </style>
+</head>
+<body>
+
+    <h2>A Little Something For You</h2>
+    
+    <!-- Phase 1: The Trivia Lock -->
+    <div id="phase1" class="card">
+        <p>To unlock your first surprise, answer this:<br><strong>What is our favorite inside joke?</strong></p>
+        <input type="text" id="answerInput" placeholder="Type your answer...">
+        <button onclick="checkAnswer()">Unlock</button>
+    </div>
+
+    <!-- Phase 2: The Mid-Day Graphic / Note -->
+    <div id="phase2" class="card hidden">
+        <h3>You got it! 🎉</h3>
+        <p>Here is a little something to brighten your day.</p>
+        <!-- You can insert a custom image tag here -->
+        <div class="media-placeholder">[Insert Custom Graphic or Voice Note Here]</div>
+        <p style="margin-top: 20px; color: #aaa; font-size: 14px;">The final vault opens today at 17:00 (5:00 PM). Come back later!</p>
+    </div>
+
+    <!-- Phase 3: The Video Reveal (Time-Gated) -->
+    <div id="phase3" class="card hidden">
+        <h3>The Final Vault is Open</h3>
+        <p>Enjoy the show.</p>
+        <!-- Embed your unlisted YouTube video here -->
+        <div class="media-placeholder">[Embed Cinematic Montage Here]</div>
+    </div>
+
+    <script>
+        // Set the hour the final surprise unlocks (e.g., 17 for 5:00 PM)
+        const unlockHour = 17; 
+
+        if (localStorage.getItem("phase2Unlocked") === "true") {
+            showPhase2();
+        }
+
+        function checkAnswer() {
+            const answer = document.getElementById("answerInput").value.toLowerCase().trim();
+            // CHANGE "pizza" TO YOUR ACTUAL ANSWER
+            if (answer === "pizza") { 
+                localStorage.setItem("phase2Unlocked", "true");
+                showPhase2();
+            } else {
+                alert("Not quite! Try again.");
+            }
+        }
+
+        function showPhase2() {
+            document.getElementById("phase1").classList.add("hidden");
+            document.getElementById("phase2").classList.remove("hidden");
+            checkTime();
+        }
+
+        function checkTime() {
+            const currentHour = new Date().getHours();
+            if (currentHour >= unlockHour) {
+                document.getElementById("phase3").classList.remove("hidden");
+            }
+        }
+    </script>
+</body>
+</html>
