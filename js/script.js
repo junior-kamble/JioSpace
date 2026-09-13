@@ -4,57 +4,62 @@ window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
 
-function checkAnswer() {
+// Step 1: Moves from Riddle to the Music Question
+function guessWho() {
+    fadeTransition("phase1", "phase2");
+}
+
+// Step 2: Handles the Hindi/English clicks
+function clickHindi() {
+    const msg = document.getElementById("musicMsg");
+    msg.innerText = "You can't feel it... go for English! 😉";
+    msg.classList.remove("hidden");
+}
+
+function clickEnglish() {
+    fadeTransition("phase2", "phase3");
+}
+
+// Step 3: Checks the final answer
+function checkFinalAnswer() {
     const inputField = document.getElementById("answerInput");
     const errorMsg = document.getElementById("errorMessage");
     const answer = inputField.value.toLowerCase().trim();
     
-    // Accepts "you" or "me" as correct answers
-    if (answer === "you" || answer === "me") {
-        showPhase2(true); 
+    // Accepts "me" or "you"
+    if (answer === "me" || answer === "you") {
+        fadeTransition("phase3", "phase4", true); 
     } else {
         inputField.classList.add("shake");
         errorMsg.classList.remove("hidden");
-        
-        setTimeout(() => {
-            inputField.classList.remove("shake");
-        }, 500);
+        setTimeout(() => inputField.classList.remove("shake"), 500);
     }
 }
 
-function showPhase2(animate = true) {
-    const phase1 = document.getElementById("phase1");
-    const phase2 = document.getElementById("phase2");
+// Reusable animation function for smooth transitions
+function fadeTransition(hideId, showId, checkVaultTime = false) {
+    const hideElement = document.getElementById(hideId);
+    const showElement = document.getElementById(showId);
     
-    if (animate) {
-        phase1.classList.remove("active");
-        setTimeout(() => {
-            phase1.classList.add("hidden");
-            phase2.classList.remove("hidden");
-            setTimeout(() => phase2.classList.add("active"), 50);
+    hideElement.classList.remove("active");
+    setTimeout(() => {
+        hideElement.classList.add("hidden");
+        showElement.classList.remove("hidden");
+        setTimeout(() => showElement.classList.add("active"), 50);
+        
+        if (checkVaultTime) {
             checkTime();
-        }, 500); 
-    } else {
-        phase1.classList.add("hidden");
-        phase1.classList.remove("active");
-        phase2.classList.remove("hidden");
-        phase2.classList.add("active");
-        checkTime();
-    }
+        }
+    }, 500);
 }
 
+// Checks if it is 5:00 PM for the Grand Finale
 function checkTime() {
     const currentHour = new Date().getHours();
     
     if (currentHour >= unlockHour) {
-        const phase2 = document.getElementById("phase2");
-        const phase3 = document.getElementById("phase3");
-        
-        phase2.classList.remove("active");
         setTimeout(() => {
-            phase2.classList.add("hidden");
-            phase3.classList.remove("hidden");
-            setTimeout(() => phase3.classList.add("active"), 50);
-        }, 500);
+            fadeTransition("phase4", "phase5");
+        }, 3000); // Waits 3 seconds on the music page before jumping to the finale if it's past 5 PM
     }
 }

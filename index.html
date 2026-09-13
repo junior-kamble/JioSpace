@@ -11,7 +11,7 @@
     <div class="container">
         <h1 class="main-title">A Little Something For You ✨</h1>
         
-        <!-- Phase 1: The Riddle Lock -->
+        <!-- Phase 1: The Riddle -->
         <div id="phase1" class="card">
             <div class="riddle-box">
                 <p>1. Do</p>
@@ -22,16 +22,34 @@
                 <p>6. the</p>
                 <p>7. prettiest</p>
                 <p>8. girl</p>
-                <p>9. today</p>
-                <p class="riddle-clue">Now read 6 7 8 9 5 2</p>
+                <p>9. Today</p>
             </div>
-            <input type="text" id="answerInput" placeholder="Type your answer here..." autocomplete="off">
-            <p id="errorMessage" class="error hidden">Not quite! Try again.</p>
-            <button onclick="checkAnswer()">Unlock Vault</button>
+            <button onclick="guessWho()">Guess who?</button>
         </div>
         
-        <!-- Phase 2: The Mid-Day Song -->
+        <!-- Phase 2: Reveal & Music Question -->
         <div id="phase2" class="card hidden">
+            <h3 class="success-title" style="font-size: 28px; letter-spacing: 5px;">6 7 8 9 5 2</h3>
+            <p style="color: #aaa; margin-bottom: 25px; font-style: italic;">(The prettiest girl Today is you)</p>
+            
+            <p class="question" style="margin-bottom: 15px;">Btw, do you like music?</p>
+            <div class="button-group">
+                <button onclick="clickHindi()" class="alt-button">Hindi</button>
+                <button onclick="clickEnglish()">English</button>
+            </div>
+            <p id="musicMsg" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 16px;"></p>
+        </div>
+
+        <!-- Phase 3: The Final Question -->
+        <div id="phase3" class="card hidden">
+            <p class="question">So... who was the prettiest girl today?</p>
+            <input type="text" id="answerInput" placeholder="Type your answer here..." autocomplete="off">
+            <p id="errorMessage" class="error hidden">Not quite! Try again.</p>
+            <button onclick="checkFinalAnswer()">Unlock Music</button>
+        </div>
+        
+        <!-- Phase 4: The Mid-Day Song -->
+        <div id="phase4" class="card hidden">
             <h3 class="success-title">You got it! 🤍</h3>
             <p>A little something to keep you going today...</p>
             
@@ -45,8 +63,8 @@
             </div>
         </div>
         
-        <!-- Phase 3: The Grand Finale -->
-        <div id="phase3" class="card hidden">
+        <!-- Phase 5: The Grand Finale -->
+        <div id="phase5" class="card hidden">
             <h3 class="finale-title">The Final Vault is Open 🔓</h3>
             <p class="finale-text">Meet me for coffee in Downtown Dubai right by the Burj Khalifa fountain view.</p>
         </div>
