@@ -9,12 +9,11 @@
 </head>
 <body class="theme-phase1">
     <div class="container">
-        <!-- Main Title -->
-        <h1 id="mainTitle" class="main-title">A Little Something For You ✨</h1>
+        <!-- Main Title matches the browser tab now -->
+        <h1 id="mainTitle" class="main-title">Welcome to Jio World</h1>
         
-        <!-- Phase 1: The Riddle (Now features the Flower Shadow Image right at the start) -->
+        <!-- Phase 1: The Riddle -->
         <div id="phase1" class="card">
-            <!-- Flower image featured prominently on the first page -->
             <img src="images/flower-shadow.png" alt="A special welcome" class="first-page-image">
             
             <div class="riddle-box">
@@ -36,26 +35,20 @@
             <button class="back-btn" onclick="goBack('phase2', 'phase1')">← Back</button>
             
             <div class="split-layout">
-                <!-- Left Side: The Recap -->
                 <div class="split-left">
                     <p>1. Do</p><p>2. you</p><p>3. know</p><p>4. Who</p><p>5. is</p><p>6. the</p><p>7. prettiest</p><p>8. girl</p><p>9. Today</p>
                 </div>
-                
-                <!-- Right Side: The Reveal -->
                 <div class="split-right">
                     <h3 class="success-title">6 7 8 9 5 2</h3>
                 </div>
             </div>
 
-            <!-- Bottom Right Section (Music Question) -->
             <div class="bottom-right-section">
-                <!-- Music Question 1 -->
                 <div id="ask-music">
                     <p class="question">Btw, do you like music?</p>
                     <button onclick="likeMusicYes()">Yes 🎵</button>
                 </div>
 
-                <!-- Music Question 2 -->
                 <div id="ask-language" class="hidden">
                     <p class="question">Which language?</p>
                     <div class="button-group">
