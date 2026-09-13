@@ -1,12 +1,8 @@
 const unlockHour = 17; // 5:00 PM
 
-// Check local storage as soon as the page loads
+// This forces the website to ALWAYS start at Phase 1 (the question)
 window.onload = () => {
-    if (localStorage.getItem("phase2Unlocked") === "true") {
-        showPhase2(false); // Load without animation if already unlocked
-    } else {
-        document.getElementById("phase1").classList.add("active");
-    }
+    document.getElementById("phase1").classList.add("active");
 };
 
 function checkAnswer() {
@@ -15,14 +11,12 @@ function checkAnswer() {
     const answer = inputField.value.toLowerCase().trim();
     
     if (answer === "youtube") {
-        localStorage.setItem("phase2Unlocked", "true");
-        showPhase2(true); // Trigger the fade-in animation
+        // Memory feature removed! It just moves to Phase 2 for this session only.
+        showPhase2(true); 
     } else {
-        // Trigger the red shake error animation
         inputField.classList.add("shake");
         errorMsg.classList.remove("hidden");
         
-        // Remove the shake class after half a second so it can be triggered again
         setTimeout(() => {
             inputField.classList.remove("shake");
         }, 500);
@@ -38,12 +32,10 @@ function showPhase2(animate = true) {
         setTimeout(() => {
             phase1.classList.add("hidden");
             phase2.classList.remove("hidden");
-            // Slight delay allows the CSS transition to process smoothly
             setTimeout(() => phase2.classList.add("active"), 50);
             checkTime();
         }, 500); 
     } else {
-        // Immediate swap if the page is refreshed after unlocking
         phase1.classList.add("hidden");
         phase1.classList.remove("active");
         phase2.classList.remove("hidden");
