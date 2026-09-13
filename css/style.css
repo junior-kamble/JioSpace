@@ -13,10 +13,11 @@ body {
 
 /* Luxury Dynamic Themes */
 .theme-phase1 { background: #050505; background-image: radial-gradient(circle at top right, #1a1a1a, #000 80%); } 
-.theme-phase2 { background: #020617; background-image: radial-gradient(circle at top right, #0f172a, #020617 80%); } 
-.theme-phase3 { background: #170312; background-image: radial-gradient(circle at top right, #2e0624, #170312 80%); } 
-.theme-phase4 { background: #1a1205; background-image: radial-gradient(circle at top right, #33230a, #1a1205 80%); } 
-.theme-phase5 { background: #1a0508; background-image: radial-gradient(circle at top right, #330a10, #1a0508 80%); } 
+.theme-phase2 { background: #0a0505; background-image: radial-gradient(circle at top right, #240a0a, #0a0505 80%); } 
+.theme-phase3 { background: #020617; background-image: radial-gradient(circle at top right, #0f172a, #020617 80%); } 
+.theme-phase4 { background: #170312; background-image: radial-gradient(circle at top right, #2e0624, #170312 80%); } 
+.theme-phase5 { background: #1a1205; background-image: radial-gradient(circle at top right, #33230a, #1a1205 80%); } 
+.theme-phase6 { background: #1a0508; background-image: radial-gradient(circle at top right, #330a10, #1a0508 80%); } 
 
 .container { max-width: 500px; width: 100%; text-align: center; }
 
@@ -39,6 +40,19 @@ body {
 .card.active { display: block; opacity: 1; transform: translateY(0); }
 .hidden { display: none !important; }
 
+/* Disclaimer Box Styling */
+.disclaimer-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.4;
+    text-align: left;
+}
+
 /* Back Button Style */
 .back-btn {
     background: transparent; border: none; color: #888;
@@ -59,7 +73,7 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-/* Split Layout for Phase 2 */
+/* Split Layout for Phase 3 */
 .split-layout { display: flex; gap: 20px; text-align: left; align-items: center; clear: both; }
 .split-left { flex: 0.8; border-right: 1px solid rgba(255,255,255,0.2); padding-right: 15px; font-size: 14px; color: #aaa; line-height: 1.6; }
 .split-right { flex: 1.2; padding-left: 10px; text-align: center; }

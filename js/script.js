@@ -2,19 +2,35 @@ const unlockHour = 17; // 5:00 PM
 
 const phaseConfig = {
     "phase1": { title: "A Little Something For Youuuuu🌼", theme: "theme-phase1" },
-    "phase2": { title: "i dont have doubt", theme: "theme-phase2" },
-    "phase3": { title: "Almost There...", theme: "theme-phase3" },
-    "phase4": { title: "For Your Playlist 🎵", theme: "theme-phase4" },
-    "phase5": { title: "See You Soon... ☕", theme: "theme-phase5" }
+    "phase2": { title: "A Little Something For You ✨", theme: "theme-phase2" },
+    "phase3": { title: "i dont have doubt", theme: "theme-phase3" },
+    "phase4": { title: "Almost There...", theme: "theme-phase4" },
+    "phase5": { title: "For Your Playlist 🎵", theme: "theme-phase5" },
+    "phase6": { title: "See You Soon... ☕", theme: "theme-phase6" }
 };
 
 window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
 
+// Check Phone Number Challenge (73)
+function checkPhoneAnswer() {
+    const inputField = document.getElementById("phoneInput");
+    const errorMsg = document.getElementById("phoneError");
+    const answer = inputField.value.trim();
+    
+    if (answer === "73") {
+        fadeTransition("phase1", "phase2");
+    } else {
+        inputField.classList.add("shake");
+        errorMsg.classList.remove("hidden");
+        setTimeout(() => inputField.classList.remove("shake"), 500);
+    }
+}
+
 // Universal Back Button Logic
 function goBack(currentId, targetId) {
-    if (currentId === 'phase2') {
+    if (currentId === 'phase3') {
         document.getElementById('ask-music').classList.remove('hidden');
         document.getElementById('ask-language').classList.add('hidden');
         document.getElementById('musicMsg').classList.add('hidden');
@@ -22,12 +38,12 @@ function goBack(currentId, targetId) {
     fadeTransition(currentId, targetId);
 }
 
-// Step 1: Moves from Riddle to the Split Layout
+// Step 2: Moves from Phone Check to Riddle
 function guessWho() {
-    fadeTransition("phase1", "phase2");
+    fadeTransition("phase2", "phase3");
 }
 
-// Step 2: Hides the "Yes" button and reveals the Language buttons
+// Step 3: Hides "Yes" and reveals Language buttons
 function likeMusicYes() {
     const askMusic = document.getElementById("ask-music");
     const askLanguage = document.getElementById("ask-language");
@@ -40,7 +56,7 @@ function likeMusicYes() {
     }, 300);
 }
 
-// Step 3: Handles the Hindi/English clicks
+// Step 3b: Handles Hindi/English clicks
 function clickHindi() {
     const msg = document.getElementById("musicMsg");
     msg.innerText = "You can't feel it... go for English! 😉";
@@ -48,17 +64,17 @@ function clickHindi() {
 }
 
 function clickEnglish() {
-    fadeTransition("phase2", "phase3");
+    fadeTransition("phase3", "phase4");
 }
 
-// Step 4: Checks the final answer
+// Step 4: Checks final question answer
 function checkFinalAnswer() {
     const inputField = document.getElementById("answerInput");
     const errorMsg = document.getElementById("errorMessage");
     const answer = inputField.value.toLowerCase().trim();
     
     if (answer === "me" || answer === "you") {
-        fadeTransition("phase3", "phase4", true); 
+        fadeTransition("phase4", "phase5", true); 
     } else {
         inputField.classList.add("shake");
         errorMsg.classList.remove("hidden");
@@ -99,7 +115,7 @@ function checkTime() {
     
     if (currentHour >= unlockHour) {
         setTimeout(() => {
-            fadeTransition("phase4", "phase5");
+            fadeTransition("phase5", "phase6");
         }, 3000); 
     }
 }

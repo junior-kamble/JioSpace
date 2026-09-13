@@ -9,13 +9,30 @@
 </head>
 <body class="theme-phase1">
     <div class="container">
-        <!-- Main Title matches the browser tab now -->
+        <!-- Main Title -->
         <h1 id="mainTitle" class="main-title">Welcome to Jio World</h1>
         
-        <!-- Phase 1: The Riddle -->
+        <!-- Phase 1: The Phone Number Challenge with Office Disclaimer -->
         <div id="phase1" class="card">
             <img src="images/flower-shadow.png" alt="A special welcome" class="first-page-image">
             
+            <p class="question" style="margin-bottom: 12px;">I'm a little upset with your activity today... taking way too long to reply on Insta! 😒</p>
+            
+            <!-- Disclaimer / Reminder -->
+            <div class="disclaimer-box">
+                <p>⚠️ <em>Quick reminder: Best to enjoy this little experience when no one is around... since you're in the office (and so am I!).</em> 😉</p>
+            </div>
+            
+            <p class="riddle-clue" style="font-size: 14px; color: #aaa; margin-bottom: 15px;">To unlock further experiences, guess the last 2 digits of my phone number:</p>
+            
+            <input type="text" id="phoneInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2">
+            <p id="phoneError" class="error hidden">Not quite! You can get it, you just need to try... 😉</p>
+            <button onclick="checkPhoneAnswer()">Unlock Surprise</button>
+        </div>
+        
+        <!-- Phase 2: The Riddle -->
+        <div id="phase2" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase2', 'phase1')">← Back</button>
             <div class="riddle-box">
                 <p>1. Do</p>
                 <p>2. you</p>
@@ -29,10 +46,10 @@
             </div>
             <button onclick="guessWho()">Guess who?</button>
         </div>
-        
-        <!-- Phase 2: Split Recap & Music Flow -->
-        <div id="phase2" class="card hidden">
-            <button class="back-btn" onclick="goBack('phase2', 'phase1')">← Back</button>
+
+        <!-- Phase 3: Split Recap & Music Flow -->
+        <div id="phase3" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase3', 'phase2')">← Back</button>
             
             <div class="split-layout">
                 <div class="split-left">
@@ -60,18 +77,18 @@
             </div>
         </div>
 
-        <!-- Phase 3: The Final Question -->
-        <div id="phase3" class="card hidden">
-            <button class="back-btn" onclick="goBack('phase3', 'phase2')">← Back</button>
+        <!-- Phase 4: The Final Question -->
+        <div id="phase4" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase4', 'phase3')">← Back</button>
             <p class="question">So... who was the prettiest girl today?</p>
             <input type="text" id="answerInput" placeholder="Type your answer here..." autocomplete="off">
             <p id="errorMessage" class="error hidden">Not quite! Try again.</p>
             <button onclick="checkFinalAnswer()">Unlock Music</button>
         </div>
         
-        <!-- Phase 4: The Mid-Day Song -->
-        <div id="phase4" class="card hidden">
-            <button class="back-btn" onclick="goBack('phase4', 'phase3')">← Back</button>
+        <!-- Phase 5: The Mid-Day Song -->
+        <div id="phase5" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase5', 'phase4')">← Back</button>
             <h3 class="success-title">You got it! 🤍</h3>
             <p>A little something to keep you going today...</p>
             
@@ -85,8 +102,8 @@
             </div>
         </div>
         
-        <!-- Phase 5: The Grand Finale -->
-        <div id="phase5" class="card hidden">
+        <!-- Phase 6: The Grand Finale -->
+        <div id="phase6" class="card hidden">
             <h3 class="finale-title">The Final Vault is Open 🔓</h3>
             <p class="finale-text">Meet me for coffee in Downtown Dubai right by the Burj Khalifa fountain view.</p>
         </div>
