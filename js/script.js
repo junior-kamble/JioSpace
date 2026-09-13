@@ -1,7 +1,7 @@
 const unlockHour = 17; // 5:00 PM
 
 const phaseConfig = {
-    "phase1": { title: "Welcome to Jio World", theme: "theme-phase1" },
+    "phase1": { title: "A Little Something For Youuuuu🌼", theme: "theme-phase1" },
     "phase2": { title: "i dont have doubt", theme: "theme-phase2" },
     "phase3": { title: "Almost There...", theme: "theme-phase3" },
     "phase4": { title: "For Your Playlist 🎵", theme: "theme-phase4" },
