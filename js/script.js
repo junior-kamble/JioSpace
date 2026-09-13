@@ -1,8 +1,7 @@
 const unlockHour = 17; // 5:00 PM
 
-// This dictionary controls the Title and Background Theme for each phase!
 const phaseConfig = {
-    "phase1": { title: "A Little Something For You ✨", theme: "theme-phase1" },
+    "phase1": { title: "Welcome to Jio World", theme: "theme-phase1" },
     "phase2": { title: "i dont have doubt", theme: "theme-phase2" },
     "phase3": { title: "Almost There...", theme: "theme-phase3" },
     "phase4": { title: "For Your Playlist 🎵", theme: "theme-phase4" },
@@ -13,7 +12,7 @@ window.onload = () => {
     document.getElementById("phase1").classList.add("active");
 };
 
-// Reusable function to go backwards smoothly
+// Universal Back Button Logic
 function goBack(currentId, targetId) {
     if (currentId === 'phase2') {
         document.getElementById('ask-music').classList.remove('hidden');
@@ -67,25 +66,22 @@ function checkFinalAnswer() {
     }
 }
 
-// Master Animation Function: Handles fading cards, changing titles, and updating backgrounds
+// Master Animation Function
 function fadeTransition(hideId, showId, checkVaultTime = false) {
     const hideElement = document.getElementById(hideId);
     const showElement = document.getElementById(showId);
     const mainTitleElement = document.getElementById("mainTitle");
     
-    // Smoothly fade out old text
     mainTitleElement.style.opacity = '0';
     hideElement.classList.remove("active");
     
     setTimeout(() => {
-        // Change the text and background theme automatically based on the dictionary above!
         mainTitleElement.innerText = phaseConfig[showId].title;
         document.body.className = phaseConfig[showId].theme;
         
         hideElement.classList.add("hidden");
         showElement.classList.remove("hidden");
         
-        // Fade in new text and new card
         setTimeout(() => {
             mainTitleElement.style.opacity = '1';
             showElement.classList.add("active");

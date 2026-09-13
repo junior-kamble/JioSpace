@@ -7,14 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<!-- Added the starting theme class here -->
 <body class="theme-phase1">
     <div class="container">
         <!-- Main Title -->
         <h1 id="mainTitle" class="main-title">A Little Something For You ✨</h1>
         
-        <!-- Phase 1: The Riddle -->
+        <!-- Phase 1: The Riddle (Now features the Flower Shadow Image right at the start) -->
         <div id="phase1" class="card">
+            <!-- Flower image featured prominently on the first page -->
+            <img src="images/flower-shadow.png" alt="A special welcome" class="first-page-image">
+            
             <div class="riddle-box">
                 <p>1. Do</p>
                 <p>2. you</p>
@@ -76,6 +78,7 @@
         
         <!-- Phase 4: The Mid-Day Song -->
         <div id="phase4" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase4', 'phase3')">← Back</button>
             <h3 class="success-title">You got it! 🤍</h3>
             <p>A little something to keep you going today...</p>
             
@@ -92,10 +95,6 @@
         <!-- Phase 5: The Grand Finale -->
         <div id="phase5" class="card hidden">
             <h3 class="finale-title">The Final Vault is Open 🔓</h3>
-            
-            <!-- Beautiful Reveal Image -->
-            <img src="images/flower-shadow.png" alt="A beautiful surprise" class="finale-image">
-            
             <p class="finale-text">Meet me for coffee in Downtown Dubai right by the Burj Khalifa fountain view.</p>
         </div>
     </div>

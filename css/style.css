@@ -8,20 +8,18 @@ body {
     align-items: center; 
     min-height: 100vh;
     padding: 20px;
-    /* Smoothly fades colors when the JS changes the theme */
     transition: background 0.8s ease-in-out; 
 }
 
-/* === LUXURY DYNAMIC THEMES === */
-.theme-phase1 { background: #050505; background-image: radial-gradient(circle at top right, #1a1a1a, #000 80%); } /* Midnight Black */
-.theme-phase2 { background: #020617; background-image: radial-gradient(circle at top right, #0f172a, #020617 80%); } /* Deep Navy Glass */
-.theme-phase3 { background: #170312; background-image: radial-gradient(circle at top right, #2e0624, #170312 80%); } /* Dark Amethyst */
-.theme-phase4 { background: #1a1205; background-image: radial-gradient(circle at top right, #33230a, #1a1205 80%); } /* Warm Bronze/Gold */
-.theme-phase5 { background: #1a0508; background-image: radial-gradient(circle at top right, #330a10, #1a0508 80%); } /* Deep Rose (Matches Flowers) */
+/* Luxury Dynamic Themes */
+.theme-phase1 { background: #050505; background-image: radial-gradient(circle at top right, #1a1a1a, #000 80%); } 
+.theme-phase2 { background: #020617; background-image: radial-gradient(circle at top right, #0f172a, #020617 80%); } 
+.theme-phase3 { background: #170312; background-image: radial-gradient(circle at top right, #2e0624, #170312 80%); } 
+.theme-phase4 { background: #1a1205; background-image: radial-gradient(circle at top right, #33230a, #1a1205 80%); } 
+.theme-phase5 { background: #1a0508; background-image: radial-gradient(circle at top right, #330a10, #1a0508 80%); } 
 
 .container { max-width: 500px; width: 100%; text-align: center; }
 
-/* The title also gets a smooth fade animation */
 .main-title { font-size: 24px; margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
 
 .card { 
@@ -49,6 +47,17 @@ body {
     box-shadow: none; letter-spacing: 0; float: left;
 }
 .back-btn:hover { background: transparent; color: #fff; transform: none; box-shadow: none; text-decoration: underline; }
+
+/* First Page Image Styling */
+.first-page-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
 
 /* Split Layout for Phase 2 */
 .split-layout { display: flex; gap: 20px; text-align: left; align-items: center; clear: both; }
@@ -96,5 +105,3 @@ button:hover { background: linear-gradient(45deg, #333, #555); transform: transl
 .time-text { color: #ccc; margin-top: 5px; }
 .finale-title { color: #fff; font-size: 24px; margin-bottom: 15px; letter-spacing: 1px;}
 .finale-text { font-size: 18px; line-height: 1.6; color: #ddd; }
-
-.finale-image { width: 100%; max-width: 250px; border-radius: 12px; margin: 15px auto 25px auto; display: block; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
