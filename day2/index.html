@@ -40,7 +40,9 @@
 </head>
 <body class="theme-day2">
     <div class="container">
-        <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
+        <!-- Upgraded Top Back Button -->
+        <button onclick="globalBack()" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back</button>
+        
         <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
         
         <!-- Step 1: Strict Country Validation Check -->
@@ -55,11 +57,26 @@
             <p id="countryError" class="error hidden">Not quite! Think of the Caucasus mountains... 😉</p>
             <button onclick="checkCountry()">Verify Status</button>
         </div>
+
+        <!-- Step 1.5: The Birthday Flower Promise Gatekeeper -->
+        <div id="tue-promise-step" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Important Condition</span>
+                <span class="insta-tag">Pinky Promise 🌸</span>
+            </div>
+            
+            <p class="question">Before you pass, I need a royal promise. 🤍<br><br>Promise you're going to share with me that picture of you holding the flowers I gave you on your birthday?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="acceptPromise()">I promise! 🌸</button>
+                <button onclick="rejectPromise()" class="alt-button">Nope, keeping it secret 🤐</button>
+            </div>
+            <p id="promiseError" class="error hidden" style="color: #ff4b4b; margin-top: 15px; font-size: 14px;"></p>
+        </div>
         
         <!-- Step 2: Trip Question (The Branching Point) -->
         <div id="tue-step2" class="card hidden">
-            <button class="back-btn" onclick="tueGoBack('tue-step2', 'tue-step1')">← Back</button>
-            <p class="question">Access granted, Your Highness. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
+            <p class="question">Promise recorded! Your Highness may proceed. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="choosePathA()">By spamming you with vacation photos 📸</button>
@@ -70,7 +87,6 @@
 
         <!-- Path A: If she chose photo spam -->
         <div id="tue-pathA-step3" class="card hidden">
-            <button class="back-btn" onclick="tueGoBack('tue-pathA-step3', 'tue-step2')">← Back</button>
             <p class="question">Photo spam accepted! But be honest... are you sending them just for the scenery, or to make me jealous? 🏔️</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
@@ -82,7 +98,6 @@
 
         <!-- Path B: If she chose missing the chats -->
         <div id="tue-pathB-step3" class="card hidden">
-            <button class="back-btn" onclick="tueGoBack('tue-pathB-step3', 'tue-step2')">← Back</button>
             <p class="question">That's smooth. But let's test your dedication—will you actually reply while exploring or completely ghost me for the mountains? ⛰️</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
@@ -108,6 +123,8 @@
     </div>
 
     <script>
+        let historyStack = ['tue-step1'];
+
         function checkCountry() {
             const inputField = document.getElementById("countryInput");
             const errorMsg = document.getElementById("countryError");
@@ -115,7 +132,7 @@
             
             if (answer === "georgia") {
                 errorMsg.classList.add("hidden");
-                fadeTransition("tue-step1", "tue-step2");
+                navigateTo("tue-promise-step");
             } else {
                 inputField.classList.add("shake");
                 errorMsg.classList.remove("hidden");
@@ -123,32 +140,52 @@
             }
         }
 
-        // Branch A: Vacation Photo Spam route
+        // Promise Gatekeeper Functions
+        function acceptPromise() {
+            navigateTo("tue-step2");
+        }
+
+        function rejectPromise() {
+            const errorMsg = document.getElementById("promiseError");
+            errorMsg.innerText = "Nice try, princess! Royal promises are legally binding. Try again! 😉";
+            errorMsg.classList.remove("hidden");
+        }
+
         function choosePathA() {
             const msg = document.getElementById("choiceMsg1");
             msg.innerText = "Deal. Expecting a full gallery in my inbox! 📸";
             msg.classList.remove("hidden");
-            setTimeout(() => fadeTransition("tue-step2", "tue-pathA-step3"), 1300);
+            setTimeout(() => navigateTo("tue-pathA-step3"), 1300);
         }
 
-        // Branch B: Missing the chats route
         function choosePathB() {
             const msg = document.getElementById("choiceMsg1");
-            msg.innerText = "Haha, fair enough! Let's see if that holds up 😌";
+            msg.innerText = "Haha, good to know! Let's see if that holds up 😌";
             msg.classList.remove("hidden");
-            setTimeout(() => fadeTransition("tue-step2", "tue-pathB-step3"), 1300);
+            setTimeout(() => navigateTo("tue-pathB-step3"), 1300);
         }
 
-        // Final step from either branch
         function finishJourney() {
-            fadeTransition(
-                document.getElementById("tue-pathA-step3").classList.contains("active") ? "tue-pathA-step3" : "tue-pathB-step3", 
-                "tue-step4"
-            );
+            navigateTo("tue-step4");
             startFallingFlowers();
         }
 
-        // Live Falling Flower Rain Generator
+        function navigateTo(nextId) {
+            const currentId = historyStack[historyStack.length - 1];
+            historyStack.push(nextId);
+            fadeTransition(currentId, nextId);
+        }
+
+        function globalBack() {
+            if (historyStack.length > 1) {
+                const currentId = historyStack.pop();
+                const previousId = historyStack[historyStack.length - 1];
+                fadeTransition(currentId, previousId);
+            } else {
+                window.location.href = "../index.html";
+            }
+        }
+
         function startFallingFlowers() {
             const symbols = ['🌸', '🪷', '✨', '🤍', '💮'];
             setInterval(() => {
@@ -156,24 +193,16 @@
                 flower.className = 'falling-flower';
                 flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                 flower.style.left = Math.random() * 100 + 'vw';
-                flower.style.animationDuration = (Math.random() * 3 + 3) + 's'; // falls between 3 to 6 seconds
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 flower.style.fontSize = (Math.random() * 10 + 18) + 'px';
                 document.body.appendChild(flower);
-
-                // Clean up element after it falls off screen
-                setTimeout(() => {
-                    flower.remove();
-                }, 6000);
-            }, 300); // spawns a new flower every 300ms
-        }
-
-        function tueGoBack(currentId, targetId) {
-            fadeTransition(currentId, targetId);
+                setTimeout(() => flower.remove(), 6000);
+            }, 300);
         }
 
         function fadeTransition(hideId, showId) {
-            const h = typeof hideId === 'string' ? document.getElementById(hideId) : hideId;
-            const s = typeof showId === 'string' ? document.getElementById(showId) : showId;
+            const h = document.getElementById(hideId);
+            const s = document.getElementById(showId);
             h.classList.remove("active");
             setTimeout(() => {
                 h.classList.add("hidden");
