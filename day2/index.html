@@ -6,73 +6,86 @@
     <title>Tuesday - Jio Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Lotus Background Styling */
+        body.theme-day2 {
+            background: linear-gradient(rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.9), rgba(3, 7, 18, 0.95)), 
+                        url('../images/Lotus.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body class="theme-day2">
     <div class="container">
         <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
-        <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 👑</h1>
+        <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
         
-        <!-- Step 1: Royal Country Check -->
+        <!-- Step 1: Strict Country Validation Check -->
         <div id="tue-step1" class="card active">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">Before entering the royal archives... Confirm you are the princess. What country?</p>
+            <p class="question">Confirm you are the princess. What country?</p>
             <input type="text" id="countryInput" placeholder="Enter country name..." autocomplete="off">
-            <p id="countryError" class="error hidden">Incorrect format, but royalty is royalty! Welcome. 😉</p>
+            <p id="countryError" class="error hidden">Not quite! Think of the Caucasus mountains... 😉</p>
             <button onclick="checkCountry()">Verify Status</button>
         </div>
         
-        <!-- Step 2: Flirty Interactive Choice 1 -->
+        <!-- Step 2: Trip Vibe Check & Flirty Question 1 -->
         <div id="tue-step2" class="card hidden">
             <button class="back-btn" onclick="tueGoBack('tue-step2', 'tue-step1')">← Back</button>
-            <p class="question">Status verified: Royalty detected. 🤍<br><br>Now, honest question—how are you surviving office hours today?</p>
+            <p class="question">Access granted, Your Highness. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="tueChoice(1)">By thinking about the evening coffee ☕</button>
-                <button onclick="tueChoice(2)" class="alt-button">By waiting for your next text 📱</button>
+                <button onclick="tueChoice(1)">By spamming you with vacation photos 📸</button>
+                <button onclick="tueChoice(2)" class="alt-button">Honestly? Probably won't survive 🥺</button>
             </div>
             <p id="choiceMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 3: Flirty Interactive Choice 2 -->
+        <!-- Step 3: Flirty Question 2 (Missing You) -->
         <div id="tue-step3" class="card hidden">
             <button class="back-btn" onclick="tueGoBack('tue-step3', 'tue-step2')">← Back</button>
-            <p class="question">Correct answer. Next test:<br><br>Who takes longer to reply when busy?</p>
+            <p class="question">Fair warning: baggage allowance doesn't cover how much you're going to miss me.<br><br>Be honest... how much will you miss me while away?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="tueChoice(3)">Definitely me 😇</button>
-                <button onclick="tueChoice(4)" class="alt-button">Okay fine, it's me (Georgette) 🙈</button>
+                <button onclick="tueChoice(3)">A dangerously high amount 🤫</button>
+                <button onclick="tueChoice(4)" class="alt-button">You'll find out when I text you 24/7 ✈️</button>
             </div>
             <p id="choiceMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 4: Grand Finale with Coldplay Hymn For The Weekend -->
+        <!-- Step 4: Grand Finale with New Song Embed -->
         <div id="tue-step4" class="card hidden">
-            <h3 class="success-title">Your Soundtrack 🎵</h3>
-            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">Something special for your playlist today...</p>
+            <h3 class="success-title">Before You Fly 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A little something for your travel playlist...</p>
             
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/YykjpeuMNEk" title="Coldplay - Hymn For The Weekend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/NzWkopFJuSw" title="Special Song" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
             <div class="note-card" style="text-align: center; margin-top: 15px;">
-                <p style="font-size: 14px; color: #fff; line-height: 1.5;">"Drink from me, drink from me / That shot was a wet dream / You said 'Drink from me, drink from me' / When I'm so thirsty..." ✨</p>
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have the best time on your trip. Safe travels, and text me the second you land. 🤍✨</p>
             </div>
         </div>
     </div>
     
     <script>
+        // Strict Country Validation (Georgia)
         function checkCountry() {
-            const input = document.getElementById("countryInput").value.trim();
-            // Accepts anything she types, makes her smile
-            if(input.length > 0) {
+            const inputField = document.getElementById("countryInput");
+            const errorMsg = document.getElementById("countryError");
+            const answer = inputField.value.toLowerCase().trim();
+            
+            if (answer === "georgia") {
+                errorMsg.classList.add("hidden");
                 fadeTransition("tue-step1", "tue-step2");
             } else {
-                document.getElementById("countryInput").classList.add("shake");
-                setTimeout(() => document.getElementById("countryInput").classList.remove("shake"), 500);
+                inputField.classList.add("shake");
+                errorMsg.classList.remove("hidden");
+                setTimeout(() => inputField.classList.remove("shake"), 500);
             }
         }
 
@@ -81,11 +94,11 @@
             const msg2 = document.getElementById("choiceMsg2");
 
             if(option === 1 || option === 2) {
-                msg1.innerText = "Music to my ears. Let's move to the final check... ✨";
+                msg1.innerText = "Accepted. Expect replies at lightning speed. ✨";
                 msg1.classList.remove("hidden");
                 setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1200);
             } else if(option === 3 || option === 4) {
-                msg2.innerText = "Haha caught you! Unlocking your song now... 🤍";
+                msg2.innerText = "That's what I like to hear. Unlocking your travel track... 🤍";
                 msg2.classList.remove("hidden");
                 setTimeout(() => fadeTransition("tue-step3", "tue-step4"), 1200);
             }
