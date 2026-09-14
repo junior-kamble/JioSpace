@@ -15,24 +15,26 @@
             overflow-x: hidden;
         }
 
-        /* Blooming Corner Flowers Animation */
-        .corner-flower {
+        /* Live Falling Flower Rain Animation */
+        .falling-flower {
             position: fixed;
-            font-size: 24px;
+            top: -50px;
+            font-size: 22px;
             z-index: 999;
-            opacity: 0;
-            animation: bloomFlower 2s ease-in-out forwards;
+            user-select: none;
             pointer-events: none;
+            animation: fallDown linear infinite;
         }
-        .top-left { top: 20px; left: 20px; animation-delay: 0.2s; }
-        .top-right { top: 20px; right: 20px; animation-delay: 0.4s; }
-        .bottom-left { bottom: 20px; left: 20px; animation-delay: 0.6s; }
-        .bottom-right { bottom: 20px; right: 20px; animation-delay: 0.8s; }
 
-        @keyframes bloomFlower {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.3); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 0.8; }
+        @keyframes fallDown {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0.2;
+            }
         }
     </style>
 </head>
@@ -54,31 +56,43 @@
             <button onclick="checkCountry()">Verify Status</button>
         </div>
         
-        <!-- Step 2: Trip Vibe Check & Dynamic Responses -->
+        <!-- Step 2: Trip Question (The Branching Point) -->
         <div id="tue-step2" class="card hidden">
             <button class="back-btn" onclick="tueGoBack('tue-step2', 'tue-step1')">← Back</button>
             <p class="question">Access granted, Your Highness. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="tueChoice(1)">By spamming you with vacation photos 📸</button>
-                <button onclick="tueChoice(2)" class="alt-button">Honestly? Might actually miss the chats 🙈</button>
+                <button onclick="choosePathA()">By spamming you with vacation photos 📸</button>
+                <button onclick="choosePathB()" class="alt-button">Honestly? Might actually miss the chats 🙈</button>
             </div>
             <p id="choiceMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 3: Second Question with Dynamic Responses -->
-        <div id="tue-step3" class="card hidden">
-            <button class="back-btn" onclick="tueGoBack('tue-step3', 'tue-step2')">← Back</button>
-            <p class="question">Fair warning: baggage allowance doesn't cover how busy work gets.<br><br>Be honest... will you actually find time to text while away?</p>
+        <!-- Path A: If she chose photo spam -->
+        <div id="tue-pathA-step3" class="card hidden">
+            <button class="back-btn" onclick="tueGoBack('tue-pathA-step3', 'tue-step2')">← Back</button>
+            <p class="question">Photo spam accepted! But be honest... are you sending them just for the scenery, or to make me jealous? 🏔️</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="tueChoice(3)">I'll try my best between sightseeing 🗺️</button>
-                <button onclick="tueChoice(4)" class="alt-button">Depends on how interesting your messages are 🤫</button>
+                <button onclick="finishJourney()">A little bit of both 🤫</button>
+                <button onclick="finishJourney()" class="alt-button">Just for the aesthetic, obviously ✨</button>
             </div>
-            <p id="choiceMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+            <p id="pathAMsg" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 4: Grand Finale with Blooming Corners & New Song -->
+        <!-- Path B: If she chose missing the chats -->
+        <div id="tue-pathB-step3" class="card hidden">
+            <button class="back-btn" onclick="tueGoBack('tue-pathB-step3', 'tue-step2')">← Back</button>
+            <p class="question">That's smooth. But let's test your dedication—will you actually reply while exploring or completely ghost me for the mountains? ⛰️</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="finishJourney()">I could never ghost you 😌</button>
+                <button onclick="finishJourney()" class="alt-button">Depends on network coverage... and your texts 😉</button>
+            </div>
+            <p id="pathBMsg" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Step 4: Grand Finale with Live Falling Flowers & Music -->
         <div id="tue-step4" class="card hidden">
             <h3 class="success-title">Before You Fly 🎵</h3>
             <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A little travel soundtrack for your journey...</p>
@@ -92,9 +106,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Blooming Corner Flowers Elements -->
-    <div id="flowerContainer"></div>
 
     <script>
         function checkCountry() {
@@ -112,51 +123,48 @@
             }
         }
 
-        function tueChoice(option) {
-            const msg1 = document.getElementById("choiceMsg1");
-            const msg2 = document.getElementById("choiceMsg2");
-
-            if (option === 1) {
-                msg1.innerText = "Honestly, I'd like that — photo spam accepted! 📸✨";
-                msg1.classList.remove("hidden");
-                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1300);
-            } else if (option === 2) {
-                msg1.innerText = "Haha, good to know I won't be easily forgotten! 😌";
-                msg1.classList.remove("hidden");
-                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1300);
-            } else if (option === 3) {
-                msg2.innerText = "Fair enough! Enjoy the views out there 🗺️🤍";
-                msg2.classList.remove("hidden");
-                setTimeout(() => {
-                    fadeTransition("tue-step3", "tue-step4");
-                    triggerBloomingFlowers();
-                }, 1300);
-            } else if (option === 4) {
-                msg2.innerText = "Challenge accepted. Unlocking your travel track... 😉";
-                msg2.classList.remove("hidden");
-                setTimeout(() => {
-                    fadeTransition("tue-step3", "tue-step4");
-                    triggerBloomingFlowers();
-                }, 1300);
-            }
+        // Branch A: Vacation Photo Spam route
+        function choosePathA() {
+            const msg = document.getElementById("choiceMsg1");
+            msg.innerText = "Deal. Expecting a full gallery in my inbox! 📸";
+            msg.classList.remove("hidden");
+            setTimeout(() => fadeTransition("tue-step2", "tue-pathA-step3"), 1300);
         }
 
-        // Blooming corner flowers effect for the final music page
-        function triggerBloomingFlowers() {
-            const container = document.getElementById("flowerContainer");
-            const corners = [
-                { class: 'top-left', emoji: '🌸' },
-                { class: 'top-right', emoji: '🪷' },
-                { class: 'bottom-left', emoji: '🪷' },
-                { class: 'bottom-right', emoji: '🌸' }
-            ];
+        // Branch B: Missing the chats route
+        function choosePathB() {
+            const msg = document.getElementById("choiceMsg1");
+            msg.innerText = "Haha, fair enough! Let's see if that holds up 😌";
+            msg.classList.remove("hidden");
+            setTimeout(() => fadeTransition("tue-step2", "tue-pathB-step3"), 1300);
+        }
 
-            corners.forEach(c => {
-                const span = document.createElement('span');
-                span.className = `corner-flower ${c.class}`;
-                span.innerText = c.emoji;
-                container.appendChild(span);
-            });
+        // Final step from either branch
+        function finishJourney() {
+            fadeTransition(
+                document.getElementById("tue-pathA-step3").classList.contains("active") ? "tue-pathA-step3" : "tue-pathB-step3", 
+                "tue-step4"
+            );
+            startFallingFlowers();
+        }
+
+        // Live Falling Flower Rain Generator
+        function startFallingFlowers() {
+            const symbols = ['🌸', '🪷', '✨', '🤍', '💮'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.className = 'falling-flower';
+                flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's'; // falls between 3 to 6 seconds
+                flower.style.fontSize = (Math.random() * 10 + 18) + 'px';
+                document.body.appendChild(flower);
+
+                // Clean up element after it falls off screen
+                setTimeout(() => {
+                    flower.remove();
+                }, 6000);
+            }, 300); // spawns a new flower every 300ms
         }
 
         function tueGoBack(currentId, targetId) {
@@ -164,8 +172,8 @@
         }
 
         function fadeTransition(hideId, showId) {
-            const h = document.getElementById(hideId);
-            const s = document.getElementById(showId);
+            const h = typeof hideId === 'string' ? document.getElementById(hideId) : hideId;
+            const s = typeof showId === 'string' ? document.getElementById(showId) : showId;
             h.classList.remove("active");
             setTimeout(() => {
                 h.classList.add("hidden");
