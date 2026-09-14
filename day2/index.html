@@ -27,34 +27,39 @@
         }
 
         @keyframes fallDown {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
         }
     </style>
 </head>
 <body class="theme-day2">
     <div class="container">
-        <!-- Upgraded Top Back Button -->
         <button onclick="globalBack()" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back</button>
         
         <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
         
+        <!-- Time-Lock Gatekeeper Card (Active if before 11:00 AM) -->
+        <div id="tue-timelock" class="card">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Time Locked</span>
+                <span class="insta-tag">Patience, Madam ⏳</span>
+            </div>
+            <div class="envelope-box" style="cursor: default;">
+                <div class="envelope-icon">⏰</div>
+                <p class="envelope-text">This chapter is resting until morning.<br><br><strong>Come back at 11:00 AM</strong> for Tuesday's surprise, Madam! 🤍</p>
+            </div>
+        </div>
+
         <!-- Step 1: Strict Country Validation Check -->
-        <div id="tue-step1" class="card active">
+        <div id="tue-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">Confirm you are the princess. What country?</p>
+            <p class="question">Confirm you are Madam. What country?</p>
             <input type="text" id="countryInput" placeholder="Enter country name..." autocomplete="off">
-            <p id="countryError" class="error hidden">Not quite! Think of the Caucasus mountains... 😉</p>
+            <p id="countryError" class="error hidden">Not quite, Madam! Think of the Caucasus mountains... 😉</p>
             <button onclick="checkCountry()">Verify Status</button>
         </div>
 
@@ -65,7 +70,7 @@
                 <span class="insta-tag">Pinky Promise 🌸</span>
             </div>
             
-            <p class="question">Before you pass, I need a royal promise. 🤍<br><br>Promise you're going to share with me that picture of you holding the flowers I gave you on your birthday?</p>
+            <p class="question">Before you pass, I need a promise, Madam. 🤍<br><br>Promise you're going to share with me that picture of you holding the flowers I gave you on your birthday?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="acceptPromise()">I promise! 🌸</button>
@@ -76,7 +81,7 @@
         
         <!-- Step 2: Trip Question (The Branching Point) -->
         <div id="tue-step2" class="card hidden">
-            <p class="question">Promise recorded! Your Highness may proceed. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
+            <p class="question">Promise recorded! You may proceed, Madam. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="choosePathA()">By spamming you with vacation photos 📸</button>
@@ -117,13 +122,28 @@
             </div>
             
             <div class="note-card" style="text-align: center; margin-top: 15px;">
-                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have an amazing trip! Safe travels, and enjoy the getaway. 🤍✨</p>
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have an amazing trip, Madam! Safe travels, and enjoy the getaway. 🤍✨</p>
             </div>
         </div>
     </div>
 
     <script>
-        let historyStack = ['tue-step1'];
+        let historyStack = [];
+
+        window.onload = () => {
+            const now = new Date();
+            const currentHour = now.getHours(); // 24-hour format
+            const unlockHour = 11; // 11:00 AM
+
+            // Enforces 11:00 AM time-lock for morning testing
+            if (currentHour < unlockHour) {
+                document.getElementById("tue-timelock").classList.add("active");
+                historyStack = ['tue-timelock'];
+            } else {
+                document.getElementById("tue-step1").classList.add("active");
+                historyStack = ['tue-step1'];
+            }
+        };
 
         function checkCountry() {
             const inputField = document.getElementById("countryInput");
@@ -135,25 +155,25 @@
                 navigateTo("tue-promise-step");
             } else {
                 inputField.classList.add("shake");
+                errorMsg.innerText = "Not quite, Madam! Think of the Caucasus mountains... 😉";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
             }
         }
 
-        // Promise Gatekeeper Functions
         function acceptPromise() {
             navigateTo("tue-step2");
         }
 
         function rejectPromise() {
             const errorMsg = document.getElementById("promiseError");
-            errorMsg.innerText = "Nice try, princess! Royal promises are legally binding. Try again! 😉";
+            errorMsg.innerText = "Nice try, Madam! Promises are legally binding. Try again! 😉";
             errorMsg.classList.remove("hidden");
         }
 
         function choosePathA() {
             const msg = document.getElementById("choiceMsg1");
-            msg.innerText = "Deal. Expecting a full gallery in my inbox! 📸";
+            msg.innerText = "Deal. Expecting a full gallery in my inbox, Madam! 📸";
             msg.classList.remove("hidden");
             setTimeout(() => navigateTo("tue-pathA-step3"), 1300);
         }

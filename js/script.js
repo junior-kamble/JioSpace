@@ -116,3 +116,18 @@ function checkTime() {
         }, 3000); 
     }
 }
+function checkCountry() {
+            const inputField = document.getElementById("countryInput");
+            const errorMsg = document.getElementById("countryError");
+            const answer = inputField.value.toLowerCase().trim();
+            
+            if (answer === "georgia") {
+                errorMsg.classList.add("hidden");
+                navigateTo("tue-promise-step");
+            } else {
+                inputField.classList.add("shake");
+                errorMsg.innerText = "Not quite, Madam! Think of the Caucasus mountains... 😉";
+                errorMsg.classList.remove("hidden");
+                setTimeout(() => inputField.classList.remove("shake"), 500);
+            }
+        }
