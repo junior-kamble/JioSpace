@@ -10,84 +10,100 @@
 <body class="theme-day2">
     <div class="container">
         <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
-        <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
+        <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 👑</h1>
         
-        <div id="day2-step1" class="card active">
+        <!-- Step 1: Royal Country Check -->
+        <div id="tue-step1" class="card active">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Office hours edition</span>
-                <span class="insta-tag">Faster replies today? 👀</span>
+                <span class="disclaimer-tag">⚠️ Royal Protocol</span>
+                <span class="insta-tag">Verification Required ✨</span>
             </div>
-            <div class="envelope-box" onclick="openEnvelope()">
-                <div class="envelope-icon">💌</div>
-                <p class="envelope-text">You have a new message.<br><strong>Tap to open</strong></p>
-            </div>
+            
+            <p class="question">Before entering the royal archives... Confirm you are the princess. What country?</p>
+            <input type="text" id="countryInput" placeholder="Enter country name..." autocomplete="off">
+            <p id="countryError" class="error hidden">Incorrect format, but royalty is royalty! Welcome. 😉</p>
+            <button onclick="checkCountry()">Verify Status</button>
         </div>
         
-        <div id="day2-step2" class="card hidden">
-            <button class="back-btn" onclick="goBackStep('day2-step2', 'day2-step1')">← Back</button>
-            <div class="notes-container">
-                <div class="note-card">
-                    <span class="note-number">01 / 03</span>
-                    <p class="note-text">Thought yesterday's surprise turned out pretty well... despite how long you take to reply on Insta. 😉</p>
-                </div>
-                <div class="note-card hidden" id="note2">
-                    <span class="note-number">02 / 03</span>
-                    <p class="note-text">Official status: You are still winning the "prettiest girl today" award with zero competition.</p>
-                </div>
-                <div class="note-card hidden" id="note3">
-                    <span class="note-number">03 / 03</span>
-                    <p class="note-text">Ready for today's final vibe check?</p>
-                </div>
+        <!-- Step 2: Flirty Interactive Choice 1 -->
+        <div id="tue-step2" class="card hidden">
+            <button class="back-btn" onclick="tueGoBack('tue-step2', 'tue-step1')">← Back</button>
+            <p class="question">Status verified: Royalty detected. 🤍<br><br>Now, honest question—how are you surviving office hours today?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="tueChoice(1)">By thinking about the evening coffee ☕</button>
+                <button onclick="tueChoice(2)" class="alt-button">By waiting for your next text 📱</button>
             </div>
-            <button id="nextNoteBtn" onclick="nextNote()" style="margin-top: 20px;">Continue 🤍</button>
+            <p id="choiceMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <div id="day2-step3" class="card hidden">
-            <button class="back-btn" onclick="goBackStep('day2-step3', 'day2-step2')">← Back</button>
-            <h3 class="success-title" style="font-size: 22px; margin-bottom: 15px;">Quick Vibe Check</h3>
-            <p class="question">How are we feeling about today so far?</p>
-            <div class="button-group" style="margin-top: 20px;">
-                <button onclick="vibeResponse('good')">Loving it 🥰</button>
-                <button onclick="vibeResponse('spoiled')" class="alt-button">Too spoiled 😌</button>
+        <!-- Step 3: Flirty Interactive Choice 2 -->
+        <div id="tue-step3" class="card hidden">
+            <button class="back-btn" onclick="tueGoBack('tue-step3', 'tue-step2')">← Back</button>
+            <p class="question">Correct answer. Next test:<br><br>Who takes longer to reply when busy?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="tueChoice(3)">Definitely me 😇</button>
+                <button onclick="tueChoice(4)" class="alt-button">Okay fine, it's me (Georgette) 🙈</button>
             </div>
-            <p id="vibeMsg" class="error hidden" style="color: #f9d423; margin-top: 20px; font-size: 14px;"></p>
+            <p id="choiceMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Step 4: Grand Finale with Coldplay Hymn For The Weekend -->
+        <div id="tue-step4" class="card hidden">
+            <h3 class="success-title">Your Soundtrack 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">Something special for your playlist today...</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/YykjpeuMNEk" title="Coldplay - Hymn For The Weekend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="note-card" style="text-align: center; margin-top: 15px;">
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">"Drink from me, drink from me / That shot was a wet dream / You said 'Drink from me, drink from me' / When I'm so thirsty..." ✨</p>
+            </div>
         </div>
     </div>
     
     <script>
-        let currentNoteIndex = 1;
-        window.onload = () => { document.getElementById("day2-step1").classList.add("active"); };
-        function openEnvelope() { fadeTransition("day2-step1", "day2-step2"); }
-        function nextNote() {
-            if (currentNoteIndex === 1) {
-                document.getElementById("note2").classList.remove("hidden");
-                currentNoteIndex = 2;
-            } else if (currentNoteIndex === 2) {
-                document.getElementById("note3").classList.remove("hidden");
-                document.getElementById("nextNoteBtn").innerText = "Final Step 🤍";
-                currentNoteIndex = 3;
+        function checkCountry() {
+            const input = document.getElementById("countryInput").value.trim();
+            // Accepts anything she types, makes her smile
+            if(input.length > 0) {
+                fadeTransition("tue-step1", "tue-step2");
             } else {
-                fadeTransition("day2-step2", "day2-step3");
+                document.getElementById("countryInput").classList.add("shake");
+                setTimeout(() => document.getElementById("countryInput").classList.remove("shake"), 500);
             }
         }
-        function vibeResponse(type) {
-            const msg = document.getElementById("vibeMsg");
-            msg.innerText = (type === 'good') ? "That's the right answer. See you soon! 🥰" : "A little spoiling never hurt anyone. 😌✨";
-            msg.classList.remove("hidden");
-        }
-        function goBackStep(currentId, targetId) {
-            if (currentId === 'day2-step2') {
-                currentNoteIndex = 1;
-                document.getElementById("note2").classList.add("hidden");
-                document.getElementById("note3").classList.add("hidden");
-                document.getElementById("nextNoteBtn").innerText = "Continue 🤍";
+
+        function tueChoice(option) {
+            const msg1 = document.getElementById("choiceMsg1");
+            const msg2 = document.getElementById("choiceMsg2");
+
+            if(option === 1 || option === 2) {
+                msg1.innerText = "Music to my ears. Let's move to the final check... ✨";
+                msg1.classList.remove("hidden");
+                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1200);
+            } else if(option === 3 || option === 4) {
+                msg2.innerText = "Haha caught you! Unlocking your song now... 🤍";
+                msg2.classList.remove("hidden");
+                setTimeout(() => fadeTransition("tue-step3", "tue-step4"), 1200);
             }
+        }
+
+        function tueGoBack(currentId, targetId) {
             fadeTransition(currentId, targetId);
         }
+
         function fadeTransition(hideId, showId) {
-            const h = document.getElementById(hideId), s = document.getElementById(showId);
+            const h = document.getElementById(hideId);
+            const s = document.getElementById(showId);
             h.classList.remove("active");
-            setTimeout(() => { h.classList.add("hidden"); s.classList.remove("hidden"); setTimeout(() => s.classList.add("active"), 50); }, 500);
+            setTimeout(() => {
+                h.classList.add("hidden");
+                s.classList.remove("hidden");
+                setTimeout(() => s.classList.add("active"), 50);
+            }, 500);
         }
     </script>
 </body>

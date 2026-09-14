@@ -15,28 +15,61 @@
             <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
             
             <div class="date-list">
+                <!-- Monday (Always open for testing) -->
                 <a href="day1/index.html" class="date-btn">
                     <span class="date-name">Monday, Sept 14</span>
                     <span class="date-status" style="color: #4ade80;">Open 🔓</span>
                 </a>
+
+                <!-- Tuesday (Open for testing) -->
                 <a href="day2/index.html" class="date-btn">
                     <span class="date-name">Tuesday, Sept 15</span>
                     <span class="date-status" style="color: #f472b6;">Open ✨</span>
                 </a>
-                <a href="day3/index.html" class="date-btn">
+
+                <!-- Wednesday (Auto unlocks on Sept 16) -->
+                <a href="day3/index.html" id="link-day3" class="date-btn locked">
                     <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" style="color: #38bdf8;">Open 🔓</span>
+                    <span class="date-status" id="status-day3">Locked 🔒</span>
                 </a>
-                <a href="day4/index.html" class="date-btn">
+
+                <!-- Thursday (Auto unlocks on Sept 17) -->
+                <a href="day4/index.html" id="link-day4" class="date-btn locked">
                     <span class="date-name">Thursday, Sept 17</span>
-                    <span class="date-status" style="color: #facc15;">Open 🔓</span>
+                    <span class="date-status" id="status-day4">Locked 🔒</span>
                 </a>
-                <a href="day5/index.html" class="date-btn">
+
+                <!-- Friday (Auto unlocks on Sept 18) -->
+                <a href="day5/index.html" id="link-day5" class="date-btn locked">
                     <span class="date-name">Friday, Sept 18</span>
-                    <span class="date-status" style="color: #c084fc;">Open 🔓</span>
+                    <span class="date-status" id="status-day5">Locked 🔒</span>
                 </a>
             </div>
         </div>
     </div>
+
+    <script>
+        // Automatic Midnight Date Unlocking Logic
+        const today = new Date();
+        const currentDay = today.getDate(); // gets day of the month (e.g., 14, 15, 16...)
+        const currentMonth = today.getMonth() + 1; // September is 9
+
+        // If it's September or later, check dates
+        if (currentMonth >= 9) {
+            if (currentDay >= 16) unlockChapter('day3', 'Wednesday, Sept 16');
+            if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
+            if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
+        }
+
+        function unlockChapter(dayId, name) {
+            const link = document.getElementById('link-' + dayId);
+            const status = document.getElementById('status-' + dayId);
+            if (link && status) {
+                link.classList.remove('locked');
+                status.innerText = 'Open 🔓';
+                status.style.color = '#38bdf8';
+            }
+        }
+    </script>
 </body>
 </html>
