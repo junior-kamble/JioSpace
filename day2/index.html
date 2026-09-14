@@ -12,6 +12,27 @@
             background: linear-gradient(rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.9), rgba(3, 7, 18, 0.95)), 
                         url('../images/Lotus.webp') no-repeat center center fixed;
             background-size: cover;
+            overflow-x: hidden;
+        }
+
+        /* Blooming Corner Flowers Animation */
+        .corner-flower {
+            position: fixed;
+            font-size: 24px;
+            z-index: 999;
+            opacity: 0;
+            animation: bloomFlower 2s ease-in-out forwards;
+            pointer-events: none;
+        }
+        .top-left { top: 20px; left: 20px; animation-delay: 0.2s; }
+        .top-right { top: 20px; right: 20px; animation-delay: 0.4s; }
+        .bottom-left { bottom: 20px; left: 20px; animation-delay: 0.6s; }
+        .bottom-right { bottom: 20px; right: 20px; animation-delay: 0.8s; }
+
+        @keyframes bloomFlower {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
     </style>
 </head>
@@ -33,47 +54,49 @@
             <button onclick="checkCountry()">Verify Status</button>
         </div>
         
-        <!-- Step 2: Trip Vibe Check & Flirty Question 1 -->
+        <!-- Step 2: Trip Vibe Check & Dynamic Responses -->
         <div id="tue-step2" class="card hidden">
             <button class="back-btn" onclick="tueGoBack('tue-step2', 'tue-step1')">← Back</button>
             <p class="question">Access granted, Your Highness. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="tueChoice(1)">By spamming you with vacation photos 📸</button>
-                <button onclick="tueChoice(2)" class="alt-button">Honestly? Probably won't survive 🥺</button>
+                <button onclick="tueChoice(2)" class="alt-button">Honestly? Might actually miss the chats 🙈</button>
             </div>
             <p id="choiceMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 3: Flirty Question 2 (Missing You) -->
+        <!-- Step 3: Second Question with Dynamic Responses -->
         <div id="tue-step3" class="card hidden">
             <button class="back-btn" onclick="tueGoBack('tue-step3', 'tue-step2')">← Back</button>
-            <p class="question">Fair warning: baggage allowance doesn't cover how much you're going to miss me.<br><br>Be honest... how much will you miss me while away?</p>
+            <p class="question">Fair warning: baggage allowance doesn't cover how busy work gets.<br><br>Be honest... will you actually find time to text while away?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="tueChoice(3)">A dangerously high amount 🤫</button>
-                <button onclick="tueChoice(4)" class="alt-button">You'll find out when I text you 24/7 ✈️</button>
+                <button onclick="tueChoice(3)">I'll try my best between sightseeing 🗺️</button>
+                <button onclick="tueChoice(4)" class="alt-button">Depends on how interesting your messages are 🤫</button>
             </div>
             <p id="choiceMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 4: Grand Finale with New Song Embed -->
+        <!-- Step 4: Grand Finale with Blooming Corners & New Song -->
         <div id="tue-step4" class="card hidden">
             <h3 class="success-title">Before You Fly 🎵</h3>
-            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A little something for your travel playlist...</p>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A little travel soundtrack for your journey...</p>
             
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/NzWkopFJuSw" title="Special Song" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
             <div class="note-card" style="text-align: center; margin-top: 15px;">
-                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have the best time on your trip. Safe travels, and text me the second you land. 🤍✨</p>
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have an amazing trip! Safe travels, and enjoy the getaway. 🤍✨</p>
             </div>
         </div>
     </div>
     
+    <!-- Blooming Corner Flowers Elements -->
+    <div id="flowerContainer"></div>
+
     <script>
-        // Strict Country Validation (Georgia)
         function checkCountry() {
             const inputField = document.getElementById("countryInput");
             const errorMsg = document.getElementById("countryError");
@@ -93,15 +116,47 @@
             const msg1 = document.getElementById("choiceMsg1");
             const msg2 = document.getElementById("choiceMsg2");
 
-            if(option === 1 || option === 2) {
-                msg1.innerText = "Accepted. Expect replies at lightning speed. ✨";
+            if (option === 1) {
+                msg1.innerText = "Honestly, I'd like that — photo spam accepted! 📸✨";
                 msg1.classList.remove("hidden");
-                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1200);
-            } else if(option === 3 || option === 4) {
-                msg2.innerText = "That's what I like to hear. Unlocking your travel track... 🤍";
+                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1300);
+            } else if (option === 2) {
+                msg1.innerText = "Haha, good to know I won't be easily forgotten! 😌";
+                msg1.classList.remove("hidden");
+                setTimeout(() => fadeTransition("tue-step2", "tue-step3"), 1300);
+            } else if (option === 3) {
+                msg2.innerText = "Fair enough! Enjoy the views out there 🗺️🤍";
                 msg2.classList.remove("hidden");
-                setTimeout(() => fadeTransition("tue-step3", "tue-step4"), 1200);
+                setTimeout(() => {
+                    fadeTransition("tue-step3", "tue-step4");
+                    triggerBloomingFlowers();
+                }, 1300);
+            } else if (option === 4) {
+                msg2.innerText = "Challenge accepted. Unlocking your travel track... 😉";
+                msg2.classList.remove("hidden");
+                setTimeout(() => {
+                    fadeTransition("tue-step3", "tue-step4");
+                    triggerBloomingFlowers();
+                }, 1300);
             }
+        }
+
+        // Blooming corner flowers effect for the final music page
+        function triggerBloomingFlowers() {
+            const container = document.getElementById("flowerContainer");
+            const corners = [
+                { class: 'top-left', emoji: '🌸' },
+                { class: 'top-right', emoji: '🪷' },
+                { class: 'bottom-left', emoji: '🪷' },
+                { class: 'bottom-right', emoji: '🌸' }
+            ];
+
+            corners.forEach(c => {
+                const span = document.createElement('span');
+                span.className = `corner-flower ${c.class}`;
+                span.innerText = c.emoji;
+                container.appendChild(span);
+            });
         }
 
         function tueGoBack(currentId, targetId) {
