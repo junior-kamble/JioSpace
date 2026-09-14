@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monday - Jio Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="theme-phase1">
+    <div class="container">
+        <!-- Back to Hub Button -->
+        <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
+        
+        <!-- Main Title -->
+        <h1 id="mainTitle" class="main-title">A Little Something For Youuuuu🌼</h1>
+        
+        <!-- Phase 1: The Phone Number Challenge -->
+        <div id="phase1" class="card active">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Enjoy when alone (office hours!)</span>
+                <span class="insta-tag">Taking too long on Insta! 😒</span>
+            </div>
+
+            <img src="../images/flower-shadow.png" alt="A special welcome" class="first-page-image">
+            
+            <p class="question" style="font-size: 15px; margin-bottom: 10px;">To unlock further experiences, guess the last 2 digits of my phone number:</p>
+            <p class="hint-note">(If you don't know, you need to figure it out! Give it a try... 😉)</p>
+            
+            <input type="text" id="phoneInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2">
+            <p id="phoneError" class="error hidden">Not quite! You can get it, you just need to try... 😉</p>
+            <button onclick="checkPhoneAnswer()">Unlock Surprise</button>
+
+            <!-- Hidden Web3Forms Notification Form (Replace with your key if wanted) -->
+            <form action="https://api.web3forms.com/submit" method="POST" id="notificationForm" class="hidden">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+                <input type="hidden" name="message" value="Georgette just cracked the phone number code for Monday!">
+            </form>
+        </div>
+        
+        <!-- Phase 2: The Riddle -->
+        <div id="phase2" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase2', 'phase1')">← Back</button>
+            <div class="riddle-box">
+                <p>1. Do</p>
+                <p>2. you</p>
+                <p>3. know</p>
+                <p>4. Who</p>
+                <p>5. is</p>
+                <p>6. the</p>
+                <p>7. prettiest</p>
+                <p>8. girl</p>
+                <p>9. Today</p>
+            </div>
+            <button onclick="guessWho()">Guess who?</button>
+        </div>
+
+        <!-- Phase 3: Split Recap & Music Flow -->
+        <div id="phase3" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase3', 'phase2')">← Back</button>
+            
+            <div class="split-layout">
+                <div class="split-left">
+                    <p>1. Do</p><p>2. you</p><p>3. know</p><p>4. Who</p><p>5. is</p><p>6. the</p><p>7. prettiest</p><p>8. girl</p><p>9. Today</p>
+                </div>
+                <div class="split-right">
+                    <p class="above-number-text">the prettiest girl today is</p>
+                    <h3 class="success-title">6 7 8 9 5 2</h3>
+                </div>
+            </div>
+
+            <div class="bottom-right-section">
+                <div id="ask-music">
+                    <p class="question">Btw, do you like music?</p>
+                    <button onclick="likeMusicYes()">Yes 🎵</button>
+                </div>
+
+                <div id="ask-language" class="hidden">
+                    <p class="question">Which language?</p>
+                    <div class="button-group">
+                        <button onclick="clickHindi()" class="alt-button">Hindi</button>
+                        <button onclick="clickEnglish()">English</button>
+                    </div>
+                    <p id="musicMsg" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4: The Final Question -->
+        <div id="phase4" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase4', 'phase3')">← Back</button>
+            <p class="question">So... who was the prettiest girl today?</p>
+            <input type="text" id="answerInput" placeholder="Type your answer here..." autocomplete="off">
+            <p id="errorMessage" class="error hidden">Not quite! Try again.</p>
+            <button onclick="checkFinalAnswer()">Unlock Music</button>
+        </div>
+        
+        <!-- Phase 5: The Mid-Day Song -->
+        <div id="phase5" class="card hidden">
+            <button class="back-btn" onclick="goBack('phase5', 'phase4')">← Back</button>
+            <h3 class="success-title">You got it! 🤍</h3>
+            <p>A little something to keep you going today...</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/wlULW05ecLI" title="Doing my best" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="countdown-box">
+                <p>The final vault opens today at 17:00 (5:00 PM).</p>
+                <p class="time-text">Come back later!</p>
+            </div>
+        </div>
+        
+        <!-- Phase 6: The Grand Finale -->
+        <div id="phase6" class="card hidden">
+            <h3 class="finale-title">The Final Vault is Open 🔓</h3>
+            <p class="finale-text">Meet me for coffee in Downtown Dubai right by the Burj Khalifa fountain view.</p>
+        </div>
+    </div>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html>

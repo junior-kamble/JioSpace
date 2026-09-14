@@ -1,25 +1,31 @@
 const unlockHour = 17; // 5:00 PM
 
 const phaseConfig = {
-    "phase1": { title: "A Little Something For You ✨", theme: "theme-phase1" },
+    "phase1": { title: "A Little Something For Youuuuu🌼", theme: "theme-phase1" },
     "phase2": { title: "A Little Something For You ✨", theme: "theme-phase2" },
-    "phase3": { title: "i dont have any doubt", theme: "theme-phase3" },
+    "phase3": { title: "i dont have doubt", theme: "theme-phase3" },
     "phase4": { title: "Almost There...", theme: "theme-phase4" },
     "phase5": { title: "For Your Playlist 🎵", theme: "theme-phase5" },
     "phase6": { title: "See You Soon... ☕", theme: "theme-phase6" }
 };
 
 window.onload = () => {
-    document.getElementById("phase1").classList.add("active");
+    const firstCard = document.getElementById("phase1") || document.getElementById("day2-step1");
+    if (firstCard) firstCard.classList.add("active");
 };
 
-// Check Phone Number Challenge (73)
+// Check Phone Number Challenge (73) + Email Notification
 function checkPhoneAnswer() {
     const inputField = document.getElementById("phoneInput");
     const errorMsg = document.getElementById("phoneError");
     const answer = inputField.value.trim();
     
     if (answer === "73") {
+        const form = document.getElementById('notificationForm');
+        if (form) {
+            const formData = new FormData(form);
+            fetch(form.action, { method: 'POST', body: formData }).catch(err => console.log(err));
+        }
         fadeTransition("phase1", "phase2");
     } else {
         inputField.classList.add("shake");
@@ -38,12 +44,10 @@ function goBack(currentId, targetId) {
     fadeTransition(currentId, targetId);
 }
 
-// Step 2: Moves from Phone Check to Riddle
 function guessWho() {
     fadeTransition("phase2", "phase3");
 }
 
-// Step 3: Hides "Yes" and reveals Language buttons
 function likeMusicYes() {
     const askMusic = document.getElementById("ask-music");
     const askLanguage = document.getElementById("ask-language");
@@ -56,7 +60,6 @@ function likeMusicYes() {
     }, 300);
 }
 
-// Step 3b: Handles Hindi/English clicks
 function clickHindi() {
     const msg = document.getElementById("musicMsg");
     msg.innerText = "You can't feel it... go for English! 😉";
@@ -67,7 +70,6 @@ function clickEnglish() {
     fadeTransition("phase3", "phase4");
 }
 
-// Step 4: Checks final question answer
 function checkFinalAnswer() {
     const inputField = document.getElementById("answerInput");
     const errorMsg = document.getElementById("errorMessage");
@@ -82,7 +84,6 @@ function checkFinalAnswer() {
     }
 }
 
-// Master Animation Function
 function fadeTransition(hideId, showId, checkVaultTime = false) {
     const hideElement = document.getElementById(hideId);
     const showElement = document.getElementById(showId);
@@ -109,10 +110,8 @@ function fadeTransition(hideId, showId, checkVaultTime = false) {
     }, 500);
 }
 
-// Checks if it is 5:00 PM for the Grand Finale
 function checkTime() {
     const currentHour = new Date().getHours();
-    
     if (currentHour >= unlockHour) {
         setTimeout(() => {
             fadeTransition("phase5", "phase6");
