@@ -6,6 +6,21 @@
     <title>A Little Something For Youuuuu🌼</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Shading and Fading Past/Future Days */
+        .date-btn.faded {
+            opacity: 0.35;
+            filter: grayscale(40%);
+            transition: 0.3s ease;
+        }
+        .date-btn.faded:hover {
+            opacity: 0.7; /* Slight highlight if she hovers back over past days */
+        }
+        .date-btn.active-day {
+            border-color: rgba(244, 114, 182, 0.5);
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+        }
+    </style>
 </head>
 <body class="theme-day1">
     <div class="container">
@@ -15,57 +30,74 @@
             <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
             
             <div class="date-list">
-                <!-- Monday (Always open for testing) -->
-                <a href="day1/index.html" class="date-btn">
+                <!-- Monday, Sept 14 -->
+                <a href="day1/index.html" id="btn-day1" class="date-btn">
                     <span class="date-name">Monday, Sept 14</span>
-                    <span class="date-status" style="color: #4ade80;">Open 🔓</span>
+                    <span class="date-status" id="stat-day1">Open 🔓</span>
                 </a>
 
-                <!-- Tuesday (Open for testing) -->
-                <a href="day2/index.html" class="date-btn">
+                <!-- Tuesday, Sept 15 (Today) -->
+                <a href="day2/index.html" id="btn-day2" class="date-btn active-day">
                     <span class="date-name">Tuesday, Sept 15</span>
-                    <span class="date-status" style="color: #f472b6;">Open ✨</span>
+                    <span class="date-status" id="stat-day2" style="color: #f472b6;">Today ✨</span>
                 </a>
 
-                <!-- Wednesday (Auto unlocks on Sept 16) -->
-                <a href="day3/index.html" id="link-day3" class="date-btn locked">
+                <!-- Wednesday, Sept 16 -->
+                <a href="day3/index.html" id="btn-day3" class="date-btn locked">
                     <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" id="status-day3">Locked 🔒</span>
+                    <span class="date-status" id="stat-day3">Locked 🔒</span>
                 </a>
 
-                <!-- Thursday (Auto unlocks on Sept 17) -->
-                <a href="day4/index.html" id="link-day4" class="date-btn locked">
+                <!-- Thursday, Sept 17 -->
+                <a href="day4/index.html" id="btn-day4" class="date-btn locked">
                     <span class="date-name">Thursday, Sept 17</span>
-                    <span class="date-status" id="status-day4">Locked 🔒</span>
+                    <span class="date-status" id="stat-day4">Locked 🔒</span>
                 </a>
 
-                <!-- Friday (Auto unlocks on Sept 18) -->
-                <a href="day5/index.html" id="link-day5" class="date-btn locked">
+                <!-- Friday, Sept 18 -->
+                <a href="day5/index.html" id="btn-day5" class="date-btn locked">
                     <span class="date-name">Friday, Sept 18</span>
-                    <span class="date-status" id="status-day5">Locked 🔒</span>
+                    <span class="date-status" id="stat-day5">Locked 🔒</span>
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Automatic Midnight Date Unlocking Logic
+        // Automatic Date Styling & Unlocking Logic
         const today = new Date();
-        const currentDay = today.getDate(); // gets day of the month (e.g., 14, 15, 16...)
-        const currentMonth = today.getMonth() + 1; // September is 9
+        const currentDay = today.getDate(); // 15 for today (Sept 15)
+        const currentMonth = today.getMonth() + 1;
 
-        // If it's September or later, check dates
+        // Automatically shadow past days and highlight today
         if (currentMonth >= 9) {
+            // Monday (Sept 14) -> Fade it out since it's past
+            if (currentDay > 14) {
+                const b1 = document.getElementById('btn-day1');
+                b1.classList.add('faded');
+                b1.classList.remove('active-day');
+                document.getElementById('stat-day1').innerText = 'Completed ✓';
+            }
+
+            // Tuesday (Sept 15) -> Active today
+            if (currentDay === 15) {
+                const b2 = document.getElementById('btn-day2');
+                b2.classList.add('active-day');
+                document.getElementById('stat-day2').innerText = 'Open ✨';
+            }
+
+            // Future days auto-unlock logic
             if (currentDay >= 16) unlockChapter('day3', 'Wednesday, Sept 16');
             if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
             if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
         }
 
         function unlockChapter(dayId, name) {
-            const link = document.getElementById('link-' + dayId);
-            const status = document.getElementById('status-' + dayId);
+            const link = document.getElementById('btn-' + dayId);
+            const status = document.getElementById('stat-' + dayId);
             if (link && status) {
                 link.classList.remove('locked');
+                link.classList.add('active-day');
                 status.innerText = 'Open 🔓';
                 status.style.color = '#38bdf8';
             }
