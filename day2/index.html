@@ -12,9 +12,83 @@
         <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
         <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
         
-        <div class="card active">
-            <p class="question">Tomorrow's surprise is currently locked behind the scenes. Check back soon! ✨</p>
+        <div id="day2-step1" class="card active">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Office hours edition</span>
+                <span class="insta-tag">Faster replies today? 👀</span>
+            </div>
+            <div class="envelope-box" onclick="openEnvelope()">
+                <div class="envelope-icon">💌</div>
+                <p class="envelope-text">You have a new message.<br><strong>Tap to open</strong></p>
+            </div>
+        </div>
+        
+        <div id="day2-step2" class="card hidden">
+            <button class="back-btn" onclick="goBackStep('day2-step2', 'day2-step1')">← Back</button>
+            <div class="notes-container">
+                <div class="note-card">
+                    <span class="note-number">01 / 03</span>
+                    <p class="note-text">Thought yesterday's surprise turned out pretty well... despite how long you take to reply on Insta. 😉</p>
+                </div>
+                <div class="note-card hidden" id="note2">
+                    <span class="note-number">02 / 03</span>
+                    <p class="note-text">Official status: You are still winning the "prettiest girl today" award with zero competition.</p>
+                </div>
+                <div class="note-card hidden" id="note3">
+                    <span class="note-number">03 / 03</span>
+                    <p class="note-text">Ready for today's final vibe check?</p>
+                </div>
+            </div>
+            <button id="nextNoteBtn" onclick="nextNote()" style="margin-top: 20px;">Continue 🤍</button>
+        </div>
+
+        <div id="day2-step3" class="card hidden">
+            <button class="back-btn" onclick="goBackStep('day2-step3', 'day2-step2')">← Back</button>
+            <h3 class="success-title" style="font-size: 22px; margin-bottom: 15px;">Quick Vibe Check</h3>
+            <p class="question">How are we feeling about today so far?</p>
+            <div class="button-group" style="margin-top: 20px;">
+                <button onclick="vibeResponse('good')">Loving it 🥰</button>
+                <button onclick="vibeResponse('spoiled')" class="alt-button">Too spoiled 😌</button>
+            </div>
+            <p id="vibeMsg" class="error hidden" style="color: #f9d423; margin-top: 20px; font-size: 14px;"></p>
         </div>
     </div>
+    
+    <script>
+        let currentNoteIndex = 1;
+        window.onload = () => { document.getElementById("day2-step1").classList.add("active"); };
+        function openEnvelope() { fadeTransition("day2-step1", "day2-step2"); }
+        function nextNote() {
+            if (currentNoteIndex === 1) {
+                document.getElementById("note2").classList.remove("hidden");
+                currentNoteIndex = 2;
+            } else if (currentNoteIndex === 2) {
+                document.getElementById("note3").classList.remove("hidden");
+                document.getElementById("nextNoteBtn").innerText = "Final Step 🤍";
+                currentNoteIndex = 3;
+            } else {
+                fadeTransition("day2-step2", "day2-step3");
+            }
+        }
+        function vibeResponse(type) {
+            const msg = document.getElementById("vibeMsg");
+            msg.innerText = (type === 'good') ? "That's the right answer. See you soon! 🥰" : "A little spoiling never hurt anyone. 😌✨";
+            msg.classList.remove("hidden");
+        }
+        function goBackStep(currentId, targetId) {
+            if (currentId === 'day2-step2') {
+                currentNoteIndex = 1;
+                document.getElementById("note2").classList.add("hidden");
+                document.getElementById("note3").classList.add("hidden");
+                document.getElementById("nextNoteBtn").innerText = "Continue 🤍";
+            }
+            fadeTransition(currentId, targetId);
+        }
+        function fadeTransition(hideId, showId) {
+            const h = document.getElementById(hideId), s = document.getElementById(showId);
+            h.classList.remove("active");
+            setTimeout(() => { h.classList.add("hidden"); s.classList.remove("hidden"); setTimeout(() => s.classList.add("active"), 50); }, 500);
+        }
+    </script>
 </body>
 </html>

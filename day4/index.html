@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thursday - Jio Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="theme-day4">
+    <div class="container">
+        <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
+        <h1 class="main-title">Thursday, Sept 17 ⏳</h1>
+        
+        <div class="card active">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Almost Friday</span>
+                <span class="insta-tag">Weekend mode loading...</span>
+            </div>
+            <p class="question">How hard is it to focus in the office today on a scale of 1 to 10?</p>
+            <input type="number" id="focusInput" min="1" max="10" placeholder="Enter a number (1-10)..." autocomplete="off">
+            <button onclick="checkFocus()">Submit Level</button>
+            <p id="focusMsg" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+    </div>
+    <script>
+        function checkFocus() {
+            const val = document.getElementById("focusInput").value;
+            const m = document.getElementById("focusMsg");
+            if(val) {
+                m.innerText = "Error: Focus levels too low when you're around. Valid excuse accepted. 😉";
+                m.classList.remove("hidden");
+            }
+        }
+    </script>
+</body>
+</html>
