@@ -38,7 +38,7 @@
         
         <h1 id="mainTitle" class="main-title">Tuesday, Sept 15 🌙</h1>
         
-        <!-- Time-Lock Gatekeeper Card (Active if before 11:00 AM) -->
+        <!-- Time-Lock Gatekeeper Card -->
         <div id="tue-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
@@ -95,10 +95,9 @@
             <p class="question">Photo spam accepted! But be honest... are you sending them just for the scenery, or to make me jealous? 🏔️</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="finishJourney()">A little bit of both 🤫</button>
-                <button onclick="finishJourney()" class="alt-button">Just for the aesthetic, obviously ✨</button>
+                <button onclick="finishJourney('Chose Path A + A little bit of both')">A little bit of both 🤫</button>
+                <button onclick="finishJourney('Chose Path A + Just for the aesthetic')" class="alt-button">Just for the aesthetic, obviously ✨</button>
             </div>
-            <p id="pathAMsg" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
         <!-- Path B: If she chose missing the chats -->
@@ -106,10 +105,9 @@
             <p class="question">That's smooth. But let's test your dedication—will you actually reply while exploring or completely ghost me for the mountains? ⛰️</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="finishJourney()">I could never ghost you 😌</button>
-                <button onclick="finishJourney()" class="alt-button">Depends on network coverage... and your texts 😉</button>
+                <button onclick="finishJourney('Chose Path B + I could never ghost you')">I could never ghost you 😌</button>
+                <button onclick="finishJourney('Chose Path B + Depends on network')" class="alt-button">Depends on network coverage... and your texts 😉</button>
             </div>
-            <p id="pathBMsg" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
         <!-- Step 4: Grand Finale with Live Falling Flowers & Music -->
@@ -127,21 +125,29 @@
         </div>
     </div>
 
-    <!-- Web3Forms Tracking Form for Email Notifications -->
+    <!-- Combined Web3Forms Tracking Form -->
     <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
         <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
-        <input type="hidden" name="response_choice" id="choiceField" value="">
+        <input type="hidden" name="subject" value="Tuesday Responses - Jio Space">
+        <input type="hidden" name="all_responses" id="combinedResponses" value="">
     </form>
 
     <script>
         let historyStack = [];
+        let userChoices = {
+            day: "Tuesday",
+            promiseAccepted: "",
+            pathChoice: "",
+            finalReaction: ""
+        };
 
         window.onload = () => {
             const now = new Date();
             const currentHour = now.getHours(); 
-            const unlockHour = 11; // 11:00 AM
+            const unlockHour = 11; 
+            const testBypass = true; // Enabled for testing today
 
-            if (currentHour < unlockHour) {
+            if (!testBypass && currentHour < unlockHour) {
                 document.getElementById("tue-timelock").classList.add("active");
                 historyStack = ['tue-timelock'];
             } else {
@@ -167,7 +173,7 @@
         }
 
         function acceptPromise() {
-            sendEmailNotification("Agreed to birthday flower promise");
+            userChoices.promiseAccepted = "Agreed to birthday flower promise";
             navigateTo("tue-step2");
         }
 
@@ -178,7 +184,7 @@
         }
 
         function choosePathA() {
-            sendEmailNotification("Chose Path A: Spamming with vacation photos");
+            userChoices.pathChoice = "Chose Path A: Spamming with vacation photos";
             const msg = document.getElementById("choiceMsg1");
             msg.innerText = "Deal. Expecting a full gallery in my inbox, Your Highness! 📸";
             msg.classList.remove("hidden");
@@ -186,24 +192,28 @@
         }
 
         function choosePathB() {
-            sendEmailNotification("Chose Path B: Might actually miss the chats");
+            userChoices.pathChoice = "Chose Path B: Might actually miss the chats";
             const msg = document.getElementById("choiceMsg1");
             msg.innerText = "Haha, good to know! Let's see if that holds up 😌";
             msg.classList.remove("hidden");
             setTimeout(() => navigateTo("tue-pathB-step3"), 1300);
         }
 
-        function finishJourney() {
-            sendEmailNotification("Completed Tuesday's final music chapter");
+        function finishJourney(finalActionText) {
+            userChoices.finalReaction = finalActionText;
+            
+            // SEND ALL RESPONSES IN 1 SINGLE EMAIL HERE
+            sendFinalEmailBundle();
+
             navigateTo("tue-step4");
             startFallingFlowers();
         }
 
-        // Helper function to silently send her choices straight to your email
-        function sendEmailNotification(choiceText) {
-            const field = document.getElementById("choiceField");
+        function sendFinalEmailBundle() {
+            const summaryString = `Promise Status: ${userChoices.promiseAccepted}\nPath Choice: ${userChoices.pathChoice}\nFinal Reaction: ${userChoices.finalReaction}`;
+            const field = document.getElementById("combinedResponses");
             if (field) {
-                field.value = choiceText;
+                field.value = summaryString;
                 const form = document.getElementById('trackingForm');
                 if (form) {
                     fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));

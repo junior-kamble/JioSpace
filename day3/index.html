@@ -38,7 +38,7 @@
         
         <h1 id="mainTitle" class="main-title">Wednesday, Sept 16 🌸</h1>
         
-        <!-- Time-Lock Gatekeeper Card (Active if before Wednesday Sept 16) -->
+        <!-- Time-Lock Gatekeeper Card -->
         <div id="wed-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
@@ -92,23 +92,26 @@
         </div>
     </div>
 
-    <!-- Web3Forms Tracking Form for Email Notifications (Using your key) -->
+    <!-- Combined Web3Forms Tracking Form for Wednesday -->
     <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
         <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
-        <input type="hidden" name="response_choice" id="choiceField" value="">
+        <input type="hidden" name="subject" value="Wednesday Responses - Jio Space">
+        <input type="hidden" name="all_responses" id="combinedResponses" value="">
     </form>
 
     <script>
         let historyStack = [];
+        let wedChoices = {
+            day: "Wednesday",
+            q1: "",
+            q2: ""
+        };
 
         window.onload = () => {
             const now = new Date();
-            const currentDay = now.getDate(); // Current day of the month
+            const currentDay = now.getDate(); 
             const currentMonth = now.getMonth() + 1;
-
-            // LOCK TEST OVERRIDE: 
-            // Comment out the `if` check below if you want to test Wednesday's page right now!
-            const testBypass = true; // Set to true if you want to test it today
+            const testBypass = true; // Enabled so you can test Wednesday right now
 
             if (!testBypass && (currentMonth < 9 || currentDay < 16)) {
                 document.getElementById("wed-timelock").classList.add("active");
@@ -120,9 +123,8 @@
         };
 
         function wedChoice(option) {
-            const choiceText = option === 1 ? "Wednesday Q1: Absolute paradise" : "Wednesday Q1: Missing our chats";
-            sendEmailNotification(choiceText);
-
+            wedChoices.q1 = option === 1 ? "Q1: Absolute paradise" : "Q1: Missing our chats";
+            
             const msg = document.getElementById("wedMsg1");
             msg.innerText = option === 1 ? "Love that! Soak it all in 🏔️✨" : "Haha, good answer! Unlocking next step... 🤍";
             msg.classList.remove("hidden");
@@ -130,8 +132,10 @@
         }
 
         function wedFinish(option) {
-            const choiceText = option === 1 ? "Wednesday Q2: Always in my thoughts" : "Wednesday Q2: You'll never guess how much";
-            sendEmailNotification(choiceText);
+            wedChoices.q2 = option === 1 ? "Q2: Always in my thoughts" : "Q2: You'll never guess how much";
+            
+            // SEND ALL RESPONSES IN 1 SINGLE EMAIL ON THE FINAL STEP
+            sendWedEmailBundle();
 
             const msg = document.getElementById("wedMsg2");
             msg.innerText = "Music incoming... enjoy your Wednesday! 🎵";
@@ -142,11 +146,11 @@
             }, 1300);
         }
 
-        // Helper function to silently send responses to your email
-        function sendEmailNotification(choiceText) {
-            const field = document.getElementById("choiceField");
+        function sendWedEmailBundle() {
+            const summaryString = `Question 1: ${wedChoices.q1}\nQuestion 2: ${wedChoices.q2}`;
+            const field = document.getElementById("combinedResponses");
             if (field) {
-                field.value = choiceText;
+                field.value = summaryString;
                 const form = document.getElementById('trackingForm');
                 if (form) {
                     fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
