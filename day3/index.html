@@ -198,7 +198,7 @@
         function wedFinish(option) {
             wedChoices.q2 = option === 1 ? "Q2: Always in my thoughts" : "Q2: You'll never guess how much";
             
-            // SEND ALL RESPONSES IN 1 SINGLE EMAIL ON THE FINAL STEP
+            // SEND ALL RESPONSES IN 1 SINGLE BUNDLE EMAIL
             sendWedEmailBundle();
 
             const msg = document.getElementById("wedMsg2");
@@ -221,6 +221,19 @@
             const field = document.getElementById("combinedResponses");
             if (field) {
                 field.value = summaryString;
+
+                // ==========================================
+                // EMAIL TESTING OVERRIDE SWITCH
+                // Set to `true` = NO emails sent (saves quota while testing!)
+                // Set to `false` = LIVE mode (sends real email to your inbox)
+                // ==========================================
+                const emailTestBypass = true; 
+
+                if (emailTestBypass) {
+                    console.log("Test mode active: Email suppressed to save quota. Summary would have been:\n" + summaryString);
+                    return; 
+                }
+
                 const form = document.getElementById('trackingForm');
                 if (form) {
                     fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
@@ -240,7 +253,6 @@
                 const previousId = historyStack[historyStack.length - 1];
                 fadeTransition(currentId, previousId);
                 
-                // Adjust progress bar backwards on back navigation
                 if (currentId === 'wed-step4') updateProgress(75);
                 else if (currentId === 'wed-step3') updateProgress(50);
                 else if (currentId === 'wed-step2') updateProgress(25);
