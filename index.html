@@ -7,18 +7,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Shading and Fading Past/Future Days */
         .date-btn.faded {
             opacity: 0.35;
             filter: grayscale(40%);
             transition: 0.3s ease;
         }
         .date-btn.faded:hover {
-            opacity: 0.7; /* Slight highlight if she hovers back over past days */
+            opacity: 0.7;
         }
         .date-btn.active-day {
             border-color: rgba(244, 114, 182, 0.5);
             box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+        }
+        /* Make locked buttons unclickable */
+        .date-btn.locked {
+            pointer-events: none;
+            opacity: 0.4;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -64,14 +69,14 @@
     </div>
 
     <script>
-        // Automatic Date Styling & Unlocking Logic
         const today = new Date();
-        const currentDay = today.getDate(); // 15 for today (Sept 15)
+        const currentDay = today.getDate(); 
         const currentMonth = today.getMonth() + 1;
 
-        // Automatically shadow past days and highlight today
-        if (currentMonth >= 9) {
-            // Monday (Sept 14) -> Fade it out since it's past
+        // TESTING OVERRIDE: Set to true if you want to test unlocking all days right now from the hub
+        const testHubBypass = false;
+
+        if (testHubBypass || currentMonth >= 9) {
             if (currentDay > 14) {
                 const b1 = document.getElementById('btn-day1');
                 b1.classList.add('faded');
@@ -79,17 +84,15 @@
                 document.getElementById('stat-day1').innerText = 'Completed ✓';
             }
 
-            // Tuesday (Sept 15) -> Active today
-            if (currentDay === 15) {
+            if (testHubBypass || currentDay === 15) {
                 const b2 = document.getElementById('btn-day2');
                 b2.classList.add('active-day');
                 document.getElementById('stat-day2').innerText = 'Open ✨';
             }
 
-            // Future days auto-unlock logic
-            if (currentDay >= 16) unlockChapter('day3', 'Wednesday, Sept 16');
-            if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
-            if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
+            if (testHubBypass || currentDay >= 16) unlockChapter('day3', 'Wednesday, Sept 16');
+            if (testHubBypass || currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
+            if (testHubBypass || currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
         }
 
         function unlockChapter(dayId, name) {
