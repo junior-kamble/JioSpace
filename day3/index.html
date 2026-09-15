@@ -87,7 +87,7 @@
             </div>
             <div class="envelope-box" style="cursor: default;">
                 <div class="envelope-icon">⏰</div>
-                <p class="envelope-text">This chapter is resting until Wednesday.<br><br><strong>Come back on Sept 16</strong> for Wednesday's surprise, Your Highness! 🤍</p>
+                <p class="envelope-text">This chapter unlocks at 10:00 AM.<br><br><strong>Come back then</strong> for Wednesday's surprise, Your Highness! 🤍</p>
             </div>
         </div>
 
@@ -170,9 +170,19 @@
             const now = new Date();
             const currentDay = now.getDate(); 
             const currentMonth = now.getMonth() + 1;
-            const testBypass = true; // Enabled for testing today
+            const currentHour = now.getHours(); // Captures current hour (0-23)
+            
+            // ==========================================
+            // TIME LOCK OVERRIDE SWITCH
+            // Set to `true` = Instantly unlocks for testing right now
+            // Set to `false` = Locks until Sept 16 at 10:00 AM
+            // ==========================================
+            const testBypass = true; 
 
-            if (!testBypass && (currentMonth < 9 || currentDay < 16)) {
+            // Checks if it's before Sept 16, OR if it's Sept 16 but before 10:00 AM
+            const isLocked = !testBypass && (currentMonth < 9 || currentDay < 16 || (currentDay === 16 && currentHour < 10));
+
+            if (isLocked) {
                 document.getElementById("wed-timelock").classList.add("active");
                 historyStack = ['wed-timelock'];
                 updateProgress(0);
@@ -242,7 +252,7 @@
                 // Set to `true` = NO emails sent (saves quota while testing!)
                 // Set to `false` = LIVE mode (sends real email to your inbox)
                 // ==========================================
-                const emailTestBypass = false; // Change to true for testing without sending emails
+                const emailTestBypass = false; 
 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed to save quota. Summary would have been:\n" + summaryString);
