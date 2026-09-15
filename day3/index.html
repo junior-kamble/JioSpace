@@ -108,7 +108,7 @@
 
             // LOCK TEST OVERRIDE: 
             // Comment out the `if` check below if you want to test Wednesday's page right now!
-            const testBypass = false; // Set to true if you want to test it today
+            const testBypass = true; // Set to true if you want to test it today
 
             if (!testBypass && (currentMonth < 9 || currentDay < 16)) {
                 document.getElementById("wed-timelock").classList.add("active");
