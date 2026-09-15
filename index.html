@@ -7,23 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Shading and Fading Past/Future Days */
         .date-btn.faded {
             opacity: 0.35;
             filter: grayscale(40%);
             transition: 0.3s ease;
         }
         .date-btn.faded:hover {
-            opacity: 0.7;
+            opacity: 0.7; 
         }
         .date-btn.active-day {
             border-color: rgba(244, 114, 182, 0.5);
             box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
-        }
-        /* Make locked buttons unclickable */
-        .date-btn.locked {
-            pointer-events: none;
-            opacity: 0.4;
-            cursor: not-allowed;
         }
     </style>
 </head>
@@ -36,21 +31,21 @@
             
             <div class="date-list">
                 <!-- Monday, Sept 14 -->
-                <a href="day1/index.html" id="btn-day1" class="date-btn">
+                <a href="day1/index.html" id="btn-day1" class="date-btn faded">
                     <span class="date-name">Monday, Sept 14</span>
-                    <span class="date-status" id="stat-day1">Open 🔓</span>
+                    <span class="date-status" id="stat-day1">Completed ✓</span>
                 </a>
 
-                <!-- Tuesday, Sept 15 (Today) -->
-                <a href="day2/index.html" id="btn-day2" class="date-btn active-day">
+                <!-- Tuesday, Sept 15 -->
+                <a href="day2/index.html" id="btn-day2" class="date-btn faded">
                     <span class="date-name">Tuesday, Sept 15</span>
-                    <span class="date-status" id="stat-day2" style="color: #f472b6;">Today ✨</span>
+                    <span class="date-status" id="stat-day2">Completed ✓</span>
                 </a>
 
-                <!-- Wednesday, Sept 16 -->
-                <a href="day3/index.html" id="btn-day3" class="date-btn locked">
+                <!-- Wednesday, Sept 16 (Today) -->
+                <a href="day3/index.html" id="btn-day3" class="date-btn active-day">
                     <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" id="stat-day3">Locked 🔒</span>
+                    <span class="date-status" id="stat-day3" style="color: #f472b6;">Today ✨</span>
                 </a>
 
                 <!-- Thursday, Sept 17 -->
@@ -69,30 +64,36 @@
     </div>
 
     <script>
+        // Automatic Date Styling & Unlocking Logic for Sept 16
         const today = new Date();
-        const currentDay = today.getDate(); 
+        const currentDay = today.getDate(); // 16 for today
         const currentMonth = today.getMonth() + 1;
 
-        // TESTING OVERRIDE: Set to true if you want to test unlocking all days right now from the hub
-        const testHubBypass = false;
-
-        if (testHubBypass || currentMonth >= 9) {
+        if (currentMonth >= 9) {
+            // Monday & Tuesday -> Faded out as past days
             if (currentDay > 14) {
-                const b1 = document.getElementById('btn-day1');
-                b1.classList.add('faded');
-                b1.classList.remove('active-day');
+                document.getElementById('btn-day1').classList.add('faded');
                 document.getElementById('stat-day1').innerText = 'Completed ✓';
             }
-
-            if (testHubBypass || currentDay === 15) {
+            if (currentDay > 15) {
                 const b2 = document.getElementById('btn-day2');
-                b2.classList.add('active-day');
-                document.getElementById('stat-day2').innerText = 'Open ✨';
+                b2.classList.add('faded');
+                b2.classList.remove('active-day');
+                document.getElementById('stat-day2').innerText = 'Completed ✓';
             }
 
-            if (testHubBypass || currentDay >= 16) unlockChapter('day3', 'Wednesday, Sept 16');
-            if (testHubBypass || currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
-            if (testHubBypass || currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
+            // Wednesday (Sept 16) -> Active Today
+            if (currentDay === 16) {
+                const b3 = document.getElementById('btn-day3');
+                b3.classList.add('active-day');
+                b3.classList.remove('faded');
+                document.getElementById('stat-day3').innerText = 'Open ✨';
+                document.getElementById('stat-day3').style.color = '#f472b6';
+            }
+
+            // Future days unlock logic
+            if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
+            if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
         }
 
         function unlockChapter(dayId, name) {
@@ -101,6 +102,7 @@
             if (link && status) {
                 link.classList.remove('locked');
                 link.classList.add('active-day');
+                link.classList.remove('faded');
                 status.innerText = 'Open 🔓';
                 status.style.color = '#38bdf8';
             }
