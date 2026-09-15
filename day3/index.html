@@ -80,16 +80,16 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question (Khallas Check) -->
+        <!-- Step 1: Entry Gate Question (Khallas Check with Royal Tone) -->
         <div id="wed-step1" class="card">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Entry Protocol</span>
+                <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">When something is done, what do you say?</p>
-            <input type="text" id="entryInput" placeholder="Enter password..." autocomplete="off">
-            <p id="entryError" class="error hidden">Not quite! Think of what you say when it's finished... 😉</p>
+            <p class="question">Before you enter, Princess... when something is completely done, what word do you say? 😉</p>
+            <input type="text" id="entryInput" placeholder="Enter keyword..." autocomplete="off">
+            <p id="entryError" class="error hidden">Not quite, Your Highness! Think of what you say when it's finished... 🤍</p>
             <button onclick="checkEntry()">Verify Status</button>
         </div>
 
@@ -100,33 +100,33 @@
                 <span class="insta-tag">Chapter 3 ✨</span>
             </div>
             
-            <p class="question">Happy Wednesday, Your Highness! 🤍<br><br>How is the trip treating you so far? Surviving the new views?</p>
+            <p class="question">Happy Wednesday, Your Highness! 🤍<br><br>How are you liking the new views without your favorite person around?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="wedChoice(1)">Absolute paradise, loving every second 🏔️</button>
-                <button onclick="wedChoice(2)" class="alt-button">Great views, but missing our usual chats 🙈</button>
+                <button onclick="wedChoice(1)">Enjoying the scenery... while thinking of you 🏔️</button>
+                <button onclick="wedChoice(2)" class="alt-button">Scenery is nice, but I'd rather be annoying you instead 🙈</button>
             </div>
             <p id="wedMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
         <!-- Question 2: The Final Tease & Song Reveal -->
         <div id="wed-step3" class="card hidden">
-            <p class="question">That sounds amazing. One last quick question before your soundtrack unlocks...<br><br>Are you actually keeping me in your thoughts out there, or completely distracted? 😉</p>
+            <p class="question">Such a diplomatic answer, Princess! One last quick question before your soundtrack unlocks...<br><br>Be honest—are you actually missing our chats out there? 😉</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="wedFinish(1)">Always in my thoughts 🤫</button>
-                <button onclick="wedFinish(2)" class="alt-button">You'll never guess how much 🤍</button>
+                <button onclick="wedFinish(1)">Every single second 🤫</button>
+                <button onclick="wedFinish(2)" class="alt-button">I plead the fifth, but... yes 🤍</button>
             </div>
             <p id="wedMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 4: Grand Finale with One Direction Music & Falling Flowers -->
+        <!-- Step 4: Grand Finale with Correct One Direction Music & Falling Flowers -->
         <div id="wed-step4" class="card hidden">
             <h3 class="success-title">Wednesday's Melody 🎵</h3>
             <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A special track for your mid-week journey...</p>
             
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/J_ub7Etch2U" title="One Direction - Night Changes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/syFZfO_wfMQ" title="One Direction - Night Changes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
             <div class="note-card" style="text-align: center; margin-top: 15px;">
@@ -186,23 +186,23 @@
         }
 
         function wedChoice(option) {
-            wedChoices.q1 = option === 1 ? "Q1: Absolute paradise" : "Q1: Missing our chats";
+            wedChoices.q1 = option === 1 ? "Q1: Enjoying scenery while thinking of you" : "Q1: Scenery is nice, but would rather be annoying you";
             
             const msg = document.getElementById("wedMsg1");
-            msg.innerText = option === 1 ? "Love that! Soak it all in 🏔️✨" : "Haha, good answer! Unlocking next step... 🤍";
+            msg.innerText = option === 1 ? "So sweet! Soak it all in, Princess 🏔️✨" : "Haha, what a diplomatic answer! Unlocking next step... 🤍";
             msg.classList.remove("hidden");
             updateProgress(75);
             setTimeout(() => navigateTo("wed-step3"), 1300);
         }
 
         function wedFinish(option) {
-            wedChoices.q2 = option === 1 ? "Q2: Always in my thoughts" : "Q2: You'll never guess how much";
+            wedChoices.q2 = option === 1 ? "Q2: Every single second" : "Q2: I plead the fifth, but... yes";
             
             // SEND ALL RESPONSES IN 1 SINGLE BUNDLE EMAIL
             sendWedEmailBundle();
 
             const msg = document.getElementById("wedMsg2");
-            msg.innerText = "Music incoming... enjoy your Wednesday! 🎵";
+            msg.innerText = "Music incoming... enjoy your Wednesday, Your Highness! 🎵";
             msg.classList.remove("hidden");
             updateProgress(100);
             setTimeout(() => {
