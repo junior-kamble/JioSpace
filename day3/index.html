@@ -40,6 +40,17 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
+        /* Highlighted Travel Note Card Styling */
+        .travel-highlight-card {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(251, 113, 133, 0.18));
+            border: 1.5px solid rgba(244, 114, 182, 0.5);
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
         /* Live Falling Flower Rain Animation */
         .falling-flower {
             position: fixed;
@@ -129,8 +140,12 @@
                 <iframe src="https://www.youtube.com/embed/syFZfO_wfMQ" title="One Direction - Night Changes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
-            <div class="note-card" style="text-align: center; margin-top: 15px;">
-                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Hope your Wednesday is as wonderful as you are, Your Highness. Keep exploring! 🤍✨</p>
+            <!-- Highlighted Travel Message Card -->
+            <div class="travel-highlight-card">
+                <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
+                    Office is far behind, and the journey has officially begun... <br>
+                    <span style="color: #f472b6; font-weight: 600;">Have the most amazing trip, Your Highness. Keep exploring! 🤍✨</span>
+                </p>
             </div>
         </div>
     </div>
@@ -227,7 +242,7 @@
                 // Set to `true` = NO emails sent (saves quota while testing!)
                 // Set to `false` = LIVE mode (sends real email to your inbox)
                 // ==========================================
-                const emailTestBypass = true; 
+                const emailTestBypass = false; // Change to true for testing without sending emails
 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed to save quota. Summary would have been:\n" + summaryString);
