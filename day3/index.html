@@ -40,7 +40,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* Highlighted Travel Note Card Styling */
+        /* Highlighted Travel Message Card */
         .travel-highlight-card {
             background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(251, 113, 133, 0.18));
             border: 1.5px solid rgba(244, 114, 182, 0.5);
@@ -91,16 +91,16 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question (Khallas Check with Royal Tone) -->
+        <!-- Step 1: Entry Gate Question (Short & Punchy) -->
         <div id="wed-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">Before you enter, Princess... when something is completely done, what word do you say? 😉</p>
+            <p class="question">When it's done, what do you say? 😉</p>
             <input type="text" id="entryInput" placeholder="Enter keyword..." autocomplete="off">
-            <p id="entryError" class="error hidden">Not quite, Your Highness! Think of what you say when it's finished... 🤍</p>
+            <p id="entryError" class="error hidden">Not quite, Your Highness! Try again... 🤍</p>
             <button onclick="checkEntry()">Verify Status</button>
         </div>
 
@@ -194,7 +194,7 @@
                 navigateTo("wed-step2");
             } else {
                 inputField.classList.add("shake");
-                errorMsg.innerText = "Not quite, Your Highness! Think of what you say when it's finished... 😉";
+                errorMsg.innerText = "Not quite, Your Highness! Try again... 🤍";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
             }
