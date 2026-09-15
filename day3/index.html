@@ -6,35 +6,193 @@
     <title>Wednesday - Jio Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Lotus Background Styling */
+        body.theme-day3 {
+            background: linear-gradient(rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.9), rgba(3, 7, 18, 0.95)), 
+                        url('../images/Lotus.webp') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        /* Live Falling Flower Rain Animation */
+        .falling-flower {
+            position: fixed;
+            top: -50px;
+            font-size: 22px;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fallDown linear infinite;
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        }
+    </style>
 </head>
 <body class="theme-day3">
     <div class="container">
-        <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
-        <h1 class="main-title">Wednesday, Sept 16 🎵</h1>
+        <button onclick="globalBack()" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back</button>
         
-        <div class="card active">
+        <h1 id="mainTitle" class="main-title">Wednesday, Sept 16 🌸</h1>
+        
+        <!-- Time-Lock Gatekeeper Card (Active if before Wednesday Sept 16) -->
+        <div id="wed-timelock" class="card">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Mid-week check-in</span>
-                <span class="insta-tag">Headphones on! 🎧</span>
+                <span class="disclaimer-tag">⚠️ Time Locked</span>
+                <span class="insta-tag">Patience, Your Highness ⏳</span>
             </div>
-            <p class="question">Hump day soundtrack recommendation:</p>
-            <div class="note-card" style="text-align: center; margin-bottom: 20px;">
-                <p style="font-weight: 600; color: #fff; font-size: 16px;">"Coffee" — Beabadoobee</p>
-                <p class="note-text" style="text-align: center; font-size: 13px; color: #aaa;">"And I walk you home / Our-our sides touch and I feel happy..."</p>
+            <div class="envelope-box" style="cursor: default;">
+                <div class="envelope-icon">⏰</div>
+                <p class="envelope-text">This chapter is resting until Wednesday.<br><br><strong>Come back on Sept 16</strong> for Wednesday's surprise, Your Highness! 🤍</p>
             </div>
-            <p class="question" style="font-size: 14px;">Rate this track selection:</p>
-            <div class="button-group">
-                <button onclick="rateSong('10')">10/10 Vibe ✨</button>
-                <button onclick="rateSong('perfect')" class="alt-button">Absolute Peak 🤍</button>
+        </div>
+
+        <!-- Question 1: Mid-Week / Travel Vibe Check -->
+        <div id="wed-step1" class="card">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Mid-Week Check</span>
+                <span class="insta-tag">Chapter 3 ✨</span>
             </div>
-            <p id="songMsg" class="error hidden" style="color: #f9d423; margin-top: 20px; font-size: 14px;"></p>
+            
+            <p class="question">Happy Wednesday, Your Highness! 🤍<br><br>How is the trip treating you so far? Surviving the new views?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="wedChoice(1)">Absolute paradise, loving every second 🏔️</button>
+                <button onclick="wedChoice(2)" class="alt-button">Great views, but missing our usual chats 🙈</button>
+            </div>
+            <p id="wedMsg1" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Question 2: The Final Tease & Song Reveal -->
+        <div id="wed-step2" class="card hidden">
+            <p class="question">That sounds amazing. One last quick question before your soundtrack unlocks...<br><br>Are you actually keeping me in your thoughts out there, or completely distracted? 😉</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="wedFinish(1)">Always in my thoughts 🤫</button>
+                <button onclick="wedFinish(2)" class="alt-button">You'll never guess how much 🤍</button>
+            </div>
+            <p id="wedMsg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Step 3: Grand Finale with Music & Falling Flowers -->
+        <div id="wed-step3" class="card hidden">
+            <h3 class="success-title">Wednesday's Melody 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A special track for your mid-week journey...</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/YykjpeuMNEk" title="Wednesday Track" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="note-card" style="text-align: center; margin-top: 15px;">
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Hope your Wednesday is as wonderful as you are, Your Highness. Keep exploring! 🤍✨</p>
+            </div>
         </div>
     </div>
+
+    <!-- Web3Forms Tracking Form for Email Notifications (Using your key) -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
+        <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
+        <input type="hidden" name="response_choice" id="choiceField" value="">
+    </form>
+
     <script>
-        function rateSong(val) {
-            const m = document.getElementById("songMsg");
-            m.innerText = "Glad you approve. Saving it for our next coffee run. ☕";
-            m.classList.remove("hidden");
+        let historyStack = [];
+
+        window.onload = () => {
+            const now = new Date();
+            const currentDay = now.getDate(); // Current day of the month
+            const currentMonth = now.getMonth() + 1;
+
+            // LOCK TEST OVERRIDE: 
+            // Comment out the `if` check below if you want to test Wednesday's page right now!
+            const testBypass = false; // Set to true if you want to test it today
+
+            if (!testBypass && (currentMonth < 9 || currentDay < 16)) {
+                document.getElementById("wed-timelock").classList.add("active");
+                historyStack = ['wed-timelock'];
+            } else {
+                document.getElementById("wed-step1").classList.add("active");
+                historyStack = ['wed-step1'];
+            }
+        };
+
+        function wedChoice(option) {
+            const choiceText = option === 1 ? "Wednesday Q1: Absolute paradise" : "Wednesday Q1: Missing our chats";
+            sendEmailNotification(choiceText);
+
+            const msg = document.getElementById("wedMsg1");
+            msg.innerText = option === 1 ? "Love that! Soak it all in 🏔️✨" : "Haha, good answer! Unlocking next step... 🤍";
+            msg.classList.remove("hidden");
+            setTimeout(() => navigateTo("wed-step2"), 1300);
+        }
+
+        function wedFinish(option) {
+            const choiceText = option === 1 ? "Wednesday Q2: Always in my thoughts" : "Wednesday Q2: You'll never guess how much";
+            sendEmailNotification(choiceText);
+
+            const msg = document.getElementById("wedMsg2");
+            msg.innerText = "Music incoming... enjoy your Wednesday! 🎵";
+            msg.classList.remove("hidden");
+            setTimeout(() => {
+                navigateTo("wed-step3");
+                startFallingFlowers();
+            }, 1300);
+        }
+
+        // Helper function to silently send responses to your email
+        function sendEmailNotification(choiceText) {
+            const field = document.getElementById("choiceField");
+            if (field) {
+                field.value = choiceText;
+                const form = document.getElementById('trackingForm');
+                if (form) {
+                    fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
+                }
+            }
+        }
+
+        function navigateTo(nextId) {
+            const currentId = historyStack[historyStack.length - 1];
+            historyStack.push(nextId);
+            fadeTransition(currentId, nextId);
+        }
+
+        function globalBack() {
+            if (historyStack.length > 1) {
+                const currentId = historyStack.pop();
+                const previousId = historyStack[historyStack.length - 1];
+                fadeTransition(currentId, previousId);
+            } else {
+                window.location.href = "../index.html";
+            }
+        }
+
+        function startFallingFlowers() {
+            const symbols = ['🌸', '🪷', '✨', '🤍', '💮'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.className = 'falling-flower';
+                flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                flower.style.fontSize = (Math.random() * 10 + 18) + 'px';
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 6000);
+            }, 300);
+        }
+
+        function fadeTransition(hideId, showId) {
+            const h = document.getElementById(hideId);
+            const s = document.getElementById(showId);
+            h.classList.remove("active");
+            setTimeout(() => {
+                h.classList.add("hidden");
+                s.classList.remove("hidden");
+                setTimeout(() => s.classList.add("active"), 50);
+            }, 500);
         }
     </script>
 </body>
