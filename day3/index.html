@@ -177,7 +177,7 @@
             // Set to `true` = Instantly unlocks for testing right now
             // Set to `false` = Locks until Sept 16 at 10:00 AM
             // ==========================================
-            const testBypass = true; 
+            const testBypass = false; 
 
             // Checks if it's before Sept 16, OR if it's Sept 16 but before 10:00 AM
             const isLocked = !testBypass && (currentMonth < 9 || currentDay < 16 || (currentDay === 16 && currentHour < 10));
