@@ -42,22 +42,22 @@
         <div id="tue-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
-                <span class="insta-tag">Patience ⏳</span>
+                <span class="insta-tag">Patience, Your Highness ⏳</span>
             </div>
             <div class="envelope-box" style="cursor: default;">
                 <div class="envelope-icon">⏰</div>
-                <p class="envelope-text">This chapter is resting until morning.<br><br><strong>Come back at 11:00 AM</strong> for Tuesday's surprise! 🤍</p>
+                <p class="envelope-text">This chapter is resting until morning.<br><br><strong>Come back at 11:00 AM</strong> for Tuesday's surprise, Your Highness! 🤍</p>
             </div>
         </div>
 
         <!-- Step 1: Strict Country Validation Check -->
         <div id="tue-step1" class="card">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Verification</span>
-                <span class="insta-tag">Protocol ✨</span>
+                <span class="disclaimer-tag">⚠️ Royal Protocol</span>
+                <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">Confirm you're the one. What country?</p>
+            <p class="question">Confirm you are the princess. What country?</p>
             <input type="text" id="countryInput" placeholder="Enter country name..." autocomplete="off">
             <p id="countryError" class="error hidden">Not quite! Think of the Caucasus mountains... 😉</p>
             <button onclick="checkCountry()">Verify Status</button>
@@ -70,7 +70,7 @@
                 <span class="insta-tag">Pinky Promise 🌸</span>
             </div>
             
-            <p class="question">Before you pass, I need a quick promise. 🤍<br><br>Promise you're going to share with me that picture of you holding the flowers I gave you on your birthday?</p>
+            <p class="question">Before you pass, I need a royal promise, Your Highness. 🤍<br><br>Promise you're going to share with me that picture of you holding the flowers I gave you on your birthday?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="acceptPromise()">I promise! 🌸</button>
@@ -81,7 +81,7 @@
         
         <!-- Step 2: Trip Question (The Branching Point) -->
         <div id="tue-step2" class="card hidden">
-            <p class="question">Promise recorded! You may proceed. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
+            <p class="question">Promise recorded! You may proceed, Your Highness. 🤍<br><br>Since you're heading off on your trip tomorrow evening... how are you planning to survive without my texts?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
                 <button onclick="choosePathA()">By spamming you with vacation photos 📸</button>
@@ -122,10 +122,16 @@
             </div>
             
             <div class="note-card" style="text-align: center; margin-top: 15px;">
-                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have an amazing trip! Safe travels, and enjoy the getaway. 🤍✨</p>
+                <p style="font-size: 14px; color: #fff; line-height: 1.5;">Have an amazing trip, Your Highness! Safe travels, and enjoy the getaway. 🤍✨</p>
             </div>
         </div>
     </div>
+
+    <!-- Hidden Web3Forms Tracking Form for Email Notifications -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+        <input type="hidden" name="response_choice" id="choiceField" value="">
+    </form>
 
     <script>
         let historyStack = [];
@@ -161,23 +167,27 @@
         }
 
         function acceptPromise() {
+            // Optional: log choice via Web3Forms if you plug in your access key
+            sendEmailNotification("Agreed to birthday flower promise");
             navigateTo("tue-step2");
         }
 
         function rejectPromise() {
             const errorMsg = document.getElementById("promiseError");
-            errorMsg.innerText = "Nice try! Promises are legally binding. Try again! 😉";
+            errorMsg.innerText = "Nice try, Your Highness! Royal promises are legally binding. Try again! 😉";
             errorMsg.classList.remove("hidden");
         }
 
         function choosePathA() {
+            sendEmailNotification("Chose Path A: Spamming with vacation photos");
             const msg = document.getElementById("choiceMsg1");
-            msg.innerText = "Deal. Expecting a full gallery in my inbox! 📸";
+            msg.innerText = "Deal. Expecting a full gallery in my inbox, Your Highness! 📸";
             msg.classList.remove("hidden");
             setTimeout(() => navigateTo("tue-pathA-step3"), 1300);
         }
 
         function choosePathB() {
+            sendEmailNotification("Chose Path B: Might actually miss the chats");
             const msg = document.getElementById("choiceMsg1");
             msg.innerText = "Haha, good to know! Let's see if that holds up 😌";
             msg.classList.remove("hidden");
@@ -185,8 +195,21 @@
         }
 
         function finishJourney() {
+            sendEmailNotification("Completed Tuesday's final music chapter");
             navigateTo("tue-step4");
             startFallingFlowers();
+        }
+
+        // Helper function to silently send her choices straight to your email
+        function sendEmailNotification(choiceText) {
+            const field = document.getElementById("choiceField");
+            if (field) {
+                field.value = choiceText;
+                const form = document.getElementById('trackingForm');
+                if (form) {
+                    fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
+                }
+            }
         }
 
         function navigateTo(nextId) {
@@ -226,7 +249,7 @@
             setTimeout(() => {
                 h.classList.add("hidden");
                 s.classList.remove("hidden");
-                setTimeout(() => s.classList.add("active"), 60);
+                setTimeout(() => s.classList.add("active"), 50);
             }, 500);
         }
     </script>
