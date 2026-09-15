@@ -127,9 +127,9 @@
         </div>
     </div>
 
-    <!-- Hidden Web3Forms Tracking Form for Email Notifications -->
+    <!-- Web3Forms Tracking Form for Email Notifications -->
     <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+        <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
         <input type="hidden" name="response_choice" id="choiceField" value="">
     </form>
 
@@ -167,7 +167,6 @@
         }
 
         function acceptPromise() {
-            // Optional: log choice via Web3Forms if you plug in your access key
             sendEmailNotification("Agreed to birthday flower promise");
             navigateTo("tue-step2");
         }
