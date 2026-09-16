@@ -197,7 +197,7 @@
             // Set to `true` = Instantly unlocks for testing
             // Set to `false` = Locks until Sept 17 at 10 AM
             // ==========================================
-            const testBypass = true; 
+            const testBypass = false; 
 
             const isLocked = !testBypass && (currentMonth < 9 || currentDay < 17 || (currentDay === 17 && currentHour < 10));
 
@@ -288,7 +288,7 @@
             if (field) {
                 field.value = summaryString;
 
-                const emailTestBypass = true; 
+                const emailTestBypass = false; 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed.\n" + summaryString);
                     return; 
