@@ -20,6 +20,11 @@
             border-color: rgba(244, 114, 182, 0.5);
             box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
         }
+        /* Safeguard for locked links */
+        .date-btn.locked {
+            pointer-events: none;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body class="theme-day1">
