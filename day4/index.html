@@ -26,7 +26,7 @@
         }
         .progress-bar {
             height: 100%;
-            width: 33%;
+            width: 25%;
             background: linear-gradient(90deg, #f472b6, #fb7185);
             border-radius: 10px;
             transition: width 0.4s ease;
@@ -38,6 +38,17 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(244, 114, 182, 0.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Highlighted Travel Message Card */
+        .travel-highlight-card {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(251, 113, 133, 0.18));
+            border: 1.5px solid rgba(244, 114, 182, 0.5);
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            margin-top: 15px;
         }
 
         /* Live Falling Flower Rain Animation */
@@ -68,7 +79,7 @@
             <div id="progressBar" class="progress-bar"></div>
         </div>
 
-        <!-- Time-Lock Gatekeeper Card (Blocks early access completely) -->
+        <!-- Time-Lock Gatekeeper Card -->
         <div id="day4-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
@@ -80,24 +91,99 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question -->
-        <div id="day4-step1" class="card hidden">
+        <!-- Step 1: Entry Gate Question (Apartment Number Check) -->
+        <div id="day4-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Verification Required ✨</span>
             </div>
             
-            <p class="question">When it's done, what do you say? 😉</p>
-            <input type="text" id="entryInput" placeholder="Enter keyword..." autocomplete="off">
-            <p id="entryError" class="error hidden">Not quite, Your Highness! Try again... 🤍</p>
-            <button onclick="checkEntry()">Verify Status</button>
+            <p class="question">To enter Your Highness's sacred space... what is your apartment number? 🏡🤫</p>
+            <input type="text" id="entryInput" placeholder="Enter number..." autocomplete="off">
+            <p id="entryError" class="error hidden">Incorrect! Only apartment 621 may enter here, Princess... 😉🤍</p>
+            <button onclick="checkEntry()">Verify Apartment</button>
         </div>
 
-        <!-- Future steps for Thursday can go here -->
+        <!-- Question 1: Missing Meter (0-100%, Must be >= 90) -->
+        <div id="day4-step2" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Day 1 of Travel</span>
+                <span class="insta-tag">Missing Meter 📊</span>
+            </div>
+            
+            <p class="question">Since today was the first full day of your trip away from office... on a scale of 0% to 100%, how much are you missing me? 🥺</p>
+            <input type="number" id="missingInput" placeholder="Enter percentage (e.g. 95)..." min="0" max="100" autocomplete="off">
+            <p id="missingError" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
+            <button onclick="checkMissingScore()" style="margin-top: 15px;">Submit Score</button>
+        </div>
+
+        <!-- Question 2: Travel Vibe Check -->
+        <div id="day4-step3" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Journey Check</span>
+                <span class="insta-tag">Chapter 4 ✨</span>
+            </div>
+            
+            <p class="question">How are you holding up on your travels so far, Princess?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="day4Choice(1)">Having an incredible time exploring! 🌍</button>
+                <button onclick="day4Choice(2)" class="alt-button">Missing my favorite distraction (that's you) 🙈</button>
+            </div>
+            <p id="day4Msg1" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Question 3: Final Tease -->
+        <div id="day4-step4" class="card hidden">
+            <p class="question">One last question before your Thursday melody unlocks...<br><br>Ready for day two of adventures?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="day4Finish(1)">Born ready, Your Highness 🚀</button>
+                <button onclick="day4Finish(2)" class="alt-button">Only if you come along virtually 🤍</button>
+            </div>
+            <p id="day4Msg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Step 5: Grand Finale with Thursday Image & Music -->
+        <div id="day4-step5" class="card hidden">
+            <h3 class="success-title">Thursday's Memory & Melody 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A special look and track for your journey...</p>
+            
+            <!-- Thursday Custom Image Display -->
+            <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(244, 114, 182, 0.3);">
+                <img src="../images/thursday.jpg" alt="Thursday Memory" style="width: 100%; display: block; max-height: 300px; object-fit: cover;">
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/syFZfO_wfMQ" title="Thursday Track" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <!-- Highlighted Travel Message Card -->
+            <div class="travel-highlight-card">
+                <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
+                    First full day of travel complete... <br>
+                    <span style="color: #f472b6; font-weight: 600;">Hope you're having the most wonderful adventure, Your Highness! 🤍✨</span>
+                </p>
+            </div>
+        </div>
     </div>
+
+    <!-- Web3Forms Tracking Form for Thursday -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
+        <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
+        <input type="hidden" name="subject" value="Thursday Responses - Jio Space">
+        <input type="hidden" name="all_responses" id="combinedResponses" value="">
+    </form>
 
     <script>
         let historyStack = [];
+        let day4Choices = {
+            day: "Thursday",
+            entryPassed: "Apartment 621 Verified",
+            missingScore: "",
+            q1: "",
+            q2: ""
+        };
 
         window.onload = () => {
             const now = new Date();
@@ -105,10 +191,13 @@
             const currentMonth = now.getMonth() + 1;
             const currentHour = now.getHours();
             
-            // Set to `false` for production so it locks automatically until Sept 17, 10 AM
-            const testBypass = false; 
+            // ==========================================
+            // TIME LOCK OVERRIDE SWITCH FOR TESTING
+            // Set to `true` = Instantly unlocks for testing
+            // Set to `false` = Locks until Sept 17 at 10 AM
+            // ==========================================
+            const testBypass = true; 
 
-            // Locks if before Sept 17, OR if it's Sept 17 but before 10:00 AM
             const isLocked = !testBypass && (currentMonth < 9 || currentDay < 17 || (currentDay === 17 && currentHour < 10));
 
             if (isLocked) {
@@ -118,25 +207,73 @@
             } else {
                 document.getElementById("day4-step1").classList.add("active");
                 historyStack = ['day4-step1'];
-                updateProgress(25);
+                updateProgress(20);
             }
         };
 
         function checkEntry() {
             const inputField = document.getElementById("entryInput");
             const errorMsg = document.getElementById("entryError");
-            const answer = inputField.value.toLowerCase().trim();
+            const answer = inputField.value.trim();
             
-            if (answer === "khallas") {
+            if (answer === "621") {
                 errorMsg.classList.add("hidden");
-                updateProgress(50);
-                // Navigate to next step when ready
+                updateProgress(40);
+                navigateTo("day4-step2");
             } else {
                 inputField.classList.add("shake");
-                errorMsg.innerText = "Not quite, Your Highness! Try again... 🤍";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
             }
+        }
+
+        function checkMissingScore() {
+            const inputField = document.getElementById("missingInput");
+            const errorMsg = document.getElementById("missingError");
+            const score = parseInt(inputField.value.trim());
+
+            if (isNaN(score)) {
+                errorMsg.innerText = "Please enter a valid number, Your Highness! 🤍";
+                errorMsg.classList.remove("hidden");
+                return;
+            }
+
+            if (score < 90) {
+                inputField.classList.add("shake");
+                errorMsg.innerText = "⚠️ Cryptic Warning: Less than 90%?! Protocol dictates severe penalties for underselling your missing score! Try a higher and more accurate number... 😉🤍";
+                errorMsg.classList.remove("hidden");
+                setTimeout(() => inputField.classList.remove("shake"), 500);
+            } else {
+                errorMsg.classList.add("hidden");
+                day4Choices.missingScore = score + "%";
+                updateProgress(60);
+                navigateTo("day4-step3");
+            }
+        }
+
+        function day4Choice(option) {
+            day4Choices.q1 = option === 1 ? "Q1: Having an incredible time exploring" : "Q1: Missing my favorite distraction";
+            
+            const msg = document.getElementById("day4Msg1");
+            msg.innerText = option === 1 ? "Love that for you! Soak it all in 🌍✨" : "Aww, mutual feeling Princess! Unlocking final step... 🤍";
+            msg.classList.remove("hidden");
+            updateProgress(80);
+            setTimeout(() => navigateTo("day4-step4"), 1300);
+        }
+
+        function day4Finish(option) {
+            day4Choices.q2 = option === 1 ? "Q2: Born ready" : "Q2: Only if you come along virtually";
+            
+            sendDay4EmailBundle();
+
+            const msg = document.getElementById("day4Msg2");
+            msg.innerText = "Thursday's memory & music incoming! 🎵";
+            msg.classList.remove("hidden");
+            updateProgress(100);
+            setTimeout(() => {
+                navigateTo("day4-step5");
+                startFallingFlowers();
+            }, 1300);
         }
 
         function updateProgress(percent) {
@@ -144,8 +281,70 @@
             if (bar) bar.style.width = percent + "%";
         }
 
+        function sendDay4EmailBundle() {
+            const summaryString = `Entry: ${day4Choices.entryPassed}\nMissing Score: ${day4Choices.missingScore}\nQ1: ${day4Choices.q1}\nQ2: ${day4Choices.q2}`;
+            const field = document.getElementById("combinedResponses");
+            if (field) {
+                field.value = summaryString;
+
+                // Email testing bypass switch
+                const emailTestBypass = true; 
+                if (emailTestBypass) {
+                    console.log("Test mode active: Email suppressed.\n" + summaryString);
+                    return; 
+                }
+
+                const form = document.getElementById('trackingForm');
+                if (form) {
+                    fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
+                }
+            }
+        }
+
+        function navigateTo(nextId) {
+            const currentId = historyStack[historyStack.length - 1];
+            historyStack.push(nextId);
+            fadeTransition(currentId, nextId);
+        }
+
         function globalBack() {
-            window.location.href = "../index.html";
+            if (historyStack.length > 1) {
+                const currentId = historyStack.pop();
+                const previousId = historyStack[historyStack.length - 1];
+                fadeTransition(currentId, previousId);
+                
+                if (currentId === 'day4-step5') updateProgress(80);
+                else if (currentId === 'day4-step4') updateProgress(60);
+                else if (currentId === 'day4-step3') updateProgress(40);
+                else if (currentId === 'day4-step2') updateProgress(20);
+            } else {
+                window.location.href = "../index.html";
+            }
+        }
+
+        function startFallingFlowers() {
+            const symbols = ['🌸', '🪷', '✨', '🤍', '💮'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.className = 'falling-flower';
+                flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                flower.style.fontSize = (Math.random() * 10 + 18) + 'px';
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 6000);
+            }, 300);
+        }
+
+        function fadeTransition(hideId, showId) {
+            const h = document.getElementById(hideId);
+            const s = document.getElementById(showId);
+            h.classList.remove("active");
+            setTimeout(() => {
+                h.classList.add("hidden");
+                s.classList.remove("hidden");
+                setTimeout(() => s.classList.add("active"), 50);
+            }, 500);
         }
     </script>
 </body>
