@@ -7,15 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Pink Flower Background with Deep Cinematic Vignette */
+        /* Rich Cinematic Background using thursday.jpg with Deep Purple/Pink Tone */
         body.theme-day4 {
-            background: linear-gradient(rgba(3, 7, 18, 0.78), rgba(15, 5, 20, 0.88), rgba(3, 7, 18, 0.95)), 
-                        url('../images/pink-flowers-pink-tulips.webp') no-repeat center center fixed;
+            background: linear-gradient(rgba(15, 5, 25, 0.75), rgba(10, 2, 15, 0.88), rgba(3, 7, 18, 0.95)), 
+                        url('../images/thursday.jpg') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
 
-        /* Progress Bar Styling to Track Chapter Steps */
+        /* Progress Bar Styling */
         .progress-container {
             width: 100%;
             background: rgba(255, 255, 255, 0.1);
@@ -27,24 +27,25 @@
         .progress-bar {
             height: 100%;
             width: 25%;
-            background: linear-gradient(90deg, #f472b6, #fb7185);
+            background: linear-gradient(90deg, #f472b6, #c084fc);
             border-radius: 10px;
             transition: width 0.4s ease;
         }
 
-        /* Enhanced Glassmorphism Card Hover Polish */
+        /* Enhanced Glassmorphism Card Polish */
         .card {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(244, 114, 182, 0.15);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(244, 114, 182, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            background: rgba(15, 12, 23, 0.75);
         }
 
         /* Highlighted Travel Message Card */
         .travel-highlight-card {
-            background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(251, 113, 133, 0.18));
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(192, 132, 252, 0.2));
             border: 1.5px solid rgba(244, 114, 182, 0.5);
-            box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.25);
             border-radius: 16px;
             padding: 18px;
             text-align: center;
@@ -91,69 +92,69 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question (Apartment Number Check) -->
+        <!-- Step 1: Entry Gate Question (Apartment Number Check - Secret PWD) -->
         <div id="day4-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
-                <span class="insta-tag">Verification Required ✨</span>
+                <span class="insta-tag">Secured Access ✨</span>
             </div>
             
-            <p class="question">To enter Your Highness's sacred space... what is your apartment number? 🏡🤫</p>
-            <input type="text" id="entryInput" placeholder="Enter number..." autocomplete="off">
-            <p id="entryError" class="error hidden">Incorrect! Only apartment 621 may enter here, Princess... 😉🤍</p>
-            <button onclick="checkEntry()">Verify Apartment</button>
+            <p class="question">To cross the threshold into Your Highness's private sanctuary... authenticate your residence number. 🏡✨</p>
+            <input type="text" id="entryInput" placeholder="Enter door code..." autocomplete="off">
+            <p id="entryError" class="error hidden">Access Denied. Biometric mismatch—only the true resident of this sanctuary holds the key... 🗝️🚫</p>
+            <button onclick="checkEntry()">Authorize Access</button>
         </div>
 
         <!-- Question 1: Missing Meter (0-100%, Must be >= 90) -->
         <div id="day4-step2" class="card hidden">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Day 1 of Travel</span>
+                <span class="disclaimer-tag">⚠️ Day 1 Audit</span>
                 <span class="insta-tag">Missing Meter 📊</span>
             </div>
             
-            <p class="question">Since today was the first full day of your trip away from office... on a scale of 0% to 100%, how much are you missing me? 🥺</p>
+            <p class="question">As the dust settles on the first full day away from the office realm... honestly measure your heart: what percentage are you missing me right now? 🥺🤍</p>
             <input type="number" id="missingInput" placeholder="Enter percentage (e.g. 95)..." min="0" max="100" autocomplete="off">
-            <p id="missingError" class="error hidden" style="color: #f9d423; margin-top: 15px; font-size: 14px;"></p>
-            <button onclick="checkMissingScore()" style="margin-top: 15px;">Submit Score</button>
+            <p id="missingError" class="error hidden" style="color: #f472b6; margin-top: 15px; font-size: 14px; line-height: 1.5;"></p>
+            <button onclick="checkMissingScore()" style="margin-top: 15px;">Calibrate Score</button>
         </div>
 
         <!-- Question 2: Travel Vibe Check -->
         <div id="day4-step3" class="card hidden">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Journey Check</span>
+                <span class="disclaimer-tag">⚠️ Horizon Check</span>
                 <span class="insta-tag">Chapter 4 ✨</span>
             </div>
             
-            <p class="question">How are you holding up on your travels so far, Princess?</p>
+            <p class="question">How is the new horizon treating you so far, Princess?</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="day4Choice(1)">Having an incredible time exploring! 🌍</button>
-                <button onclick="day4Choice(2)" class="alt-button">Missing my favorite distraction (that's you) 🙈</button>
+                <button onclick="day4Choice(1)">Discovering breathtaking sights... yet wishing you were here to see them 🏔️</button>
+                <button onclick="day4Choice(2)" class="alt-button">Enjoying the escape, but secretly missing my favorite daily distraction 🙈</button>
             </div>
-            <p id="day4Msg1" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+            <p id="day4Msg1" class="error hidden" style="color: #c084fc; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Question 3: Final Tease -->
+        <!-- Question 3: Impressive New Final Question -->
         <div id="day4-step4" class="card hidden">
-            <p class="question">One last question before your Thursday melody unlocks...<br><br>Ready for day two of adventures?</p>
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Final Inquiry</span>
+                <span class="insta-tag">The Journey Ahead 🧭</span>
+            </div>
+            
+            <p class="question">As we step into tomorrow's adventures... do you promise to keep me in your back pocket through every single view? 🤫✨</p>
             
             <div class="button-group" style="flex-direction: column; gap: 10px;">
-                <button onclick="day4Finish(1)">Born ready, Your Highness 🚀</button>
-                <button onclick="day4Finish(2)" class="alt-button">Only if you come along virtually 🤍</button>
+                <button onclick="day4Finish(1)">Always. You're my favorite co-pilot, miles away or right here 🚀🤍</button>
+                <button onclick="day4Finish(2)" class="alt-button">I wouldn't dare explore without checking in with you first 😉</button>
             </div>
-            <p id="day4Msg2" class="error hidden" style="color: #4ade80; margin-top: 15px; font-size: 14px;"></p>
+            <p id="day4Msg2" class="error hidden" style="color: #f472b6; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 5: Grand Finale with Thursday Image & Music -->
+        <!-- Step 5: Grand Finale with Music & Romantic Note -->
         <div id="day4-step5" class="card hidden">
-            <h3 class="success-title">Thursday's Memory & Melody 🎵</h3>
-            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A special look and track for your journey...</p>
+            <h3 class="success-title">Thursday's Melody 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A resonance across the distance...</p>
             
-            <!-- Thursday Custom Image Display -->
-            <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(244, 114, 182, 0.3);">
-                <img src="../images/thursday.jpg" alt="Thursday Memory" style="width: 100%; display: block; max-height: 300px; object-fit: cover;">
-            </div>
-
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/syFZfO_wfMQ" title="Thursday Track" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -161,8 +162,8 @@
             <!-- Highlighted Travel Message Card -->
             <div class="travel-highlight-card">
                 <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
-                    First full day of travel complete... <br>
-                    <span style="color: #f472b6; font-weight: 600;">Hope you're having the most wonderful adventure, Your Highness! 🤍✨</span>
+                    First chapter of exploration written into the stars... <br>
+                    <span style="color: #f472b6; font-weight: 600;">Have the most extraordinary rest of your journey, Your Highness. I'm right here cheering you on! 🤍✨</span>
                 </p>
             </div>
         </div>
@@ -192,7 +193,7 @@
             const currentHour = now.getHours();
             
             // ==========================================
-            // TIME LOCK OVERRIDE SWITCH FOR TESTING
+            // TESTING BYPASS SWITCH
             // Set to `true` = Instantly unlocks for testing
             // Set to `false` = Locks until Sept 17 at 10 AM
             // ==========================================
@@ -233,14 +234,14 @@
             const score = parseInt(inputField.value.trim());
 
             if (isNaN(score)) {
-                errorMsg.innerText = "Please enter a valid number, Your Highness! 🤍";
+                errorMsg.innerText = "Please enter a valid numeric value, Your Highness! 🤍";
                 errorMsg.classList.remove("hidden");
                 return;
             }
 
             if (score < 90) {
                 inputField.classList.add("shake");
-                errorMsg.innerText = "⚠️ Cryptic Warning: Less than 90%?! Protocol dictates severe penalties for underselling your missing score! Try a higher and more accurate number... 😉🤍";
+                errorMsg.innerText = "⚠️ Protocol Alert: Anything below 90% triggers a security lockdown! Royal decree demands a much higher, more accurate evaluation of your missing meter... 😉🤍";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
             } else {
@@ -252,22 +253,22 @@
         }
 
         function day4Choice(option) {
-            day4Choices.q1 = option === 1 ? "Q1: Having an incredible time exploring" : "Q1: Missing my favorite distraction";
+            day4Choices.q1 = option === 1 ? "Q1: Breathtaking sights wishing you were here" : "Q1: Enjoying escape, missing distraction";
             
             const msg = document.getElementById("day4Msg1");
-            msg.innerText = option === 1 ? "Love that for you! Soak it all in 🌍✨" : "Aww, mutual feeling Princess! Unlocking final step... 🤍";
+            msg.innerText = option === 1 ? "Soak it all in, Princess. The views are lucky to have you 🏔️✨" : "Mutual feeling across the map! Unlocking final step... 🤍";
             msg.classList.remove("hidden");
             updateProgress(80);
             setTimeout(() => navigateTo("day4-step4"), 1300);
         }
 
         function day4Finish(option) {
-            day4Choices.q2 = option === 1 ? "Q2: Born ready" : "Q2: Only if you come along virtually";
+            day4Choices.q2 = option === 1 ? "Q2: Always my favorite co-pilot" : "Q2: Wouldn't explore without checking in";
             
             sendDay4EmailBundle();
 
             const msg = document.getElementById("day4Msg2");
-            msg.innerText = "Thursday's memory & music incoming! 🎵";
+            msg.innerText = "Thursday's melody incoming... enjoy! 🎵";
             msg.classList.remove("hidden");
             updateProgress(100);
             setTimeout(() => {
@@ -287,7 +288,6 @@
             if (field) {
                 field.value = summaryString;
 
-                // Email testing bypass switch
                 const emailTestBypass = true; 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed.\n" + summaryString);
