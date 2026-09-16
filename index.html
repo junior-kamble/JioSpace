@@ -69,10 +69,17 @@
     </div>
 
     <script>
-        // Automatic Date Styling & Unlocking Logic for Sept 16
+        // Automatic Date Styling & Unlocking Logic
         const today = new Date();
-        const currentDay = today.getDate(); // 16 for today
+        const currentDay = today.getDate(); 
         const currentMonth = today.getMonth() + 1;
+
+        // ==========================================
+        // TESTING OVERRIDE SWITCH FOR THE HUB
+        // Set to `true` = Force unlocks Thursday & Friday so you can test them now!
+        // Set to `false` = Strict live calendar locking
+        // ==========================================
+        const forceTestUnlock = true; 
 
         if (currentMonth >= 9) {
             // Monday & Tuesday -> Faded out as past days
@@ -88,7 +95,7 @@
             }
 
             // Wednesday (Sept 16) -> Active Today
-            if (currentDay === 16) {
+            if (currentDay === 16 && !forceTestUnlock) {
                 const b3 = document.getElementById('btn-day3');
                 b3.classList.add('active-day');
                 b3.classList.remove('faded');
@@ -96,9 +103,9 @@
                 document.getElementById('stat-day3').style.color = '#f472b6';
             }
 
-            // Future days unlock logic
-            if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
-            if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
+            // Future days unlock logic (respects forceTestUnlock toggle)
+            if (currentDay >= 17 || forceTestUnlock) unlockChapter('day4', 'Thursday, Sept 17');
+            if (currentDay >= 18 || forceTestUnlock) unlockChapter('day5', 'Friday, Sept 18');
         }
 
         function unlockChapter(dayId, name) {
