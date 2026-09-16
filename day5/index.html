@@ -6,23 +6,147 @@
     <title>Friday - Jio Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Pink Flower Background with Deep Cinematic Vignette */
+        body.theme-day5 {
+            background: linear-gradient(rgba(3, 7, 18, 0.78), rgba(15, 5, 20, 0.88), rgba(3, 7, 18, 0.95)), 
+                        url('../images/pink-flowers-pink-tulips.webp') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        /* Progress Bar Styling to Track Chapter Steps */
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 33%;
+            background: linear-gradient(90deg, #f472b6, #fb7185);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Enhanced Glassmorphism Card Hover Polish */
+        .card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Live Falling Flower Rain Animation */
+        .falling-flower {
+            position: fixed;
+            top: -50px;
+            font-size: 22px;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fallDown linear infinite;
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        }
+    </style>
 </head>
 <body class="theme-day5">
     <div class="container">
-        <a href="../index.html" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Chapters</a>
-        <h1 class="main-title">Friday, Sept 18 🎉</h1>
+        <button onclick="globalBack()" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Hub</button>
         
-        <div class="card active">
+        <h1 id="mainTitle" class="main-title">Friday, Sept 18 🌸</h1>
+        
+        <!-- Interactive Progress Bar -->
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <!-- Time-Lock Gatekeeper Card (Blocks early access completely) -->
+        <div id="day5-timelock" class="card">
             <div class="top-meta-row">
-                <span class="disclaimer-tag">⚠️ Weekend unlocked</span>
-                <span class="insta-tag">We survived the office! 🥂</span>
+                <span class="disclaimer-tag">⚠️ Time Locked</span>
+                <span class="insta-tag">Patience, Your Highness ⏳</span>
             </div>
-            <h3 class="success-title" style="font-size: 24px; margin-bottom: 15px;">Chapter Complete</h3>
-            <p class="finale-text" style="margin-bottom: 20px;">You successfully navigated 5 days of digital surprises, slow Instagram replies, and office stealth operations.</p>
-            <div class="note-card" style="text-align: center;">
-                <p style="font-size: 15px; color: #fff; font-weight: 600;">Ready for round two in person? ☕✨</p>
+            <div class="envelope-box" style="cursor: default;">
+                <div class="envelope-icon">🔒</div>
+                <p class="envelope-text">This chapter unlocks on Friday at 10:00 AM.<br><br><strong>Come back then</strong> for Friday's surprise, Your Highness! 🤍</p>
             </div>
         </div>
+
+        <!-- Step 1: Entry Gate Question -->
+        <div id="day5-step1" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Royal Protocol</span>
+                <span class="insta-tag">Verification Required ✨</span>
+            </div>
+            
+            <p class="question">When it's done, what do you say? 😉</p>
+            <input type="text" id="entryInput" placeholder="Enter keyword..." autocomplete="off">
+            <p id="entryError" class="error hidden">Not quite, Your Highness! Try again... 🤍</p>
+            <button onclick="checkEntry()">Verify Status</button>
+        </div>
+
+        <!-- Future steps for Friday can go here -->
     </div>
+
+    <script>
+        let historyStack = [];
+
+        window.onload = () => {
+            const now = new Date();
+            const currentDay = now.getDate(); 
+            const currentMonth = now.getMonth() + 1;
+            const currentHour = now.getHours();
+            
+            // Set to `false` for production so it locks automatically until Sept 18, 10 AM
+            const testBypass = false; 
+
+            // Locks if before Sept 18, OR if it's Sept 18 but before 10:00 AM
+            const isLocked = !testBypass && (currentMonth < 9 || currentDay < 18 || (currentDay === 18 && currentHour < 10));
+
+            if (isLocked) {
+                document.getElementById("day5-timelock").classList.add("active");
+                historyStack = ['day5-timelock'];
+                updateProgress(0);
+            } else {
+                document.getElementById("day5-step1").classList.add("active");
+                historyStack = ['day5-step1'];
+                updateProgress(25);
+            }
+        };
+
+        function checkEntry() {
+            const inputField = document.getElementById("entryInput");
+            const errorMsg = document.getElementById("entryError");
+            const answer = inputField.value.toLowerCase().trim();
+            
+            if (answer === "khallas") {
+                errorMsg.classList.add("hidden");
+                updateProgress(50);
+                // Navigate to next step when ready
+            } else {
+                inputField.classList.add("shake");
+                errorMsg.innerText = "Not quite, Your Highness! Try again... 🤍";
+                errorMsg.classList.remove("hidden");
+                setTimeout(() => inputField.classList.remove("shake"), 500);
+            }
+        }
+
+        function updateProgress(percent) {
+            const bar = document.getElementById("progressBar");
+            if (bar) bar.style.width = percent + "%";
+        }
+
+        function globalBack() {
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 </html>
