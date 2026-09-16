@@ -3,110 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Little Something For Youuuuu🌼</title>
+    <title>Jio Space - Main Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Shading and Fading Past/Future Days */
-        .date-btn.faded {
-            opacity: 0.35;
-            filter: grayscale(40%);
-            transition: 0.3s ease;
+        body {
+            background: linear-gradient(rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.95)), 
+                        url('images/pink-flowers-pink-tulips.webp') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .date-btn.faded:hover {
-            opacity: 0.7; 
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            text-align: center;
         }
-        .date-btn.active-day {
-            border-color: rgba(244, 114, 182, 0.5);
-            box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+        .card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #f472b6;
+        }
+        p {
+            color: #d1d5db;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .date-btn {
+            display: block;
+            background: linear-gradient(135deg, #f472b6, #db2777);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.3);
+        }
+        .date-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(219, 39, 119, 0.5);
+        }
+        /* Locked Styling */
+        .date-btn.locked {
+            background: rgba(55, 65, 81, 0.5);
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .date-btn.locked:hover {
+            transform: none;
+            box-shadow: none;
         }
     </style>
 </head>
-<body class="theme-day1">
+<body>
     <div class="container">
-        <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
-        
-        <div class="card active">
-            <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
+        <div class="card">
+            <h1>A Little Something For Youuuuu🌼</h1>
+            <p>Your special interactive space. Select a chapter below, Your Highness! 🤍</p>
             
-            <div class="date-list">
-                <!-- Monday, Sept 14 -->
-                <a href="day1/index.html" id="btn-day1" class="date-btn faded">
-                    <span class="date-name">Monday, Sept 14</span>
-                    <span class="date-status" id="stat-day1">Completed ✓</span>
-                </a>
-
-                <!-- Tuesday, Sept 15 -->
-                <a href="day2/index.html" id="btn-day2" class="date-btn faded">
-                    <span class="date-name">Tuesday, Sept 15</span>
-                    <span class="date-status" id="stat-day2">Completed ✓</span>
-                </a>
-
-                <!-- Wednesday, Sept 16 (Today) -->
-                <a href="day3/index.html" id="btn-day3" class="date-btn active-day">
-                    <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" id="stat-day3" style="color: #f472b6;">Today ✨</span>
-                </a>
-
-                <!-- Thursday, Sept 17 -->
-                <a href="day4/index.html" id="btn-day4" class="date-btn locked">
-                    <span class="date-name">Thursday, Sept 17</span>
-                    <span class="date-status" id="stat-day4">Locked 🔒</span>
-                </a>
-
-                <!-- Friday, Sept 18 -->
-                <a href="day5/index.html" id="btn-day5" class="date-btn locked">
-                    <span class="date-name">Friday, Sept 18</span>
-                    <span class="date-status" id="stat-day5">Locked 🔒</span>
-                </a>
+            <div class="nav-links" id="navLinksContainer">
+                <a href="day1/index.html" class="date-btn" id="btn1">Monday, Sept 14 ✨</a>
+                <a href="day2/index.html" class="date-btn" id="btn2">Tuesday, Sept 15 ✨</a>
+                <a href="day3/index.html" class="date-btn" id="btn3">Wednesday, Sept 16 🌸</a>
+                <a href="day4/index.html" class="date-btn locked" id="btn4">Thursday, Sept 17 🔒</a>
+                <a href="day5/index.html" class="date-btn locked" id="btn5">Friday, Sept 18 🔒</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Automatic Date Styling & Unlocking Logic for Sept 16
-        const today = new Date();
-        const currentDay = today.getDate(); // 16 for today
-        const currentMonth = today.getMonth() + 1;
+        window.onload = () => {
+            const now = new Date();
+            const currentDay = now.getDate();
+            const currentMonth = now.getMonth() + 1;
+            const currentHour = now.getHours();
+            
+            // Testing bypass switch for root hub
+            const testBypass = true; 
 
-        if (currentMonth >= 9) {
-            // Monday & Tuesday -> Faded out as past days
-            if (currentDay > 14) {
-                document.getElementById('btn-day1').classList.add('faded');
-                document.getElementById('stat-day1').innerText = 'Completed ✓';
-            }
-            if (currentDay > 15) {
-                const b2 = document.getElementById('btn-day2');
-                b2.classList.add('faded');
-                b2.classList.remove('active-day');
-                document.getElementById('stat-day2').innerText = 'Completed ✓';
-            }
-
-            // Wednesday (Sept 16) -> Active Today
-            if (currentDay === 16) {
-                const b3 = document.getElementById('btn-day3');
-                b3.classList.add('active-day');
-                b3.classList.remove('faded');
-                document.getElementById('stat-day3').innerText = 'Open ✨';
-                document.getElementById('stat-day3').style.color = '#f472b6';
+            // If not bypassing, lock chapters based on date/hour
+            if (!testBypass) {
+                // Example check for Wednesday (Day 3): Locks if before Sept 16 or before 10 AM
+                if (currentMonth < 9 || currentDay < 16 || (currentDay === 16 && currentHour < 10)) {
+                    const btn3 = document.getElementById('btn3');
+                    if (btn3) {
+                        btn3.classList.add('locked');
+                        btn3.innerText = "Wednesday, Sept 16 (10 AM) 🔒";
+                    }
+                }
             }
 
-            // Future days unlock logic
-            if (currentDay >= 17) unlockChapter('day4', 'Thursday, Sept 17');
-            if (currentDay >= 18) unlockChapter('day5', 'Friday, Sept 18');
-        }
-
-        function unlockChapter(dayId, name) {
-            const link = document.getElementById('btn-' + dayId);
-            const status = document.getElementById('stat-' + dayId);
-            if (link && status) {
-                link.classList.remove('locked');
-                link.classList.add('active-day');
-                link.classList.remove('faded');
-                status.innerText = 'Open 🔓';
-                status.style.color = '#38bdf8';
-            }
-        }
+            // SECURITY: Block all clicks on elements with the 'locked' class
+            document.querySelectorAll('.date-btn.locked').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Completely stops the link from opening
+                    alert("Patience, Your Highness! This chapter is still locked. ⏳🤍");
+                });
+            });
+        };
     </script>
 </body>
 </html>
