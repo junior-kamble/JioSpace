@@ -36,7 +36,7 @@
             margin-bottom: 20px;
         }
         h1 {
-            font-size: 26px;
+            font-size: 24px;
             margin-bottom: 8px;
             color: #f472b6;
         }
@@ -73,10 +73,7 @@
             cursor: not-allowed;
             box-shadow: none;
             border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .date-btn.locked:hover {
-            transform: none;
-            box-shadow: none;
+            pointer-events: none; /* Instantly stops clicks via CSS */
         }
     </style>
 </head>
@@ -86,46 +83,26 @@
             <h1>A Little Something For Youuuuu🌼</h1>
             <p>Your special interactive space. Select a chapter below, Your Highness! 🤍</p>
             
-            <div class="nav-links" id="navLinksContainer">
-                <a href="day1/index.html" class="date-btn" id="btn1">Monday, Sept 14 ✨</a>
-                <a href="day2/index.html" class="date-btn" id="btn2">Tuesday, Sept 15 ✨</a>
-                <a href="day3/index.html" class="date-btn" id="btn3">Wednesday, Sept 16 🌸</a>
-                <a href="day4/index.html" class="date-btn locked" id="btn4">Thursday, Sept 17 🔒</a>
-                <a href="day5/index.html" class="date-btn locked" id="btn5">Friday, Sept 18 🔒</a>
+            <div class="nav-links">
+                <a href="day1/index.html" class="date-btn">Monday, Sept 14 ✨</a>
+                <a href="day2/index.html" class="date-btn">Tuesday, Sept 15 ✨</a>
+                <a href="day3/index.html" class="date-btn">Wednesday, Sept 16 🌸</a>
+                <a href="day4/index.html" class="date-btn locked">Thursday, Sept 17 🔒</a>
+                <a href="day5/index.html" class="date-btn locked">Friday, Sept 18 🔒</a>
             </div>
         </div>
     </div>
 
     <script>
-        window.onload = () => {
-            const now = new Date();
-            const currentDay = now.getDate();
-            const currentMonth = now.getMonth() + 1;
-            const currentHour = now.getHours();
-            
-            // Testing bypass switch for root hub
-            const testBypass = true; 
-
-            // If not bypassing, lock chapters based on date/hour
-            if (!testBypass) {
-                // Example check for Wednesday (Day 3): Locks if before Sept 16 or before 10 AM
-                if (currentMonth < 9 || currentDay < 16 || (currentDay === 16 && currentHour < 10)) {
-                    const btn3 = document.getElementById('btn3');
-                    if (btn3) {
-                        btn3.classList.add('locked');
-                        btn3.innerText = "Wednesday, Sept 16 (10 AM) 🔒";
-                    }
-                }
-            }
-
-            // SECURITY: Block all clicks on elements with the 'locked' class
+        // Extra JavaScript safeguard to block any locked clicks just in case
+        document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.date-btn.locked').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    e.preventDefault(); // Completely stops the link from opening
+                    e.preventDefault();
                     alert("Patience, Your Highness! This chapter is still locked. ⏳🤍");
                 });
             });
-        };
+        });
     </script>
 </body>
 </html>
