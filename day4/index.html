@@ -51,6 +51,15 @@
             margin-top: 15px;
         }
 
+        /* Visible Input Placeholder Styling */
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+        }
+        input::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.4); }
+        input::-moz-placeholder { color: rgba(255, 255, 255, 0.4); }
+        input { color: #ffffff; }
+
         /* Live Falling Flower Rain Animation */
         .falling-flower {
             position: fixed;
@@ -195,20 +204,24 @@
             const currentDay = now.getDate(); 
             const currentMonth = now.getMonth() + 1;
             const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
             
-            // ==========================================
-            // TESTING BYPASS SWITCH
-            // Set to `true` = Instantly unlocks for testing
-            // Set to `false` = Locks until Sept 17 at 10 AM
-            // ==========================================
-            const testBypass = true; 
+            // Production Time Window: Opens Sept 17 at 10:00 AM, Concludes after Sept 17 at 11:59 PM
+            const testBypass = false; 
 
-            const isLocked = !testBypass && (currentMonth < 9 || currentDay < 17 || (currentDay === 17 && currentHour < 10));
+            const isBeforeUnlock = (currentMonth < 9 || currentDay < 17 || (currentDay === 17 && currentHour < 10));
+            const isAfterExpiry = (currentDay > 17 || (currentDay === 17 && (currentHour > 23 || (currentHour === 23 && currentMinute > 59))));
 
-            if (isLocked) {
+            if (!testBypass && isBeforeUnlock) {
                 document.getElementById("day4-timelock").classList.add("active");
                 historyStack = ['day4-timelock'];
                 updateProgress(0);
+            } else if (!testBypass && isAfterExpiry) {
+                document.getElementById("day4-timelock").querySelector('.envelope-text').innerHTML = 
+                    "Thursday's chapter has concluded and is now marked complete! Thank you for the wonderful memories, Your Highness. 🤍✨";
+                document.getElementById("day4-timelock").classList.add("active");
+                historyStack = ['day4-timelock'];
+                updateProgress(100);
             } else {
                 document.getElementById("day4-step1").classList.add("active");
                 historyStack = ['day4-step1'];
