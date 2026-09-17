@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question with friday-freshness.png -->
+        <!-- Step 1: Entry Gate Question with friday-freshness.png fully visible -->
         <div id="day5-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
@@ -109,8 +109,8 @@
             </div>
             
             <!-- Friday Freshness Image Display inside Step 1 Card -->
-            <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(192,132,252,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
-                <img src="../images/friday-freshness.png" alt="Friday Freshness" style="width: 100%; display: block; max-height: 200px; object-fit: cover;">
+            <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(192,132,252,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5); background: rgba(0,0,0,0.4);">
+                <img src="../images/friday-freshness.png" alt="Friday Freshness" style="width: 100%; display: block; max-height: 280px; object-fit: contain; object-position: center top;">
             </div>
 
             <p class="question">To step into the final chapter... what is Your Highness's absolute favorite flower color? 🌸</p>
@@ -245,7 +245,6 @@
             errorMsg.classList.add("hidden");
             day5Choices.customThought = text;
 
-            // Send full bundle to Web3Forms
             sendDay5EmailBundle();
 
             updateProgress(100);
@@ -266,7 +265,7 @@
             if (field) {
                 field.value = summaryString;
 
-                const emailTestBypass = false; 
+                const emailTestBypass = true; 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed.\n" + summaryString);
                     return; 
