@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Rich Cinematic Background using jioThursday.png with Deep Purple/Pink Tone */
+        /* Pink Flower Background with Deep Cinematic Vignette */
         body.theme-day4 {
-            background: linear-gradient(rgba(15, 5, 25, 0.78), rgba(10, 2, 15, 0.90), rgba(3, 7, 18, 0.96)), 
-                        url('../images/jioThursday.png') no-repeat center center fixed;
+            background: linear-gradient(rgba(3, 7, 18, 0.78), rgba(15, 5, 20, 0.88), rgba(3, 7, 18, 0.95)), 
+                        url('../images/pink-flowers-pink-tulips.webp') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
@@ -26,26 +26,25 @@
         }
         .progress-bar {
             height: 100%;
-            width: 25%;
-            background: linear-gradient(90deg, #f472b6, #c084fc);
+            width: 20%;
+            background: linear-gradient(90deg, #f472b6, #fb7185);
             border-radius: 10px;
             transition: width 0.4s ease;
         }
 
         /* Enhanced Glassmorphism Card Polish */
         .card {
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(244, 114, 182, 0.25);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            background: rgba(15, 12, 23, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         /* Highlighted Travel Message Card */
         .travel-highlight-card {
-            background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(192, 132, 252, 0.2));
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(251, 113, 133, 0.18));
             border: 1.5px solid rgba(244, 114, 182, 0.5);
-            box-shadow: 0 0 25px rgba(244, 114, 182, 0.25);
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
             border-radius: 16px;
             padding: 18px;
             text-align: center;
@@ -105,7 +104,7 @@
             <button onclick="checkEntry()">Authorize Access</button>
         </div>
 
-        <!-- Question 1: Missing Meter (0-100%, Must be >= 90) -->
+        <!-- Step 2: Missing Meter (0-100%, Must be >= 90) -->
         <div id="day4-step2" class="card hidden">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Day 1 Audit</span>
@@ -118,7 +117,7 @@
             <button onclick="checkMissingScore()" style="margin-top: 15px;">Calibrate Score</button>
         </div>
 
-        <!-- Question 2: Travel Vibe Check -->
+        <!-- Step 3: Travel Vibe Check -->
         <div id="day4-step3" class="card hidden">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Horizon Check</span>
@@ -134,7 +133,7 @@
             <p id="day4Msg1" class="error hidden" style="color: #c084fc; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Question 3: Final Inquiry -->
+        <!-- Step 4: Final Inquiry -->
         <div id="day4-step4" class="card hidden">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Final Inquiry</span>
@@ -150,11 +149,16 @@
             <p id="day4Msg2" class="error hidden" style="color: #f472b6; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 5: Grand Finale with Coldplay Music & Romantic Note -->
+        <!-- Step 5: Grand Finale with jioThursday Image inside card, Coldplay Music & Romantic Note -->
         <div id="day4-step5" class="card hidden">
-            <h3 class="success-title">Thursday's Melody 🎵</h3>
+            <h3 class="success-title">Thursday's Memory & Melody 🎵</h3>
             <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A resonance across the distance...</p>
             
+            <!-- jioThursday Image Display inside Card -->
+            <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(244, 114, 182, 0.3);">
+                <img src="../images/jioThursday.png" alt="Thursday Memory" style="width: 100%; display: block; max-height: 280px; object-fit: cover;">
+            </div>
+
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/YykjpeuMNEk" title="Coldplay - Hymn For The Weekend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
