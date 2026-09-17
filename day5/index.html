@@ -7,15 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Pink Flower Background with Deep Cinematic Vignette */
+        /* Rich Purple Floral Cinematic Background */
         body.theme-day5 {
-            background: linear-gradient(rgba(3, 7, 18, 0.78), rgba(15, 5, 20, 0.88), rgba(3, 7, 18, 0.95)), 
-                        url('../images/pink-flowers-pink-tulips.webp') no-repeat center center fixed;
+            background: linear-gradient(rgba(15, 3, 25, 0.78), rgba(30, 10, 45, 0.88), rgba(8, 2, 15, 0.95)), 
+                        url('../images/purple-flowers-field_534373-2549.avif') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
 
-        /* Progress Bar Styling to Track Chapter Steps */
+        /* Progress Bar Styling */
         .progress-container {
             width: 100%;
             background: rgba(255, 255, 255, 0.1);
@@ -26,19 +26,40 @@
         }
         .progress-bar {
             height: 100%;
-            width: 33%;
-            background: linear-gradient(90deg, #f472b6, #fb7185);
+            width: 20%;
+            background: linear-gradient(90deg, #c084fc, #f472b6);
             border-radius: 10px;
             transition: width 0.4s ease;
         }
 
-        /* Enhanced Glassmorphism Card Hover Polish */
+        /* Enhanced Glassmorphism Card Polish */
         .card {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(244, 114, 182, 0.15);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            background: rgba(18, 12, 28, 0.78);
         }
+
+        /* Highlighted Message Card */
+        .travel-highlight-card {
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.15), rgba(244, 114, 182, 0.2));
+            border: 1.5px solid rgba(192, 132, 252, 0.5);
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.25);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Visible Input Placeholder Styling */
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+        }
+        input::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.4); }
+        input::-moz-placeholder { color: rgba(255, 255, 255, 0.4); }
+        input { color: #ffffff; }
 
         /* Live Falling Flower Rain Animation */
         .falling-flower {
@@ -61,14 +82,14 @@
     <div class="container">
         <button onclick="globalBack()" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Hub</button>
         
-        <h1 id="mainTitle" class="main-title">Friday, Sept 18 🌸</h1>
+        <h1 id="mainTitle" class="main-title">Friday, Sept 18 🪷</h1>
         
         <!-- Interactive Progress Bar -->
         <div class="progress-container">
             <div id="progressBar" class="progress-bar"></div>
         </div>
 
-        <!-- Time-Lock Gatekeeper Card (Blocks early access completely) -->
+        <!-- Time-Lock Gatekeeper Card -->
         <div id="day5-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
@@ -76,28 +97,91 @@
             </div>
             <div class="envelope-box" style="cursor: default;">
                 <div class="envelope-icon">🔒</div>
-                <p class="envelope-text">This chapter unlocks on Friday at 10:00 AM.<br><br><strong>Come back then</strong> for Friday's surprise, Your Highness! 🤍</p>
+                <p class="envelope-text">This chapter unlocks on Friday at 10:00 AM.<br><br><strong>Come back then</strong> for Friday's grand finale, Your Highness! 🤍</p>
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question -->
-        <div id="day5-step1" class="card hidden">
+        <!-- Step 1: Entry Gate Question with friday-freshness.png -->
+        <div id="day5-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
-                <span class="insta-tag">Verification Required ✨</span>
+                <span class="insta-tag">Friday Freshness ✨</span>
             </div>
             
-            <p class="question">When it's done, what do you say? 😉</p>
-            <input type="text" id="entryInput" placeholder="Enter keyword..." autocomplete="off">
-            <p id="entryError" class="error hidden">Not quite, Your Highness! Try again... 🤍</p>
-            <button onclick="checkEntry()">Verify Status</button>
+            <!-- Friday Freshness Image Display inside Step 1 Card -->
+            <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(192,132,252,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                <img src="../images/friday-freshness.png" alt="Friday Freshness" style="width: 100%; display: block; max-height: 200px; object-fit: cover;">
+            </div>
+
+            <p class="question">To step into the final chapter... what is Your Highness's absolute favorite flower color? 🌸</p>
+            <input type="text" id="entryInput" placeholder="Enter color..." autocomplete="off">
+            <p id="entryError" class="error hidden">Incorrect color! Hint: Think of the shade wrapping this entire space... 🤍</p>
+            <button onclick="checkEntry()">Verify Color</button>
         </div>
 
-        <!-- Future steps for Friday can go here -->
+        <!-- Step 2: Vibe Check (Choice 1) -->
+        <div id="day5-step2" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Weekend Threshold</span>
+                <span class="insta-tag">Chapter 5 ✨</span>
+            </div>
+            
+            <p class="question">We've reached the final stretch of the week, Princess! How are we feeling about the weekend ahead?</p>
+            
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button onclick="day5Choice(1)">Ready to relax, but wishing you were right here to celebrate 🥂</button>
+                <button onclick="day5Choice(2)" class="alt-button">Counting down the hours until our next conversation 🌙</button>
+            </div>
+            <p id="day5Msg1" class="error hidden" style="color: #c084fc; margin-top: 15px; font-size: 14px;"></p>
+        </div>
+
+        <!-- Step 3: Custom Text Input Question -->
+        <div id="day5-step3" class="card hidden">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Final Reflection</span>
+                <span class="insta-tag">Open Word 💭</span>
+            </div>
+            
+            <p class="question">In one short sentence, describe how this week felt with me in your back pocket. 🤫🤍</p>
+            <input type="text" id="customTextInput" placeholder="Type your thought here..." autocomplete="off">
+            <p id="customError" class="error hidden">Please share a little thought before unlocking the finale! 🤍</p>
+            <button onclick="checkCustomText()" style="margin-top: 15px;">Seal the Thought</button>
+        </div>
+
+        <!-- Step 4: Grand Finale with Ritviz - Sage Music & Romantic Note -->
+        <div id="day5-step4" class="card hidden">
+            <h3 class="success-title">Friday's Sage Melody 🎵</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A rhythmic close to our 5-day journey...</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/_S_Qc5qXQJM" title="Ritviz - Sage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <!-- Highlighted Message Card -->
+            <div class="travel-highlight-card">
+                <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
+                    Five chapters written across distance and time... <br>
+                    <span style="color: #f472b6; font-weight: 600;">Thank you for making every single day an absolute adventure, Your Highness. Until our next chapter! 🤍✨</span>
+                </p>
+            </div>
+        </div>
     </div>
+
+    <!-- Web3Forms Tracking Form for Friday -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="trackingForm" class="hidden">
+        <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
+        <input type="hidden" name="subject" value="Friday Responses - Jio Space">
+        <input type="hidden" name="all_responses" id="combinedResponses" value="">
+    </form>
 
     <script>
         let historyStack = [];
+        let day5Choices = {
+            day: "Friday",
+            entryPassed: "Pink Flower Verified",
+            q1: "",
+            customThought: ""
+        };
 
         window.onload = () => {
             const now = new Date();
@@ -105,20 +189,18 @@
             const currentMonth = now.getMonth() + 1;
             const currentHour = now.getHours();
             
-            // Set to `false` for production so it locks automatically until Sept 18, 10 AM
-            const testBypass = false; 
+            // Production check: Locks if before Friday Sept 18 at 10:00 AM
+            const testBypass = true; // Set to false for production locking
+            const isBeforeUnlock = (currentMonth < 9 || currentDay < 18 || (currentDay === 18 && currentHour < 10));
 
-            // Locks if before Sept 18, OR if it's Sept 18 but before 10:00 AM
-            const isLocked = !testBypass && (currentMonth < 9 || currentDay < 18 || (currentDay === 18 && currentHour < 10));
-
-            if (isLocked) {
+            if (!testBypass && isBeforeUnlock) {
                 document.getElementById("day5-timelock").classList.add("active");
                 historyStack = ['day5-timelock'];
                 updateProgress(0);
             } else {
                 document.getElementById("day5-step1").classList.add("active");
                 historyStack = ['day5-step1'];
-                updateProgress(25);
+                updateProgress(20);
             }
         };
 
@@ -127,16 +209,50 @@
             const errorMsg = document.getElementById("entryError");
             const answer = inputField.value.toLowerCase().trim();
             
-            if (answer === "khallas") {
+            if (answer === "pink") {
                 errorMsg.classList.add("hidden");
-                updateProgress(50);
-                // Navigate to next step when ready
+                updateProgress(40);
+                navigateTo("day5-step2");
             } else {
                 inputField.classList.add("shake");
-                errorMsg.innerText = "Not quite, Your Highness! Try again... 🤍";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
             }
+        }
+
+        function day5Choice(option) {
+            day5Choices.q1 = option === 1 ? "Q1: Ready to relax, wishing you were here" : "Q1: Counting down hours until next conversation";
+            
+            const msg = document.getElementById("day5Msg1");
+            msg.innerText = option === 1 ? "So sweet! Have the best weekend ahead 🥂✨" : "I'm counting down right with you! Unlocking final reflection... 🤍";
+            msg.classList.remove("hidden");
+            updateProgress(70);
+            setTimeout(() => navigateTo("day5-step3"), 1300);
+        }
+
+        function checkCustomText() {
+            const inputField = document.getElementById("customTextInput");
+            const errorMsg = document.getElementById("customError");
+            const text = inputField.value.trim();
+
+            if (text.length < 3) {
+                inputField.classList.add("shake");
+                errorMsg.classList.remove("hidden");
+                setTimeout(() => inputField.classList.remove("shake"), 500);
+                return;
+            }
+
+            errorMsg.classList.add("hidden");
+            day5Choices.customThought = text;
+
+            // Send full bundle to Web3Forms
+            sendDay5EmailBundle();
+
+            updateProgress(100);
+            setTimeout(() => {
+                navigateTo("day5-step4");
+                startFallingFlowers();
+            }, 600);
         }
 
         function updateProgress(percent) {
@@ -144,8 +260,68 @@
             if (bar) bar.style.width = percent + "%";
         }
 
+        function sendDay5EmailBundle() {
+            const summaryString = `Entry: ${day5Choices.entryPassed}\nQ1: ${day5Choices.q1}\nFinal Thought: ${day5Choices.customThought}`;
+            const field = document.getElementById("combinedResponses");
+            if (field) {
+                field.value = summaryString;
+
+                const emailTestBypass = false; 
+                if (emailTestBypass) {
+                    console.log("Test mode active: Email suppressed.\n" + summaryString);
+                    return; 
+                }
+
+                const form = document.getElementById('trackingForm');
+                if (form) {
+                    fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
+                }
+            }
+        }
+
+        function navigateTo(nextId) {
+            const currentId = historyStack[historyStack.length - 1];
+            historyStack.push(nextId);
+            fadeTransition(currentId, nextId);
+        }
+
         function globalBack() {
-            window.location.href = "../index.html";
+            if (historyStack.length > 1) {
+                const currentId = historyStack.pop();
+                const previousId = historyStack[historyStack.length - 1];
+                fadeTransition(currentId, previousId);
+                
+                if (currentId === 'day5-step4') updateProgress(70);
+                else if (currentId === 'day5-step3') updateProgress(40);
+                else if (currentId === 'day5-step2') updateProgress(20);
+            } else {
+                window.location.href = "../index.html";
+            }
+        }
+
+        function startFallingFlowers() {
+            const symbols = ['🌸', '🪷', '💜', '✨', '🤍'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.className = 'falling-flower';
+                flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                flower.style.fontSize = (Math.random() * 10 + 18) + 'px';
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 6000);
+            }, 300);
+        }
+
+        function fadeTransition(hideId, showId) {
+            const h = document.getElementById(hideId);
+            const s = document.getElementById(showId);
+            h.classList.remove("active");
+            setTimeout(() => {
+                h.classList.add("hidden");
+                s.classList.remove("hidden");
+                setTimeout(() => s.classList.add("active"), 50);
+            }, 500);
         }
     </script>
 </body>
