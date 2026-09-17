@@ -100,13 +100,18 @@
             </div>
         </div>
 
-        <!-- Step 1: Entry Gate Question (Apartment Number Check - Secret PWD) -->
+        <!-- Step 1: Entry Gate Question with jioThursday.png at the top -->
         <div id="day4-step1" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Royal Protocol</span>
                 <span class="insta-tag">Secured Access ✨</span>
             </div>
             
+            <!-- jioThursday Image Display inside Step 1 Card -->
+            <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                <img src="../images/jioThursday.png" alt="Thursday Memory" style="width: 100%; display: block; max-height: 200px; object-fit: cover;">
+            </div>
+
             <p class="question">To cross the threshold into Your Highness's private sanctuary... authenticate your residence number. 🏡✨</p>
             <input type="text" id="entryInput" placeholder="Enter door code..." autocomplete="off">
             <p id="entryError" class="error hidden">Access Denied. Biometric mismatch—only the true resident of this sanctuary holds the key... 🗝️🚫</p>
@@ -158,16 +163,11 @@
             <p id="day4Msg2" class="error hidden" style="color: #f472b6; margin-top: 15px; font-size: 14px;"></p>
         </div>
 
-        <!-- Step 5: Grand Finale with jioThursday Image inside card, Coldplay Music & Romantic Note -->
+        <!-- Step 5: Grand Finale with Coldplay Music & Romantic Note -->
         <div id="day4-step5" class="card hidden">
-            <h3 class="success-title">Thursday's Memory & Melody 🎵</h3>
+            <h3 class="success-title">Thursday's Melody 🎵</h3>
             <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A resonance across the distance...</p>
             
-            <!-- jioThursday Image Display inside Card -->
-            <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(244, 114, 182, 0.3);">
-                <img src="../images/jioThursday.png" alt="Thursday Memory" style="width: 100%; display: block; max-height: 280px; object-fit: cover;">
-            </div>
-
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/YykjpeuMNEk" title="Coldplay - Hymn For The Weekend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -260,7 +260,7 @@
                 inputField.classList.add("shake");
                 errorMsg.innerText = "⚠️ Protocol Alert: Anything below 90% triggers a security lockdown! Royal decree demands a much higher, more accurate evaluation of your missing meter... 😉🤍";
                 errorMsg.classList.remove("hidden");
-                setTimeout(() => inputField.classList.remove("shake"), 500);
+                setTimeout(() => inputField.classList.add("shake"), 500);
             } else {
                 errorMsg.classList.add("hidden");
                 day4Choices.missingScore = score + "%";
