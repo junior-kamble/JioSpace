@@ -93,11 +93,11 @@
         <div id="day5-timelock" class="card">
             <div class="top-meta-row">
                 <span class="disclaimer-tag">⚠️ Time Locked</span>
-                <span class="insta-tag">Patience, Your Highness ⏳</span>
+                <span class="insta-tag">Patience, Princess ⏳</span>
             </div>
             <div class="envelope-box" style="cursor: default;">
                 <div class="envelope-icon">🔒</div>
-                <p class="envelope-text">This chapter unlocks on Friday at 10:00 AM.<br><br><strong>Come back then</strong> for Friday's grand finale, Your Highness! 🤍</p>
+                <p class="envelope-text">This chapter unlocks on Friday at 10:00 AM.<br><br><strong>Come back then</strong> for Friday's grand finale, Princess! 🤍</p>
             </div>
         </div>
 
@@ -113,7 +113,7 @@
                 <img src="../images/friday-freshness.png" alt="Friday Freshness" style="width: 100%; display: block; max-height: 320px; object-fit: contain; object-position: center;">
             </div>
 
-            <p class="question">To step into the final chapter... what is Your Highness's absolute favorite flower color? 🌸</p>
+            <p class="question">To step into the final chapter... what is Princess's absolute favorite flower color? 🌸</p>
             <input type="text" id="entryInput" placeholder="Enter color..." autocomplete="off">
             <p id="entryError" class="error hidden">Incorrect color! Hint: Think of the shade wrapping this entire space... 🤍</p>
             <button onclick="checkEntry()">Verify Color</button>
@@ -160,24 +160,24 @@
             
             <p class="question">In one short sentence, describe how this 5-day journey felt with me in your back pocket. 🤫🤍</p>
             <input type="text" id="customTextInput" placeholder="Type your thought here..." autocomplete="off">
-            <p id="customError" class="error hidden">Please share a little thought before unlocking the finale! 🤍</p>
+            <p id="customError" class="error hidden">Please share a little thought (at least 10 words) before unlocking the finale! 🤍</p>
             <button onclick="checkCustomText()" style="margin-top: 15px;">Seal the Thought</button>
         </div>
 
-        <!-- Step 5: Grand Finale with Ritviz - Sage Music & Romantic Note -->
+        <!-- Step 5: Grand Finale with Ritviz - Sage Music & Flirty Weekend Note -->
         <div id="day5-step5" class="card hidden">
             <h3 class="success-title">Friday's Sage Melody 🎵</h3>
             <p style="font-size: 14px; color: #aaa; margin-bottom: 15px;">A rhythmic close to our 5-day journey...</p>
             
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/_S_Qc5qXQJM" title="Ritviz - Sage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/_kUrW9SEaJc" title="Ritviz - Sage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
-            <!-- Highlighted Message Card -->
+            <!-- Highlighted Flirty Weekend Message Card (Min 10 words) -->
             <div class="travel-highlight-card">
                 <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
-                    Five chapters written across distance and time... <br>
-                    <span style="color: #f472b6; font-weight: 600;">Thank you for making every single day an absolute adventure, Your Highness. Until our next chapter! 🤍✨</span>
+                    The work week is finally behind us, but my favorite distraction is just getting started... <br>
+                    <span style="color: #f472b6; font-weight: 600;">Get ready for a gorgeous weekend, Princess, because I am completely saving all my best energy just for you! 🥂✨🤍</span>
                 </p>
             </div>
         </div>
@@ -241,7 +241,7 @@
             day5Choices.q1 = option === 1 ? "Q1: Ready to relax, wishing you were here" : "Q1: Counting down hours until next conversation";
             
             const msg = document.getElementById("day5Msg1");
-            msg.innerText = option === 1 ? "So sweet! Have the best weekend ahead 🥂✨" : "I'm counting down right with you! Unlocking next check... 🤍";
+            msg.innerText = option === 1 ? "Soak it all in, Princess! Have the best weekend ahead 🥂✨" : "I'm counting down right with you, Princess! Unlocking next check... 🤍";
             msg.classList.remove("hidden");
             updateProgress(60);
             setTimeout(() => navigateTo("day5-step3"), 1300);
@@ -251,7 +251,7 @@
             day5Choices.q2 = option === 2 ? "Q2: Wouldn't have survived without daily check-ins" : "Q2: Every single moment, made distance feel short";
             
             const msg = document.getElementById("day5Msg2");
-            msg.innerText = option === "Mutual feeling across the map! Unlocking final thought... 🤍";
+            msg.innerText = "Mutual feeling across the map, Princess! Unlocking final thought... 🤍";
             msg.classList.remove("hidden");
             updateProgress(80);
             setTimeout(() => navigateTo("day5-step4"), 1300);
@@ -261,9 +261,11 @@
             const inputField = document.getElementById("customTextInput");
             const errorMsg = document.getElementById("customError");
             const text = inputField.value.trim();
+            const wordCount = text.split(/\s+/).filter(Boolean).length;
 
-            if (text.length < 3) {
+            if (wordCount < 10) {
                 inputField.classList.add("shake");
+                errorMsg.innerText = "Please write at least 10 words, Princess! Tell me how it really felt... 🤍";
                 errorMsg.classList.remove("hidden");
                 setTimeout(() => inputField.classList.remove("shake"), 500);
                 return;
