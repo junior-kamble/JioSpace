@@ -47,16 +47,16 @@
                     <span class="date-status" id="stat-day2">Completed ✓</span>
                 </a>
 
-                <!-- Wednesday, Sept 16 (Today) -->
-                <a href="day3/index.html" id="btn-day3" class="date-btn active-day">
+                <!-- Wednesday, Sept 16 -->
+                <a href="day3/index.html" id="btn-day3" class="date-btn faded">
                     <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" id="stat-day3" style="color: #f472b6;">Today ✨</span>
+                    <span class="date-status" id="stat-day3">Completed ✓</span>
                 </a>
 
-                <!-- Thursday, Sept 17 -->
-                <a href="day4/index.html" id="btn-day4" class="date-btn locked">
+                <!-- Thursday, Sept 17 (Today) -->
+                <a href="day4/index.html" id="btn-day4" class="date-btn active-day">
                     <span class="date-name">Thursday, Sept 17</span>
-                    <span class="date-status" id="stat-day4">Locked 🔒</span>
+                    <span class="date-status" id="stat-day4" style="color: #f472b6;">Today ✨</span>
                 </a>
 
                 <!-- Friday, Sept 18 -->
@@ -69,16 +69,13 @@
     </div>
 
     <script>
-        // Automatic Date Styling & Unlocking Logic
+        // Automatic Date Styling & Rollover Logic
         const today = new Date();
-        const currentDay = today.getDate(); 
+        const currentDay = today.getDate(); // 17 for today
         const currentMonth = today.getMonth() + 1;
+        const currentHour = today.getHours();
 
-        // ==========================================
-        // TESTING OVERRIDE SWITCH FOR THE HUB
-        // Set to `true` = Force unlocks Thursday & Friday so you can test them now!
-        // Set to `false` = Strict live calendar locking
-        // ==========================================
+        // Production Mode Switch (Set to true only if you need to force-unlock future days for testing)
         const forceTestUnlock = false; 
 
         if (currentMonth >= 9) {
@@ -93,19 +90,30 @@
                 b2.classList.remove('active-day');
                 document.getElementById('stat-day2').innerText = 'Completed ✓';
             }
-
-            // Wednesday (Sept 16) -> Active Today
-            if (currentDay === 16 && !forceTestUnlock) {
+            // Wednesday -> Faded out as past day
+            if (currentDay > 16) {
                 const b3 = document.getElementById('btn-day3');
                 b3.classList.add('faded');
                 b3.classList.remove('active-day');
                 document.getElementById('stat-day3').innerText = 'Completed ✓';
-                document.getElementById('stat-day3').style.color = '#f472b6';
             }
 
-            // Future days unlock logic (respects forceTestUnlock toggle)
-            if (currentDay >= 17 || forceTestUnlock) unlockChapter('day4', 'Thursday, Sept 17');
-            if (currentDay >= 18 || forceTestUnlock) unlockChapter('day5', 'Friday, Sept 18');
+            // Thursday (Sept 17) -> Active Today
+            if (currentDay === 17 && !forceTestUnlock) {
+                const b4 = document.getElementById('btn-day4');
+                b4.classList.add('active-day');
+                b4.classList.remove('faded');
+                document.getElementById('stat-day4').innerText = 'Today ✨';
+                document.getElementById('stat-day4').style.color = '#f472b6';
+            }
+
+            // Future days unlock logic
+            if (currentDay > 17 || (currentDay === 17 && currentHour >= 10) || forceTestUnlock) {
+                unlockChapter('day4', 'Thursday, Sept 17');
+            }
+            if (currentDay > 18 || (currentDay === 18 && currentHour >= 10) || forceTestUnlock) {
+                unlockChapter('day5', 'Friday, Sept 18');
+            }
         }
 
         function unlockChapter(dayId, name) {
