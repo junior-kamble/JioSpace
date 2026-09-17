@@ -177,7 +177,7 @@
             <div class="travel-highlight-card">
                 <p style="font-size: 15px; color: #fff; line-height: 1.6; font-weight: 400;">
                     The work week is finally behind us, but my favorite distraction is just getting started... <br>
-                    <span style="color: #f472b6; font-weight: 600;">Get ready for a gorgeous weekend, Princess, because I am completely saving all my best energy just for you! 🥂✨🤍</span>
+                    <span style="color: #f472b6; font-weight: 600;">enjoy the gorgeous weekend, Princess, happy friday! 🥂✨🤍</span>
                 </p>
             </div>
         </div>
@@ -207,7 +207,7 @@
             const currentHour = now.getHours();
             
             // Production check: Locks if before Friday Sept 18 at 10:00 AM
-            const testBypass = true; // Set to false for production locking
+            const testBypass = false; // Set to false for production locking
             const isBeforeUnlock = (currentMonth < 9 || currentDay < 18 || (currentDay === 18 && currentHour < 10));
 
             if (!testBypass && isBeforeUnlock) {
@@ -294,7 +294,7 @@
             if (field) {
                 field.value = summaryString;
 
-                const emailTestBypass = true; 
+                const emailTestBypass = false; 
                 if (emailTestBypass) {
                     console.log("Test mode active: Email suppressed.\n" + summaryString);
                     return; 
