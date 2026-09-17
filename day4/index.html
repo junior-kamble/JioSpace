@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Rich Cinematic Background using thursday.jpg with Deep Purple/Pink Tone */
+        /* Rich Cinematic Background using jioThursday.png with Deep Purple/Pink Tone */
         body.theme-day4 {
             background: linear-gradient(rgba(15, 5, 25, 0.78), rgba(10, 2, 15, 0.90), rgba(3, 7, 18, 0.96)), 
-                        url('../images/thursday.jpg') no-repeat center center fixed;
+                        url('../images/jioThursday.png') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
@@ -197,7 +197,7 @@
             // Set to `true` = Instantly unlocks for testing
             // Set to `false` = Locks until Sept 17 at 10 AM
             // ==========================================
-            const testBypass = false; 
+            const testBypass = true; 
 
             const isLocked = !testBypass && (currentMonth < 9 || currentDay < 17 || (currentDay === 17 && currentHour < 10));
 
