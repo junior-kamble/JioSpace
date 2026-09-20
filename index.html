@@ -7,6 +7,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Responsive Split Layout for Hub */
+        .hub-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .hub-left-pane {
+            flex: 1;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .hub-right-pane {
+            flex: 1;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        /* Funny Meme/Teaser Image Card Styling */
+        .meme-card {
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        .meme-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 12px;
+            display: block;
+        }
+
         /* Shading and Fading Past Days */
         .date-btn.faded {
             opacity: 0.35;
@@ -24,45 +68,69 @@
             pointer-events: none;
             cursor: not-allowed;
         }
+
+        /* Mobile Responsive Stack */
+        @media (max-width: 768px) {
+            .hub-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .hub-left-pane, .hub-right-pane {
+                max-width: 450px;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body class="theme-day1">
-    <div class="container">
+    <div class="container" style="max-width: 950px;">
         <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
         
-        <div class="card active">
-            <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
-            
-            <div class="date-list">
-                <!-- Monday, Sept 14 -->
-                <a href="day1/index.html" id="btn-day1" class="date-btn faded">
-                    <span class="date-name">Monday, Sept 14</span>
-                    <span class="date-status" id="stat-day1">Completed ✓</span>
-                </a>
+        <div class="hub-wrapper">
+            <!-- Left Pane: Funny Teaser Image -->
+            <div class="hub-left-pane">
+                <div class="meme-card">
+                    <img src="images/ungrateful-potato.jpg" alt="Subscription Expired" class="meme-image">
+                </div>
+            </div>
 
-                <!-- Tuesday, Sept 15 -->
-                <a href="day2/index.html" id="btn-day2" class="date-btn faded">
-                    <span class="date-name">Tuesday, Sept 15</span>
-                    <span class="date-status" id="stat-day2">Completed ✓</span>
-                </a>
+            <!-- Right Pane: Chapter Selection Hub -->
+            <div class="hub-right-pane">
+                <div class="card active" style="margin: 0;">
+                    <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
+                    
+                    <div class="date-list">
+                        <!-- Monday, Sept 14 -->
+                        <a href="day1/index.html" id="btn-day1" class="date-btn faded">
+                            <span class="date-name">Monday, Sept 14</span>
+                            <span class="date-status" id="stat-day1">Completed ✓</span>
+                        </a>
 
-                <!-- Wednesday, Sept 16 -->
-                <a href="day3/index.html" id="btn-day3" class="date-btn faded">
-                    <span class="date-name">Wednesday, Sept 16</span>
-                    <span class="date-status" id="stat-day3">Completed ✓</span>
-                </a>
+                        <!-- Tuesday, Sept 15 -->
+                        <a href="day2/index.html" id="btn-day2" class="date-btn faded">
+                            <span class="date-name">Tuesday, Sept 15</span>
+                            <span class="date-status" id="stat-day2">Completed ✓</span>
+                        </a>
 
-                <!-- Thursday, Sept 17 -->
-                <a href="day4/index.html" id="btn-day4" class="date-btn faded">
-                    <span class="date-name">Thursday, Sept 17</span>
-                    <span class="date-status" id="stat-day4">Completed ✓</span>
-                </a>
+                        <!-- Wednesday, Sept 16 -->
+                        <a href="day3/index.html" id="btn-day3" class="date-btn faded">
+                            <span class="date-name">Wednesday, Sept 16</span>
+                            <span class="date-status" id="stat-day3">Completed ✓</span>
+                        </a>
 
-                <!-- Friday, Sept 18 -->
-                <a href="day5/index.html" id="btn-day5" class="date-btn faded">
-                    <span class="date-name">Friday, Sept 18</span>
-                    <span class="date-status" id="stat-day5">Completed ✓</span>
-                </a>
+                        <!-- Thursday, Sept 17 -->
+                        <a href="day4/index.html" id="btn-day4" class="date-btn faded">
+                            <span class="date-name">Thursday, Sept 17</span>
+                            <span class="date-status" id="stat-day4">Completed ✓</span>
+                        </a>
+
+                        <!-- Friday, Sept 18 -->
+                        <a href="day5/index.html" id="btn-day5" class="date-btn faded">
+                            <span class="date-name">Friday, Sept 18</span>
+                            <span class="date-status" id="stat-day5">Completed ✓</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,7 +139,6 @@
         const today = new Date();
         const currentDay = today.getDate(); 
         const currentMonth = today.getMonth() + 1;
-        const currentHour = today.getHours();
 
         const forceTestUnlock = false; 
 
@@ -80,7 +147,6 @@
             if (currentDay > 15) markCompleted('day2');
             if (currentDay > 16) markCompleted('day3');
             if (currentDay > 17) markCompleted('day4');
-            // Since today is past Sept 18, Friday is also marked completed and faded
             if (currentDay > 18) markCompleted('day5');
 
             if (forceTestUnlock) {
