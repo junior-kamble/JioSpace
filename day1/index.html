@@ -6,6 +6,20 @@
     <title>Monday - Jio Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Fix for Day 1 image display to ensure it is uncropped and fully visible */
+        .first-page-image {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 320px !important;
+            object-fit: contain !important;
+            object-position: center !important;
+            border-radius: 12px;
+            background: rgba(10, 5, 18, 0.8);
+            padding: 5px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        }
+    </style>
 </head>
 <body class="theme-day1">
     <div class="container">
@@ -18,7 +32,7 @@
                 <span class="insta-tag">Taking too long on Insta! 😒</span>
             </div>
             <img src="../images/flower-shadow.png" alt="A special welcome" class="first-page-image">
-            <p class="question" style="font-size: 15px; margin-bottom: 10px;">To unlock further experiences, guess the last 2 digits of my phone number:</p>
+            <p class="question" style="font-size: 15px; margin-top: 15px; margin-bottom: 10px;">To unlock further experiences, guess the last 2 digits of my phone number:</p>
             <p class="hint-note">(If you don't know, you need to figure it out! Give it a try... 😉)</p>
             <input type="text" id="phoneInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2">
             <p id="phoneError" class="error hidden">Not quite! You can get it, you just need to try... 😉</p>
