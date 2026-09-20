@@ -7,6 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Full-Screen Cinematic Background Image Styling */
+        body {
+            background: linear-gradient(rgba(3, 7, 18, 0.82), rgba(3, 7, 18, 0.88), rgba(3, 7, 18, 0.94)), 
+                        url('images/jioSpace.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
         .hub-wrapper {
             display: flex;
             align-items: flex-start;
@@ -131,7 +143,7 @@
         }
     </style>
 </head>
-<body class="theme-day1">
+<body>
     <div class="container" style="max-width: 950px; padding-bottom: 40px;">
         <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
         
@@ -154,7 +166,7 @@
                     <!-- Step 1.5: Phone Number Gatekeeper (Verify Last 2 Digits) -->
                     <div id="subStepPhone" class="hidden">
                         <p style="font-size: 13.5px; color: #fff; margin-bottom: 6px;">Royal Security Protocol 🛡️</p>
-                        <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Enter the last 2 digits of your phone number to verify identity:</p>
+                        <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Enter the last 2 digits of my phone number to verify identity:</p>
                         <input type="text" id="phoneCheckInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2" style="margin-bottom: 8px; padding: 10px; font-size: 13px; text-align: center;">
                         <p id="phoneCheckError" class="error hidden" style="font-size: 12px; color: #ff4b4b; margin-bottom: 8px;">Not quite! Try again 😉</p>
                         <button onclick="verifyPhoneCode()" style="width: 100%; padding: 10px; font-size: 13px;">Verify Identity 🔓</button>
@@ -171,13 +183,23 @@
                         </div>
                     </div>
 
+                    <!-- Step 2.5: Flower Color Picker Menu (Only for Flowers) -->
+                    <div id="subStepFlowerColor" class="hidden">
+                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 10px;">Which color scheme would you prefer? 🌸</p>
+                        <div class="sub-options-grid">
+                            <button class="sub-option-btn" onclick="selectFlowerColor('Red Roses ❤️')">❤️ Red</button>
+                            <button class="sub-option-btn" onclick="selectFlowerColor('Pink Tulips 🌸')">🌸 Pink</button>
+                        </div>
+                        <button onclick="backToTreats()" class="alt-button" style="width: 100%; margin-top: 10px; padding: 10px; font-size: 12.5px;">← Back</button>
+                    </div>
+
                     <!-- Step 3: Location / Delivery Input Form -->
                     <div id="subStep3" class="hidden">
                         <p id="subPromptText" style="font-size: 13px; color: #fff; margin-bottom: 8px;"></p>
                         <input type="text" id="deliveryInput" placeholder="Type location or details..." autocomplete="off" style="margin-bottom: 8px; padding: 10px; font-size: 13px;">
                         <p id="deliveryNote" style="font-size: 11px; color: #f9d423; margin-bottom: 10px;" class="hidden">📦 Delivered within 24 hours!</p>
                         <div style="display: flex; gap: 8px;">
-                            <button onclick="backToTreats()" class="alt-button" style="flex: 1; padding: 10px; font-size: 12.5px;">← Back</button>
+                            <button onclick="backToPreviousStep()" class="alt-button" style="flex: 1; padding: 10px; font-size: 12.5px;">← Back</button>
                             <button onclick="submitSubscription()" style="flex: 2; padding: 10px; font-size: 13px;">Send Request 🚀</button>
                         </div>
                     </div>
@@ -232,6 +254,7 @@
 
     <script>
         let chosenTreat = "";
+        let chosenFlowerColor = "";
 
         function showPhoneGate() {
             document.getElementById('subStep1').classList.add('hidden');
@@ -254,32 +277,60 @@
         function resetSubMenu() {
             document.getElementById('phoneCheckInput').value = "";
             document.getElementById('deliveryInput').value = "";
+            document.getElementById('subStepFlowerColor').classList.add('hidden');
             document.getElementById('subStep3').classList.add('hidden');
             document.getElementById('subStep4').classList.add('hidden');
             document.getElementById('subStep1').classList.remove('hidden');
         }
 
         function backToTreats() {
-            document.getElementById('deliveryInput').value = "";
+            document.getElementById('subStepFlowerColor').classList.add('hidden');
             document.getElementById('subStep3').classList.add('hidden');
             document.getElementById('subStep2').classList.remove('hidden');
+        }
+
+        function backToPreviousStep() {
+            document.getElementById('deliveryInput').value = "";
+            document.getElementById('subStep3').classList.add('hidden');
+            if (chosenTreat.includes('Flowers')) {
+                document.getElementById('subStepFlowerColor').classList.remove('hidden');
+            } else {
+                document.getElementById('subStep2').classList.remove('hidden');
+            }
         }
 
         function selectTreat(treatName) {
             chosenTreat = treatName;
             document.getElementById('subStep2').classList.add('hidden');
-            document.getElementById('subStep3').classList.remove('hidden');
 
+            if (treatName.includes('Flowers')) {
+                // Route to color picker for flowers
+                document.getElementById('subStepFlowerColor').classList.remove('hidden');
+            } else {
+                // Route straight to input form for Coffee, Chocolate, Dinner
+                document.getElementById('subStep3').classList.remove('hidden');
+                setupInputPrompt(treatName);
+            }
+        }
+
+        function selectFlowerColor(colorName) {
+            chosenFlowerColor = colorName;
+            document.getElementById('subStepFlowerColor').classList.add('hidden');
+            document.getElementById('subStep3').classList.remove('hidden');
+            setupInputPrompt(`Flowers (${colorName})`);
+        }
+
+        function setupInputPrompt(treatDisplay) {
             const promptText = document.getElementById('subPromptText');
             const deliveryNote = document.getElementById('deliveryNote');
             const inputField = document.getElementById('deliveryInput');
 
-            if (treatName.includes('Coffee') || treatName.includes('Dinner')) {
-                promptText.innerText = `You picked ${treatName}! Where should we meet or what's the spot? ☕`;
+            if (treatDisplay.includes('Coffee') || treatDisplay.includes('Dinner')) {
+                promptText.innerText = `You picked ${treatDisplay}! Where should we meet or what's the spot? ☕`;
                 inputField.placeholder = "Enter café or restaurant name...";
                 deliveryNote.classList.add('hidden');
             } else {
-                promptText.innerText = `You picked ${treatName}! Drop your hotel or delivery address:`;
+                promptText.innerText = `You picked ${treatDisplay}! Drop your hotel or delivery address:`;
                 inputField.placeholder = "Enter hotel name & room/address...";
                 deliveryNote.classList.remove('hidden');
             }
@@ -292,8 +343,13 @@
                 return;
             }
 
-            // Send Web3Forms Notification
-            const summary = `Subscription Renewal Pick:\nTreat: ${chosenTreat}\nDetails/Location: ${details}`;
+            // Send Web3Forms Notification with full details including flower color if selected
+            let finalTreatString = chosenTreat;
+            if (chosenTreat.includes('Flowers') && chosenFlowerColor) {
+                finalTreatString = `Flowers (${chosenFlowerColor})`;
+            }
+
+            const summary = `Subscription Renewal Pick:\nTreat: ${finalTreatString}\nDetails/Location: ${details}`;
             document.getElementById('subWebhookMessage').value = summary;
             const form = document.getElementById('subWebhookForm');
             fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
