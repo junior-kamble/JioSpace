@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Diagnostic - Jio Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Cinematic Background Theme Matching the Rest of the App */
+        body.theme-diagnostics {
+            background: linear-gradient(rgba(15, 3, 25, 0.78), rgba(30, 10, 45, 0.88), rgba(8, 2, 15, 0.95)), 
+                        url('../images/purple-flowers-field_534373-2549.avif') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced Glassmorphism Card Polish */
+        .card {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            background: rgba(18, 12, 28, 0.82);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* Diagnostic Flaw Item Styling */
+        .diagnostic-item {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 3.5px solid #f472b6;
+            margin-bottom: 14px;
+            transition: transform 0.2s ease;
+        }
+        .diagnostic-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+    </style>
+</head>
+<body class="theme-diagnostics">
+    <div class="container">
+        <button onclick="window.location.href='../index.html'" class="back-btn" style="float: none; display: inline-block; margin-bottom: 15px;">← Back to Hub</button>
+        
+        <h1 class="main-title">Official System Diagnostic 🕵️‍♂️</h1>
+
+        <div class="card active">
+            <div class="top-meta-row">
+                <span class="disclaimer-tag">⚠️ Strict Audit</span>
+                <span class="insta-tag">Top 3 "Flaws" Report 📊</span>
+            </div>
+            
+            <p class="question" style="margin-bottom: 20px;">Requested by Princess: The absolute worst things about you... analyzed and logged. 🤍</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <!-- Flaw 1 -->
+                <div class="diagnostic-item" style="border-left-color: #f472b6;">
+                    <strong style="color: #f472b6; font-size: 15px;">1. Error 404: Focus Not Found</strong>
+                    <p style="font-size: 13.5px; color: #ddd; margin-top: 6px; line-height: 1.5;">You permanently occupy rent-free space in my head, making it completely impossible to focus during office sprint reviews.</p>
+                </div>
+
+                <!-- Flaw 2 -->
+                <div class="diagnostic-item" style="border-left-color: #c084fc;">
+                    <strong style="color: #c084fc; font-size: 15px;">2. Unregulated Dry-Reply Terrorism</strong>
+                    <p style="font-size: 13.5px; color: #ddd; margin-top: 6px; line-height: 1.5;">You weaponize dangerously dry responses just to watch me panic, scramble, and overcompensate with paragraphs.</p>
+                </div>
+
+                <!-- Flaw 3 -->
+                <div class="diagnostic-item" style="border-left-color: #38bdf8;">
+                    <strong style="color: #38bdf8; font-size: 15px;">3. International Smuggling Violation</strong>
+                    <p style="font-size: 13.5px; color: #ddd; margin-top: 6px; line-height: 1.5;">You crossed international borders to the UAE under the guise of an "escape," yet refuse to leave my back pocket.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 13px; color: #aaa; font-style: italic;">Conclusion: Severe risk of becoming my favorite distraction. Proceed with caution. 😉🤍</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
