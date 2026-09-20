@@ -37,7 +37,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 20px;
+            padding: 15px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             display: flex;
@@ -49,7 +49,7 @@
         .meme-image {
             width: 100%;
             height: auto;
-            max-height: 380px;
+            max-height: 320px;
             object-fit: contain;
             border-radius: 12px;
             display: block;
@@ -59,7 +59,7 @@
             background: rgba(18, 12, 28, 0.85);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(244, 114, 182, 0.3);
-            padding: 20px;
+            padding: 18px;
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             text-align: center;
@@ -69,17 +69,17 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .sub-option-btn {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 10px;
             font-family: 'Poppins', sans-serif;
-            font-size: 13.5px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -132,7 +132,7 @@
     </style>
 </head>
 <body class="theme-day1">
-    <div class="container" style="max-width: 950px;">
+    <div class="container" style="max-width: 950px; padding-bottom: 40px;">
         <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
         
         <div class="hub-wrapper">
@@ -146,14 +146,23 @@
                 <div class="sub-card" id="subModule">
                     <!-- Step 1: Initial Prompt -->
                     <div id="subStep1">
-                        <p style="font-size: 14px; color: #f472b6; font-weight: 600; margin-bottom: 8px;">Want to restore your attention span?</p>
-                        <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Renew your royal subscription and pick your treat! 🤍</p>
-                        <button onclick="showSubMenu()" style="width: 100%;">Renew Subscription 🤍</button>
+                        <p style="font-size: 13.5px; color: #f472b6; font-weight: 600; margin-bottom: 6px;">Want to restore your attention span?</p>
+                        <p style="font-size: 12.5px; color: #aaa; margin-bottom: 12px;">Renew your subscription & pick your treat! 🤍</p>
+                        <button onclick="showPhoneGate()" style="width: 100%; padding: 10px; font-size: 13.5px;">Renew Subscription 🤍</button>
+                    </div>
+
+                    <!-- Step 1.5: Phone Number Gatekeeper (Verify Last 2 Digits) -->
+                    <div id="subStepPhone" class="hidden">
+                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 6px;">Royal Security Protocol 🛡️</p>
+                        <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Enter the last 2 digits of my phone number to verify identity:</p>
+                        <input type="text" id="phoneCheckInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2" style="margin-bottom: 8px; padding: 10px; font-size: 13px; text-align: center;">
+                        <p id="phoneCheckError" class="error hidden" style="font-size: 12px; color: #ff4b4b; margin-bottom: 8px;">Not quite! Try again 😉</p>
+                        <button onclick="verifyPhoneCode()" style="width: 100%; padding: 10px; font-size: 13px;">Verify Identity 🔓</button>
                     </div>
 
                     <!-- Step 2: Pick Treatment Menu -->
                     <div id="subStep2" class="hidden">
-                        <p style="font-size: 14px; color: #fff; margin-bottom: 12px;">Choose your reward, Your Highness:</p>
+                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 10px;">Identity verified! Choose your reward, Princess:</p>
                         <div class="sub-options-grid">
                             <button class="sub-option-btn" onclick="selectTreat('Coffee ☕')">☕ Coffee</button>
                             <button class="sub-option-btn" onclick="selectTreat('Flowers 🌸')">🌸 Flowers</button>
@@ -164,16 +173,20 @@
 
                     <!-- Step 3: Location / Delivery Input Form -->
                     <div id="subStep3" class="hidden">
-                        <p id="subPromptText" style="font-size: 13.5px; color: #fff; margin-bottom: 10px;"></p>
-                        <input type="text" id="deliveryInput" placeholder="Type location or hotel details..." autocomplete="off" style="margin-bottom: 10px;">
-                        <p id="deliveryNote" style="font-size: 11.5px; color: #f9d423; margin-bottom: 12px;" class="hidden">📦 Delivered within 24 hours!</p>
-                        <button onclick="submitSubscription()" style="width: 100%;">Send Request 🚀</button>
+                        <p id="subPromptText" style="font-size: 13px; color: #fff; margin-bottom: 8px;"></p>
+                        <input type="text" id="deliveryInput" placeholder="Type location or details..." autocomplete="off" style="margin-bottom: 8px; padding: 10px; font-size: 13px;">
+                        <p id="deliveryNote" style="font-size: 11px; color: #f9d423; margin-bottom: 10px;" class="hidden">📦 Delivered within 24 hours!</p>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="backToTreats()" class="alt-button" style="flex: 1; padding: 10px; font-size: 12.5px;">← Back</button>
+                            <button onclick="submitSubscription()" style="flex: 2; padding: 10px; font-size: 13px;">Send Request 🚀</button>
+                        </div>
                     </div>
 
-                    <!-- Step 4: Success Screen -->
+                    <!-- Step 4: Success Screen with Back to Options -->
                     <div id="subStep4" class="hidden">
-                        <h3 class="success-title" style="font-size: 18px; margin-bottom: 8px;">Request Received! 🎉</h3>
-                        <p style="font-size: 13px; color: #ddd; line-height: 1.5;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
+                        <h3 class="success-title" style="font-size: 16px; margin-bottom: 6px;">Request Received! 🎉</h3>
+                        <p style="font-size: 12.5px; color: #ddd; line-height: 1.4; margin-bottom: 12px;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
+                        <button onclick="resetSubMenu()" class="alt-button" style="width: 100%; padding: 10px; font-size: 13px;">← Choose Another Treat</button>
                     </div>
                 </div>
             </div>
@@ -220,8 +233,35 @@
     <script>
         let chosenTreat = "";
 
-        function showSubMenu() {
+        function showPhoneGate() {
             document.getElementById('subStep1').classList.add('hidden');
+            document.getElementById('subStepPhone').classList.remove('hidden');
+        }
+
+        function verifyPhoneCode() {
+            const inputVal = document.getElementById('phoneCheckInput').value.trim();
+            const err = document.getElementById('phoneCheckError');
+
+            if (inputVal === "22") {
+                err.classList.add('hidden');
+                document.getElementById('subStepPhone').classList.add('hidden');
+                document.getElementById('subStep2').classList.remove('hidden');
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        function resetSubMenu() {
+            document.getElementById('phoneCheckInput').value = "";
+            document.getElementById('deliveryInput').value = "";
+            document.getElementById('subStep3').classList.add('hidden');
+            document.getElementById('subStep4').classList.add('hidden');
+            document.getElementById('subStep1').classList.remove('hidden');
+        }
+
+        function backToTreats() {
+            document.getElementById('deliveryInput').value = "";
+            document.getElementById('subStep3').classList.add('hidden');
             document.getElementById('subStep2').classList.remove('hidden');
         }
 
