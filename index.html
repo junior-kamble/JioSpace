@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Shading and Fading Past Days */
         .date-btn.faded {
             opacity: 0.35;
             filter: grayscale(40%);
@@ -57,10 +58,10 @@
                     <span class="date-status" id="stat-day4">Completed ✓</span>
                 </a>
 
-                <!-- Friday, Sept 18 (Today) -->
-                <a href="day5/index.html" id="btn-day5" class="date-btn active-day">
+                <!-- Friday, Sept 18 -->
+                <a href="day5/index.html" id="btn-day5" class="date-btn faded">
                     <span class="date-name">Friday, Sept 18</span>
-                    <span class="date-status" id="stat-day5" style="color: #f472b6;">Today ✨</span>
+                    <span class="date-status" id="stat-day5">Completed ✓</span>
                 </a>
             </div>
         </div>
@@ -68,7 +69,7 @@
 
     <script>
         const today = new Date();
-        const currentDay = today.getDate(); // 18 for today
+        const currentDay = today.getDate(); 
         const currentMonth = today.getMonth() + 1;
         const currentHour = today.getHours();
 
@@ -79,17 +80,9 @@
             if (currentDay > 15) markCompleted('day2');
             if (currentDay > 16) markCompleted('day3');
             if (currentDay > 17) markCompleted('day4');
+            // Since today is past Sept 18, Friday is also marked completed and faded
+            if (currentDay > 18) markCompleted('day5');
 
-            // Friday (Sept 18) -> Active Today
-            if (currentDay === 18 && !forceTestUnlock) {
-                const b5 = document.getElementById('btn-day5');
-                b5.classList.add('active-day');
-                b5.classList.remove('faded', 'locked');
-                document.getElementById('stat-day5').innerText = 'Today ✨';
-                document.getElementById('stat-day5').style.color = '#f472b6';
-            }
-
-            // Unlock future days if test override is on
             if (forceTestUnlock) {
                 unlockChapter('day5', 'Friday, Sept 18');
             }
