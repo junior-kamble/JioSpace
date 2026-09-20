@@ -10,14 +10,14 @@
 
         body { 
             font-family: 'Poppins', sans-serif; 
-            color: #eaeaea; 
+            color: #2b2b2b; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             min-height: 100vh;
             padding: 20px;
-            /* Cinematic Background Image Positioned to Show Full Face at Top */
-            background: linear-gradient(rgba(3, 7, 18, 0.82), rgba(3, 7, 18, 0.88), rgba(3, 7, 18, 0.94)), 
+            /* Lighter cinematic gradient so her face shines through beautifully */
+            background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(245, 235, 240, 0.55)), 
                         url('images/jioSpace.png') no-repeat center top fixed;
             background-size: cover;
             overflow-x: hidden;
@@ -25,7 +25,14 @@
 
         .container { max-width: 950px; width: 100%; text-align: center; }
 
-        .main-title { font-size: 22px; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
+        .main-title { 
+            font-size: 24px; 
+            margin-bottom: 25px; 
+            font-weight: 600; 
+            letter-spacing: 1px; 
+            color: #4a154b; 
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.9); 
+        }
 
         .hub-wrapper {
             display: flex;
@@ -51,13 +58,13 @@
         }
 
         .card { 
-            background: rgba(20, 20, 20, 0.75); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.82); 
+            backdrop-filter: blur(14px); 
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(244, 114, 182, 0.3);
             padding: 30px 25px; 
             border-radius: 16px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12); 
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             display: none;
@@ -69,13 +76,13 @@
 
         /* Meme Card Styling */
         .meme-card {
-            background: rgba(20, 20, 20, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(244, 114, 182, 0.3);
             padding: 15px;
             border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -93,12 +100,12 @@
 
         /* Interactive Subscription Card */
         .sub-card {
-            background: rgba(18, 12, 28, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(244, 114, 182, 0.3);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(244, 114, 182, 0.4);
             padding: 18px;
             border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
             text-align: center;
         }
 
@@ -110,19 +117,20 @@
         }
 
         .sub-option-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
+            background: rgba(244, 114, 182, 0.08);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            color: #4a154b;
             padding: 10px;
             border-radius: 10px;
             font-family: 'Poppins', sans-serif;
             font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .sub-option-btn:hover {
-            background: rgba(244, 114, 182, 0.2);
+            background: rgba(244, 114, 182, 0.25);
             border-color: #f472b6;
             transform: translateY(-2px);
         }
@@ -133,51 +141,54 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             padding: 15px 20px;
             border-radius: 12px;
-            color: #fff;
+            color: #2b2b2b;
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s ease;
         }
         .date-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(244, 114, 182, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
         .date-btn.locked {
             opacity: 0.4;
             cursor: not-allowed;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(200, 200, 200, 0.3);
         }
         .date-name { font-size: 15px; }
-        .date-status { font-size: 13px; color: #aaa; }
+        .date-status { font-size: 13px; color: #666; }
         .date-btn.faded {
-            opacity: 0.35;
-            filter: grayscale(40%);
+            opacity: 0.5;
+            filter: grayscale(20%);
             transition: 0.3s ease;
         }
         .date-btn.faded:hover {
-            opacity: 0.7; 
+            opacity: 0.9; 
         }
         .date-btn.active-day {
-            border-color: rgba(244, 114, 182, 0.5);
-            box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+            border-color: rgba(244, 114, 182, 0.8);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.25);
         }
 
-        input { width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.5); color: #fff; font-size: 15px; text-align: center; outline: none; transition: 0.3s; }
-        input::placeholder { color: rgba(255,255,255,0.3); }
-        input:focus { border-color: #fff; background: rgba(20, 20, 20, 0.8); box-shadow: 0 0 15px rgba(255,255,255,0.1); }
+        input { width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.15); background: rgba(255, 255, 255, 0.9); color: #2b2b2b; font-size: 15px; text-align: center; outline: none; transition: 0.3s; }
+        input::placeholder { color: rgba(0,0,0,0.35); }
+        input:focus { border-color: #f472b6; background: #fff; box-shadow: 0 0 15px rgba(244,114,182,0.2); }
 
-        button { background: linear-gradient(45deg, #222, #444); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 25px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; width: 100%; transition: 0.3s; letter-spacing: 1px; }
-        button:hover { background: linear-gradient(45deg, #333, #555); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,255,255,0.15); }
+        button { background: linear-gradient(45deg, #4a154b, #702459); color: #fff; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; width: 100%; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(74, 21, 75, 0.3); }
+        button:hover { background: linear-gradient(45deg, #5c1b5e, #822b68); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74, 21, 75, 0.4); }
 
-        .alt-button { background: linear-gradient(45deg, #111, #222); color: #888; border-color: rgba(255,255,255,0.1); }
+        .alt-button { background: rgba(0, 0, 0, 0.05); color: #555; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: none; }
+        .alt-button:hover { background: rgba(0, 0, 0, 0.1); color: #222; box-shadow: none; }
 
-        .error { color: #ff4b4b; font-size: 13px; margin-top: -8px; margin-bottom: 12px; }
+        .error { color: #d32f2f; font-size: 13px; margin-top: -8px; margin-bottom: 12px; }
+        .question { color: #2b2b2b; font-weight: 600; }
 
         /* Falling Animation Elements */
         .falling-item {
@@ -209,7 +220,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
+        <h1 class="main-title">A Little Something For Youuuuu 🌸</h1>
         
         <div class="hub-wrapper">
             <!-- Left Pane: Meme + Interactive Subscription Renewal -->
@@ -222,23 +233,23 @@
                 <div class="sub-card" id="subModule">
                     <!-- Step 1: Initial Prompt -->
                     <div id="subStep1">
-                        <p style="font-size: 13.5px; color: #f472b6; font-weight: 600; margin-bottom: 6px;">Want to restore your attention span?</p>
-                        <p style="font-size: 12.5px; color: #aaa; margin-bottom: 12px;">Renew your subscription & pick your treat! 🤍</p>
+                        <p style="font-size: 13.5px; color: #b83280; font-weight: 600; margin-bottom: 6px;">Want to restore your attention span?</p>
+                        <p style="font-size: 12.5px; color: #666; margin-bottom: 12px;">Renew your subscription & pick your treat! 🤍</p>
                         <button onclick="showPhoneGate()" style="width: 100%; padding: 10px; font-size: 13.5px;">Renew Subscription 🤍</button>
                     </div>
 
                     <!-- Step 1.5: Phone Number Gatekeeper (Verify Last 2 Digits) -->
                     <div id="subStepPhone" class="hidden">
-                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 6px;">Royal Security Protocol 🛡️</p>
-                        <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Enter the last 2 digits of your phone number to verify identity:</p>
+                        <p style="font-size: 13.5px; color: #2b2b2b; font-weight: 600; margin-bottom: 6px;">Royal Security Protocol 🛡️</p>
+                        <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Enter the last 2 digits of your phone number to verify identity:</p>
                         <input type="text" id="phoneCheckInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2" style="margin-bottom: 8px; padding: 10px; font-size: 13px; text-align: center;">
-                        <p id="phoneCheckError" class="error hidden" style="font-size: 12px; color: #ff4b4b; margin-bottom: 8px;">Not quite! Try again 😉</p>
+                        <p id="phoneCheckError" class="error hidden" style="font-size: 12px; color: #d32f2f; margin-bottom: 8px;">Not quite! Try again 😉</p>
                         <button onclick="verifyPhoneCode()" style="width: 100%; padding: 10px; font-size: 13px;">Verify Identity 🔓</button>
                     </div>
 
                     <!-- Step 2: Pick Treatment Menu -->
                     <div id="subStep2" class="hidden">
-                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 10px;">Identity verified! Choose your reward, Princess:</p>
+                        <p style="font-size: 13.5px; color: #2b2b2b; font-weight: 600; margin-bottom: 10px;">Identity verified! Choose your reward, Princess:</p>
                         <div class="sub-options-grid">
                             <button class="sub-option-btn" onclick="selectTreat('Coffee ☕')">☕ Coffee</button>
                             <button class="sub-option-btn" onclick="selectTreat('Flowers 🌸')">🌸 Flowers</button>
@@ -249,7 +260,7 @@
 
                     <!-- Step 2.5: Flower Color Picker Menu (Only for Flowers) -->
                     <div id="subStepFlowerColor" class="hidden">
-                        <p style="font-size: 13.5px; color: #fff; margin-bottom: 10px;">Which color scheme would you prefer? 🌸</p>
+                        <p style="font-size: 13.5px; color: #2b2b2b; font-weight: 600; margin-bottom: 10px;">Which color scheme would you prefer? 🌸</p>
                         <div class="sub-options-grid">
                             <button class="sub-option-btn" onclick="selectFlowerColor('Red Roses ❤️')">❤️ Red</button>
                             <button class="sub-option-btn" onclick="selectFlowerColor('Pink Tulips 🌸')">🌸 Pink</button>
@@ -259,9 +270,9 @@
 
                     <!-- Step 3: Location / Delivery Input Form -->
                     <div id="subStep3" class="hidden">
-                        <p id="subPromptText" style="font-size: 13px; color: #fff; margin-bottom: 8px;"></p>
+                        <p id="subPromptText" style="font-size: 13px; color: #2b2b2b; font-weight: 600; margin-bottom: 8px;"></p>
                         <input type="text" id="deliveryInput" placeholder="Type location or details..." autocomplete="off" style="margin-bottom: 8px; padding: 10px; font-size: 13px;">
-                        <p id="deliveryNote" style="font-size: 11px; color: #f9d423; margin-bottom: 10px;" class="hidden">📦 Delivered within 24 hours!</p>
+                        <p id="deliveryNote" style="font-size: 11px; color: #b45309; font-weight: 600; margin-bottom: 10px;" class="hidden">📦 Delivered within 24 hours!</p>
                         <div style="display: flex; gap: 8px;">
                             <button onclick="backToPreviousStep()" class="alt-button" style="flex: 1; padding: 10px; font-size: 12.5px;">← Back</button>
                             <button onclick="submitSubscription()" style="flex: 2; padding: 10px; font-size: 13px;">Send Request 🚀</button>
@@ -270,8 +281,8 @@
 
                     <!-- Step 4: Success Screen with Back to Options -->
                     <div id="subStep4" class="hidden">
-                        <h3 class="success-title" style="font-size: 18px; margin-bottom: 6px; color: #fff;">Request Received! 🎉</h3>
-                        <p style="font-size: 12.5px; color: #ddd; line-height: 1.4; margin-bottom: 12px;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
+                        <h3 class="success-title" style="font-size: 18px; margin-bottom: 6px; color: #4a154b;">Request Received! 🎉</h3>
+                        <p style="font-size: 12.5px; color: #444; line-height: 1.4; margin-bottom: 12px;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
                         <button onclick="resetSubMenu()" class="alt-button" style="width: 100%; padding: 10px; font-size: 13px;">← Choose Another Treat</button>
                     </div>
                 </div>
@@ -460,7 +471,7 @@
                 btn.classList.add('faded');
                 btn.classList.remove('active-day');
                 stat.innerText = 'Completed ✓';
-                stat.style.color = '#9ca3af';
+                stat.style.color = '#666';
             }
         }
     </script>
