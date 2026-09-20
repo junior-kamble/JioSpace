@@ -16,35 +16,55 @@
             align-items: center; 
             min-height: 100vh;
             padding: 20px;
-            /* Silent luxury moody dark-plum gradient layered over her picture */
+            /* Silent luxury moody dark-plum gradient layered over her picture, framed to the left */
             background: linear-gradient(rgba(15, 12, 20, 0.78), rgba(20, 15, 26, 0.86)), 
-                        url('images/jioSpace.png') no-repeat 62% 15% fixed;
+                        url('images/jioSpace.png') no-repeat left center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
 
-        .container { max-width: 950px; width: 100%; text-align: center; }
+        .page-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Left side is open space to showcase her face */
+        .left-face-space {
+            flex: 1;
+            display: none;
+        }
+
+        /* Right side holds all interactive cards and content */
+        .right-content-container {
+            flex: 1;
+            max-width: 520px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
         .main-title { 
             font-size: 22px; 
-            margin-bottom: 20px; 
             font-weight: 600; 
             letter-spacing: 1px; 
             color: #fff; 
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9); 
+            text-align: center;
         }
 
         .hub-wrapper {
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 25px;
+            flex-direction: column;
+            gap: 20px;
             width: 100%;
         }
 
         .hub-left-pane {
-            flex: 1;
-            max-width: 420px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -52,13 +72,11 @@
         }
 
         .hub-right-pane {
-            flex: 1;
-            max-width: 450px;
             width: 100%;
         }
 
         .card { 
-            background: rgba(22, 18, 28, 0.78); 
+            background: rgba(22, 18, 28, 0.82); 
             backdrop-filter: blur(14px); 
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(244, 114, 182, 0.25);
@@ -76,7 +94,7 @@
 
         /* Meme Card Styling */
         .meme-card {
-            background: rgba(22, 18, 28, 0.78);
+            background: rgba(22, 18, 28, 0.82);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(244, 114, 182, 0.25);
@@ -92,7 +110,7 @@
         .meme-image {
             width: 100%;
             height: auto;
-            max-height: 280px;
+            max-height: 260px;
             object-fit: contain;
             border-radius: 12px;
             display: block;
@@ -100,7 +118,7 @@
 
         /* Interactive Subscription Card */
         .sub-card {
-            background: rgba(22, 18, 28, 0.85);
+            background: rgba(22, 18, 28, 0.88);
             backdrop-filter: blur(14px);
             border: 1px solid rgba(244, 114, 182, 0.35);
             padding: 15px;
@@ -206,114 +224,127 @@
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
         }
 
-        @media (max-width: 768px) {
-            .hub-wrapper {
-                flex-direction: column;
-                gap: 20px;
+        @media (min-width: 900px) {
+            .left-face-space {
+                display: block;
             }
-            .hub-left-pane, .hub-right-pane {
+            .page-wrapper {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 899px) {
+            .page-wrapper {
+                justify-content: center;
+            }
+            .right-content-container {
                 max-width: 450px;
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="main-title">A Little Something For Youuuuu 🌸</h1>
-        
-        <div class="hub-wrapper">
-            <!-- Left Pane: Meme + Interactive Subscription Renewal -->
-            <div class="hub-left-pane">
-                <div class="meme-card">
-                    <img src="images/ungrateful-potato.jpeg" alt="Subscription Expired" class="meme-image">
+    <div class="page-wrapper">
+        <!-- Open space on left for her face -->
+        <div class="left-face-space"></div>
+
+        <!-- Right side container holding all interactive elements -->
+        <div class="right-content-container">
+            <h1 class="main-title">A Little Something For Youuuuu 🌸</h1>
+            
+            <div class="hub-wrapper">
+                <!-- Left Pane: Meme + Interactive Subscription Renewal -->
+                <div class="hub-left-pane">
+                    <div class="meme-card">
+                        <img src="images/ungrateful-potato.jpeg" alt="Subscription Expired" class="meme-image">
+                    </div>
+
+                    <!-- Interactive Subscription Module -->
+                    <div class="sub-card" id="subModule">
+                        <!-- Step 1: Initial Prompt -->
+                        <div id="subStep1">
+                            <p style="font-size: 13px; color: #f472b6; font-weight: 600; margin-bottom: 5px;">Want to restore your attention span?</p>
+                            <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Renew your subscription & pick your treat! 🤍</p>
+                            <button onclick="showPhoneGate()" style="width: 100%; padding: 9px; font-size: 13px;">Renew Subscription 🤍</button>
+                        </div>
+
+                        <!-- Step 1.5: Phone Number Gatekeeper (Verify Last 2 Digits) -->
+                        <div id="subStepPhone" class="hidden">
+                            <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 5px;">Royal Security Protocol 🛡️</p>
+                            <p style="font-size: 11.5px; color: #aaa; margin-bottom: 8px;">Enter the last 2 digits of your phone number to verify identity:</p>
+                            <input type="text" id="phoneCheckInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2" style="margin-bottom: 6px; padding: 9px; font-size: 13px; text-align: center;">
+                            <p id="phoneCheckError" class="error hidden" style="font-size: 11.5px; color: #f87171; margin-bottom: 6px;">Not quite! Try again 😉</p>
+                            <button onclick="verifyPhoneCode()" style="width: 100%; padding: 9px; font-size: 13px;">Verify Identity 🔓</button>
+                        </div>
+
+                        <!-- Step 2: Pick Treatment Menu -->
+                        <div id="subStep2" class="hidden">
+                            <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 8px;">Identity verified! Choose your reward, Princess:</p>
+                            <div class="sub-options-grid">
+                                <button class="sub-option-btn" onclick="selectTreat('Coffee ☕')">☕ Coffee</button>
+                                <button class="sub-option-btn" onclick="selectTreat('Flowers 🌸')">🌸 Flowers</button>
+                                <button class="sub-option-btn" onclick="selectTreat('Chocolate 🍫')">🍫 Chocolate</button>
+                                <button class="sub-option-btn" onclick="selectTreat('Dinner 🍽️')">🍽️ Dinner</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2.5: Flower Color Picker Menu (Only for Flowers) -->
+                        <div id="subStepFlowerColor" class="hidden">
+                            <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 8px;">Which color scheme would you prefer? 🌸</p>
+                            <div class="sub-options-grid">
+                                <button class="sub-option-btn" onclick="selectFlowerColor('Red Roses ❤️')">❤️ Red</button>
+                                <button class="sub-option-btn" onclick="selectFlowerColor('Pink Tulips 🌸')">🌸 Pink</button>
+                            </div>
+                            <button onclick="backToTreats()" class="alt-button" style="width: 100%; margin-top: 8px; padding: 9px; font-size: 12px;">← Back</button>
+                        </div>
+
+                        <!-- Step 3: Location / Delivery Input Form -->
+                        <div id="subStep3" class="hidden">
+                            <p id="subPromptText" style="font-size: 12.5px; color: #fff; font-weight: 600; margin-bottom: 6px;"></p>
+                            <input type="text" id="deliveryInput" placeholder="Type location or details..." autocomplete="off" style="margin-bottom: 6px; padding: 9px; font-size: 12.5px;">
+                            <p id="deliveryNote" style="font-size: 11px; color: #fbbf24; font-weight: 600; margin-bottom: 8px;" class="hidden">📦 Delivered within 24 hours!</p>
+                            <div style="display: flex; gap: 8px;">
+                                <button onclick="backToPreviousStep()" class="alt-button" style="flex: 1; padding: 9px; font-size: 12px;">← Back</button>
+                                <button onclick="submitSubscription()" style="flex: 2; padding: 9px; font-size: 12.5px;">Send Request 🚀</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Success Screen with Back to Options -->
+                        <div id="subStep4" class="hidden">
+                            <h3 class="success-title" style="font-size: 16px; margin-bottom: 5px; color: #fff;">Request Received! 🎉</h3>
+                            <p style="font-size: 12px; color: #ddd; line-height: 1.3; margin-bottom: 10px;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
+                            <button onclick="resetSubMenu()" class="alt-button" style="width: 100%; padding: 9px; font-size: 12.5px;">← Choose Another Treat</button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Interactive Subscription Module -->
-                <div class="sub-card" id="subModule">
-                    <!-- Step 1: Initial Prompt -->
-                    <div id="subStep1">
-                        <p style="font-size: 13px; color: #f472b6; font-weight: 600; margin-bottom: 5px;">Want to restore your attention span?</p>
-                        <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Renew your subscription & pick your treat! 🤍</p>
-                        <button onclick="showPhoneGate()" style="width: 100%; padding: 9px; font-size: 13px;">Renew Subscription 🤍</button>
-                    </div>
-
-                    <!-- Step 1.5: Phone Number Gatekeeper (Verify Last 2 Digits) -->
-                    <div id="subStepPhone" class="hidden">
-                        <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 5px;">Royal Security Protocol 🛡️</p>
-                        <p style="font-size: 11.5px; color: #aaa; margin-bottom: 8px;">Enter the last 2 digits of your phone number to verify identity:</p>
-                        <input type="text" id="phoneCheckInput" placeholder="Type 2 digits..." autocomplete="off" maxlength="2" style="margin-bottom: 6px; padding: 9px; font-size: 13px; text-align: center;">
-                        <p id="phoneCheckError" class="error hidden" style="font-size: 11.5px; color: #f87171; margin-bottom: 6px;">Not quite! Try again 😉</p>
-                        <button onclick="verifyPhoneCode()" style="width: 100%; padding: 9px; font-size: 13px;">Verify Identity 🔓</button>
-                    </div>
-
-                    <!-- Step 2: Pick Treatment Menu -->
-                    <div id="subStep2" class="hidden">
-                        <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 8px;">Identity verified! Choose your reward, Princess:</p>
-                        <div class="sub-options-grid">
-                            <button class="sub-option-btn" onclick="selectTreat('Coffee ☕')">☕ Coffee</button>
-                            <button class="sub-option-btn" onclick="selectTreat('Flowers 🌸')">🌸 Flowers</button>
-                            <button class="sub-option-btn" onclick="selectTreat('Chocolate 🍫')">🍫 Chocolate</button>
-                            <button class="sub-option-btn" onclick="selectTreat('Dinner 🍽️')">🍽️ Dinner</button>
+                <!-- Right Pane: Chapter Selection Hub -->
+                <div class="hub-right-pane">
+                    <div class="card active" style="margin: 0;">
+                        <p class="question" style="margin-bottom: 15px;">Choose your chapter:</p>
+                        
+                        <div class="date-list">
+                            <a href="day1/index.html" id="btn-day1" class="date-btn faded">
+                                <span class="date-name">Monday, Sept 14</span>
+                                <span class="date-status" id="stat-day1">Completed ✓</span>
+                            </a>
+                            <a href="day2/index.html" id="btn-day2" class="date-btn faded">
+                                <span class="date-name">Tuesday, Sept 15</span>
+                                <span class="date-status" id="stat-day2">Completed ✓</span>
+                            </a>
+                            <a href="day3/index.html" id="btn-day3" class="date-btn faded">
+                                <span class="date-name">Wednesday, Sept 16</span>
+                                <span class="date-status" id="stat-day3">Completed ✓</span>
+                            </a>
+                            <a href="day4/index.html" id="btn-day4" class="date-btn faded">
+                                <span class="date-name">Thursday, Sept 17</span>
+                                <span class="date-status" id="stat-day4">Completed ✓</span>
+                            </a>
+                            <a href="day5/index.html" id="btn-day5" class="date-btn faded">
+                                <span class="date-name">Friday, Sept 18</span>
+                                <span class="date-status" id="stat-day5">Completed ✓</span>
+                            </a>
                         </div>
-                    </div>
-
-                    <!-- Step 2.5: Flower Color Picker Menu (Only for Flowers) -->
-                    <div id="subStepFlowerColor" class="hidden">
-                        <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 8px;">Which color scheme would you prefer? 🌸</p>
-                        <div class="sub-options-grid">
-                            <button class="sub-option-btn" onclick="selectFlowerColor('Red Roses ❤️')">❤️ Red</button>
-                            <button class="sub-option-btn" onclick="selectFlowerColor('Pink Tulips 🌸')">🌸 Pink</button>
-                        </div>
-                        <button onclick="backToTreats()" class="alt-button" style="width: 100%; margin-top: 8px; padding: 9px; font-size: 12px;">← Back</button>
-                    </div>
-
-                    <!-- Step 3: Location / Delivery Input Form -->
-                    <div id="subStep3" class="hidden">
-                        <p id="subPromptText" style="font-size: 12.5px; color: #fff; font-weight: 600; margin-bottom: 6px;"></p>
-                        <input type="text" id="deliveryInput" placeholder="Type location or details..." autocomplete="off" style="margin-bottom: 6px; padding: 9px; font-size: 12.5px;">
-                        <p id="deliveryNote" style="font-size: 11px; color: #fbbf24; font-weight: 600; margin-bottom: 8px;" class="hidden">📦 Delivered within 24 hours!</p>
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="backToPreviousStep()" class="alt-button" style="flex: 1; padding: 9px; font-size: 12px;">← Back</button>
-                            <button onclick="submitSubscription()" style="flex: 2; padding: 9px; font-size: 12.5px;">Send Request 🚀</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Success Screen with Back to Options -->
-                    <div id="subStep4" class="hidden">
-                        <h3 class="success-title" style="font-size: 16px; margin-bottom: 5px; color: #fff;">Request Received! 🎉</h3>
-                        <p style="font-size: 12px; color: #ddd; line-height: 1.3; margin-bottom: 10px;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
-                        <button onclick="resetSubMenu()" class="alt-button" style="width: 100%; padding: 9px; font-size: 12.5px;">← Choose Another Treat</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Pane: Chapter Selection Hub -->
-            <div class="hub-right-pane">
-                <div class="card active" style="margin: 0;">
-                    <p class="question" style="margin-bottom: 15px;">Choose your chapter:</p>
-                    
-                    <div class="date-list">
-                        <a href="day1/index.html" id="btn-day1" class="date-btn faded">
-                            <span class="date-name">Monday, Sept 14</span>
-                            <span class="date-status" id="stat-day1">Completed ✓</span>
-                        </a>
-                        <a href="day2/index.html" id="btn-day2" class="date-btn faded">
-                            <span class="date-name">Tuesday, Sept 15</span>
-                            <span class="date-status" id="stat-day2">Completed ✓</span>
-                        </a>
-                        <a href="day3/index.html" id="btn-day3" class="date-btn faded">
-                            <span class="date-name">Wednesday, Sept 16</span>
-                            <span class="date-status" id="stat-day3">Completed ✓</span>
-                        </a>
-                        <a href="day4/index.html" id="btn-day4" class="date-btn faded">
-                            <span class="date-name">Thursday, Sept 17</span>
-                            <span class="date-status" id="stat-day4">Completed ✓</span>
-                        </a>
-                        <a href="day5/index.html" id="btn-day5" class="date-btn faded">
-                            <span class="date-name">Friday, Sept 18</span>
-                            <span class="date-status" id="stat-day5">Completed ✓</span>
-                        </a>
                     </div>
                 </div>
             </div>
