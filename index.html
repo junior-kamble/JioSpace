@@ -12,7 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             width: 100%;
             max-width: 950px;
             margin: 0 auto;
@@ -21,7 +21,7 @@
         .hub-left-pane {
             flex: 1;
             max-width: 420px;
-            text-align: center;
+            width: 100%;
         }
 
         .hub-right-pane {
@@ -30,7 +30,7 @@
             width: 100%;
         }
 
-        /* Funny Meme/Teaser Image Card Styling */
+        /* Meme Card Styling matching chapter card aesthetic */
         .meme-card {
             background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(16px);
@@ -39,13 +39,16 @@
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
 
         .meme-image {
             width: 100%;
             height: auto;
-            max-height: 500px;
+            max-height: 420px;
             object-fit: contain;
             border-radius: 12px;
             display: block;
@@ -87,10 +90,10 @@
         <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
         
         <div class="hub-wrapper">
-            <!-- Left Pane: Funny Teaser Image -->
+            <!-- Left Pane: Funny Teaser Image with corrected .jpeg extension -->
             <div class="hub-left-pane">
                 <div class="meme-card">
-                    <img src="images/ungrateful-potato.jpg" alt="Subscription Expired" class="meme-image">
+                    <img src="images/ungrateful-potato.jpeg" alt="Subscription Expired" class="meme-image">
                 </div>
             </div>
 
