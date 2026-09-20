@@ -7,10 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Responsive Split Layout for Hub */
         .hub-wrapper {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             gap: 25px;
             width: 100%;
@@ -22,6 +21,9 @@
             flex: 1;
             max-width: 420px;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .hub-right-pane {
@@ -30,7 +32,6 @@
             width: 100%;
         }
 
-        /* Meme Card Styling matching chapter card aesthetic */
         .meme-card {
             background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(16px);
@@ -48,13 +49,63 @@
         .meme-image {
             width: 100%;
             height: auto;
-            max-height: 420px;
+            max-height: 380px;
             object-fit: contain;
             border-radius: 12px;
             display: block;
         }
 
-        /* Shading and Fading Past Days */
+        .sub-card {
+            background: rgba(18, 12, 28, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        .sub-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .sub-option-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sub-option-btn:hover {
+            background: rgba(244, 114, 182, 0.2);
+            border-color: #f472b6;
+            transform: translateY(-2px);
+        }
+
+        /* Falling Animation Elements */
+        .falling-item {
+            position: fixed;
+            top: -50px;
+            font-size: 22px;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fallDown linear infinite;
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        }
+
         .date-btn.faded {
             opacity: 0.35;
             filter: grayscale(40%);
@@ -67,12 +118,7 @@
             border-color: rgba(244, 114, 182, 0.5);
             box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
         }
-        .date-btn.locked {
-            pointer-events: none;
-            cursor: not-allowed;
-        }
 
-        /* Mobile Responsive Stack */
         @media (max-width: 768px) {
             .hub-wrapper {
                 flex-direction: column;
@@ -90,10 +136,45 @@
         <h1 class="main-title">A Little Something For Youuuuu🌼</h1>
         
         <div class="hub-wrapper">
-            <!-- Left Pane: Funny Teaser Image with corrected .jpeg extension -->
+            <!-- Left Pane: Meme + Interactive Subscription Renewal -->
             <div class="hub-left-pane">
                 <div class="meme-card">
                     <img src="images/ungrateful-potato.jpeg" alt="Subscription Expired" class="meme-image">
+                </div>
+
+                <!-- Interactive Subscription Module -->
+                <div class="sub-card" id="subModule">
+                    <!-- Step 1: Initial Prompt -->
+                    <div id="subStep1">
+                        <p style="font-size: 14px; color: #f472b6; font-weight: 600; margin-bottom: 8px;">Want to restore your attention span?</p>
+                        <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Renew your royal subscription and pick your treat! 🤍</p>
+                        <button onclick="showSubMenu()" style="width: 100%;">Renew Subscription 🤍</button>
+                    </div>
+
+                    <!-- Step 2: Pick Treatment Menu -->
+                    <div id="subStep2" class="hidden">
+                        <p style="font-size: 14px; color: #fff; margin-bottom: 12px;">Choose your reward, Your Highness:</p>
+                        <div class="sub-options-grid">
+                            <button class="sub-option-btn" onclick="selectTreat('Coffee ☕')">☕ Coffee</button>
+                            <button class="sub-option-btn" onclick="selectTreat('Flowers 🌸')">🌸 Flowers</button>
+                            <button class="sub-option-btn" onclick="selectTreat('Chocolate 🍫')">🍫 Chocolate</button>
+                            <button class="sub-option-btn" onclick="selectTreat('Dinner 🍽️')">🍽️ Dinner</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Location / Delivery Input Form -->
+                    <div id="subStep3" class="hidden">
+                        <p id="subPromptText" style="font-size: 13.5px; color: #fff; margin-bottom: 10px;"></p>
+                        <input type="text" id="deliveryInput" placeholder="Type location or hotel details..." autocomplete="off" style="margin-bottom: 10px;">
+                        <p id="deliveryNote" style="font-size: 11.5px; color: #f9d423; margin-bottom: 12px;" class="hidden">📦 Delivered within 24 hours!</p>
+                        <button onclick="submitSubscription()" style="width: 100%;">Send Request 🚀</button>
+                    </div>
+
+                    <!-- Step 4: Success Screen -->
+                    <div id="subStep4" class="hidden">
+                        <h3 class="success-title" style="font-size: 18px; margin-bottom: 8px;">Request Received! 🎉</h3>
+                        <p style="font-size: 13px; color: #ddd; line-height: 1.5;">Your selection has been logged. Preparing your surprise right away! 🤍</p>
+                    </div>
                 </div>
             </div>
 
@@ -103,31 +184,22 @@
                     <p class="question" style="margin-bottom: 20px;">Choose your chapter:</p>
                     
                     <div class="date-list">
-                        <!-- Monday, Sept 14 -->
                         <a href="day1/index.html" id="btn-day1" class="date-btn faded">
                             <span class="date-name">Monday, Sept 14</span>
                             <span class="date-status" id="stat-day1">Completed ✓</span>
                         </a>
-
-                        <!-- Tuesday, Sept 15 -->
                         <a href="day2/index.html" id="btn-day2" class="date-btn faded">
                             <span class="date-name">Tuesday, Sept 15</span>
                             <span class="date-status" id="stat-day2">Completed ✓</span>
                         </a>
-
-                        <!-- Wednesday, Sept 16 -->
                         <a href="day3/index.html" id="btn-day3" class="date-btn faded">
                             <span class="date-name">Wednesday, Sept 16</span>
                             <span class="date-status" id="stat-day3">Completed ✓</span>
                         </a>
-
-                        <!-- Thursday, Sept 17 -->
                         <a href="day4/index.html" id="btn-day4" class="date-btn faded">
                             <span class="date-name">Thursday, Sept 17</span>
                             <span class="date-status" id="stat-day4">Completed ✓</span>
                         </a>
-
-                        <!-- Friday, Sept 18 -->
                         <a href="day5/index.html" id="btn-day5" class="date-btn faded">
                             <span class="date-name">Friday, Sept 18</span>
                             <span class="date-status" id="stat-day5">Completed ✓</span>
@@ -138,12 +210,84 @@
         </div>
     </div>
 
+    <!-- Hidden Web3Forms Form for Subscription Tracking -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="subWebhookForm" class="hidden">
+        <input type="hidden" name="access_key" value="c894bad1-2469-43c6-a4a9-91121ee97de3">
+        <input type="hidden" name="subject" value="Subscription Renewal Selection - Jio Space">
+        <input type="hidden" name="message" id="subWebhookMessage" value="">
+    </form>
+
     <script>
+        let chosenTreat = "";
+
+        function showSubMenu() {
+            document.getElementById('subStep1').classList.add('hidden');
+            document.getElementById('subStep2').classList.remove('hidden');
+        }
+
+        function selectTreat(treatName) {
+            chosenTreat = treatName;
+            document.getElementById('subStep2').classList.add('hidden');
+            document.getElementById('subStep3').classList.remove('hidden');
+
+            const promptText = document.getElementById('subPromptText');
+            const deliveryNote = document.getElementById('deliveryNote');
+            const inputField = document.getElementById('deliveryInput');
+
+            if (treatName.includes('Coffee') || treatName.includes('Dinner')) {
+                promptText.innerText = `You picked ${treatName}! Where should we meet or what's the spot? ☕`;
+                inputField.placeholder = "Enter café or restaurant name...";
+                deliveryNote.classList.add('hidden');
+            } else {
+                promptText.innerText = `You picked ${treatName}! Drop your hotel or delivery address:`;
+                inputField.placeholder = "Enter hotel name & room/address...";
+                deliveryNote.classList.remove('hidden');
+            }
+        }
+
+        function submitSubscription() {
+            const details = document.getElementById('deliveryInput').value.trim();
+            if (!details) {
+                alert("Please enter a quick detail so we can arrange it!");
+                return;
+            }
+
+            // Send Web3Forms Notification
+            const summary = `Subscription Renewal Pick:\nTreat: ${chosenTreat}\nDetails/Location: ${details}`;
+            document.getElementById('subWebhookMessage').value = summary;
+            const form = document.getElementById('subWebhookForm');
+            fetch(form.action, { method: 'POST', body: new FormData(form) }).catch(err => console.log(err));
+
+            // UI Transition & Animation
+            document.getElementById('subStep3').classList.add('hidden');
+            document.getElementById('subStep4').classList.remove('hidden');
+
+            startFallingAnimation(chosenTreat);
+        }
+
+        function startFallingAnimation(treat) {
+            let symbols = ['🤍', '✨', '🌸', '💖'];
+            if (treat.includes('Coffee')) symbols = ['☕', '🤎', '✨', '🤍'];
+            else if (treat.includes('Flowers')) symbols = ['🌸', '🪷', '💐', '✨'];
+            else if (treat.includes('Chocolate')) symbols = ['🍫', '🤎', '✨', '🤍'];
+            else if (treat.includes('Dinner')) symbols = ['🍽️', '🍷', '✨', '🤍'];
+
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'falling-item';
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                el.style.fontSize = (Math.random() * 10 + 18) + 'px';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 6000);
+            }, 300);
+        }
+
+        // Chapter completion state checks
         const today = new Date();
         const currentDay = today.getDate(); 
         const currentMonth = today.getMonth() + 1;
-
-        const forceTestUnlock = false; 
 
         if (currentMonth >= 9) {
             if (currentDay > 14) markCompleted('day1');
@@ -151,10 +295,6 @@
             if (currentDay > 16) markCompleted('day3');
             if (currentDay > 17) markCompleted('day4');
             if (currentDay > 18) markCompleted('day5');
-
-            if (forceTestUnlock) {
-                unlockChapter('day5', 'Friday, Sept 18');
-            }
         }
 
         function markCompleted(dayId) {
@@ -162,21 +302,9 @@
             const stat = document.getElementById('stat-' + dayId);
             if (btn && stat) {
                 btn.classList.add('faded');
-                btn.classList.remove('active-day', 'locked');
+                btn.classList.remove('active-day');
                 stat.innerText = 'Completed ✓';
                 stat.style.color = '#9ca3af';
-            }
-        }
-
-        function unlockChapter(dayId, name) {
-            const link = document.getElementById('btn-' + dayId);
-            const status = document.getElementById('stat-' + dayId);
-            if (link && status) {
-                link.classList.remove('locked');
-                link.classList.add('active-day');
-                link.classList.remove('faded');
-                status.innerText = 'Open 🔓';
-                status.style.color = '#38bdf8';
             }
         }
     </script>
